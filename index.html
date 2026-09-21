@@ -1,252 +1,726 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emtiaz Official</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Emtiaz Official — Personal portfolio of Emtiaz, a programmer, web developer, technology enthusiast and content creator.">
+<meta name="keywords" content="Emtiaz Official, Emtiaz, programmer, web developer, cybersecurity, content creator">
+<meta name="author" content="Emtiaz">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
+<meta property="og:title" content="Emtiaz Official">
+<meta property="og:description" content="Programmer • Web Developer • Tech Enthusiast • Content Creator">
+<meta property="og:type" content="website">
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #0f172a;
-            color: white;
-            line-height: 1.6;
+<title>Emtiaz Official | Programmer & Web Developer</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+    }
+
+    :root {
+        --bg: #07111f;
+        --bg2: #0b1728;
+        --card: rgba(255,255,255,0.06);
+        --text: #f8fafc;
+        --muted: #a8b3c7;
+        --primary: #38bdf8;
+        --secondary: #818cf8;
+        --border: rgba(255,255,255,0.10);
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background:
+            radial-gradient(circle at 20% 10%, rgba(56,189,248,.12), transparent 30%),
+            radial-gradient(circle at 80% 20%, rgba(129,140,248,.12), transparent 30%),
+            var(--bg);
+        color: var(--text);
+        line-height: 1.7;
+        overflow-x: hidden;
+    }
+
+    a {
+        color: inherit;
+    }
+
+    /* NAVBAR */
+
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        padding: 16px 7%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(7,17,31,.78);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+        text-decoration: none;
+        font-size: 22px;
+        font-weight: 800;
+        color: white;
+    }
+
+    .logo span {
+        color: var(--primary);
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 25px;
+        list-style: none;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: var(--muted);
+        font-weight: 600;
+        transition: .3s;
+    }
+
+    .nav-links a:hover {
+        color: var(--primary);
+    }
+
+    /* HERO */
+
+    .hero {
+        min-height: 100vh;
+        padding: 140px 7% 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .hero-content {
+        max-width: 850px;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 8px 16px;
+        border: 1px solid rgba(56,189,248,.35);
+        border-radius: 999px;
+        color: var(--primary);
+        background: rgba(56,189,248,.07);
+        margin-bottom: 22px;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    .hero h1 {
+        font-size: clamp(42px, 8vw, 78px);
+        line-height: 1.05;
+        margin-bottom: 20px;
+    }
+
+    .gradient-text {
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .hero p {
+        color: var(--muted);
+        font-size: 19px;
+        max-width: 650px;
+        margin: 0 auto 30px;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 13px 24px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 700;
+        transition: .3s;
+    }
+
+    .btn-primary {
+        color: #04111c;
+        background: var(--primary);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(56,189,248,.25);
+    }
+
+    .btn-outline {
+        border: 1px solid var(--border);
+        color: white;
+        background: rgba(255,255,255,.04);
+    }
+
+    .btn-outline:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+        transform: translateY(-3px);
+    }
+
+    /* GENERAL */
+
+    section {
+        padding: 100px 7%;
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    .section-title {
+        text-align: center;
+        margin-bottom: 55px;
+    }
+
+    .section-title h2 {
+        font-size: clamp(30px, 5vw, 45px);
+        margin-bottom: 10px;
+    }
+
+    .section-title p {
+        color: var(--muted);
+    }
+
+    /* ABOUT */
+
+    .about-box {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        padding: 35px;
+        backdrop-filter: blur(12px);
+    }
+
+    .about-box p {
+        color: var(--muted);
+        margin-bottom: 15px;
+    }
+
+    /* CARDS */
+
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .card {
+        padding: 28px;
+        border-radius: 18px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        transition: .3s;
+    }
+
+    .card:hover {
+        transform: translateY(-7px);
+        border-color: rgba(56,189,248,.45);
+    }
+
+    .card-icon {
+        font-size: 32px;
+        margin-bottom: 15px;
+    }
+
+    .card h3 {
+        margin-bottom: 10px;
+    }
+
+    .card p {
+        color: var(--muted);
+    }
+
+    /* SKILLS */
+
+    .skills {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .skill {
+        padding: 10px 17px;
+        border-radius: 999px;
+        background: rgba(56,189,248,.08);
+        border: 1px solid rgba(56,189,248,.2);
+        color: #dff6ff;
+        font-weight: 600;
+    }
+
+    /* PROJECTS */
+
+    .project-card {
+        min-height: 210px;
+    }
+
+    .project-card a {
+        display: inline-block;
+        margin-top: 18px;
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 700;
+    }
+
+    /* YOUTUBE */
+
+    .youtube-box {
+        text-align: center;
+        padding: 45px 25px;
+        border-radius: 22px;
+        background: linear-gradient(
+            135deg,
+            rgba(56,189,248,.08),
+            rgba(129,140,248,.08)
+        );
+        border: 1px solid var(--border);
+    }
+
+    .youtube-box p {
+        color: var(--muted);
+        max-width: 650px;
+        margin: 12px auto 25px;
+    }
+
+    /* CONTACT */
+
+    .contact-box {
+        max-width: 700px;
+        margin: auto;
+        text-align: center;
+        padding: 40px;
+        border-radius: 22px;
+        background: var(--card);
+        border: 1px solid var(--border);
+    }
+
+    .contact-item {
+        margin: 18px 0;
+        color: var(--muted);
+    }
+
+    .contact-item a {
+        color: var(--primary);
+        text-decoration: none;
+    }
+
+    /* FOOTER */
+
+    footer {
+        padding: 35px 20px;
+        text-align: center;
+        border-top: 1px solid var(--border);
+        background: #040b14;
+        color: var(--muted);
+    }
+
+    /* ANIMATION */
+
+    .fade-in {
+        animation: fadeIn 1s ease both;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
         }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 800px) {
 
         nav {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: #020617;
-            padding: 15px;
-            text-align: center;
+            padding: 14px 5%;
         }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 12px;
-            font-weight: bold;
+        .nav-links {
+            gap: 12px;
         }
 
-        nav a:hover {
-            color: #38bdf8;
+        .nav-links a {
+            font-size: 13px;
         }
 
         section {
-            padding: 70px 20px;
-            text-align: center;
+            padding: 75px 5%;
+        }
+
+        .cards {
+            grid-template-columns: 1fr;
+        }
+
+        .hero {
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+
+        .hero p {
+            font-size: 17px;
+        }
+    }
+
+    @media (max-width: 520px) {
+
+        nav {
+            position: sticky;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .nav-links {
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .hero {
             min-height: 90vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            padding-top: 100px;
         }
 
         .hero h1 {
-            font-size: 45px;
-            margin-bottom: 15px;
+            font-size: 42px;
         }
 
-        .hero p {
-            font-size: 20px;
-            margin-bottom: 25px;
-        }
-
-        .btn {
-            display: inline-block;
-            background: #38bdf8;
-            color: #020617;
-            padding: 12px 25px;
-            margin: 5px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .btn:hover {
-            background: white;
-        }
-
-        h2 {
-            font-size: 32px;
-            margin-bottom: 25px;
-        }
-
-        .cards {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .card {
-            background: #1e293b;
-            padding: 25px;
-            width: 280px;
-            border-radius: 12px;
-        }
-
-        .card h3 {
-            color: #38bdf8;
-            margin-bottom: 10px;
-        }
-
-        .contact-info {
-            background: #1e293b;
-            max-width: 600px;
-            margin: auto;
-            padding: 30px;
-            border-radius: 15px;
-        }
-
-        .contact-info p {
-            margin: 15px 0;
-            font-size: 18px;
-        }
-
-        .contact-info a {
-            color: #38bdf8;
-            text-decoration: none;
-        }
-
-        footer {
-            background: #020617;
-            text-align: center;
+        .about-box,
+        .contact-box {
             padding: 25px;
         }
+    }
+</style>
 
-        @media (max-width: 600px) {
-            .hero h1 {
-                font-size: 32px;
-            }
+</head><body><!-- NAVIGATION -->
 
-            nav a {
-                margin: 0 5px;
-                font-size: 14px;
-            }
-        }
-    </style>
-</head>
+<nav>
+    <a href="#home" class="logo">Emtiaz<span>.</span></a>
 
-<body>
+    <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
 
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#contact">Contact</a>
-    </nav>
 
-    <section id="home" class="hero">
-        <h1>WELCOME TO MY WEBSITE</h1>
-        <p>I'm Emtiaz</p>
-        <p>Creator • Programmer • Tech Lover</p>
+<!-- HERO -->
 
-        <div>
-            <a href="#about" class="btn">Explore More</a>
-            <a href="#contact" class="btn">Contact Me</a>
-        </div>
-    </section>
+<section id="home" class="hero">
+    <div class="hero-content fade-in">
 
-    <section id="about">
-        <h2>ABOUT ME</h2>
+        <div class="badge">WELCOME TO EMTIAZ OFFICIAL</div>
 
-        <p>Hello, I'm Emtiaz 👋</p>
+        <h1>
+            I'm <span class="gradient-text">Emtiaz</span>
+        </h1>
 
         <p>
-            I am interested in Technology, Programming,
-            Web Development, Cybersecurity and Content Creation.
+            Programmer • Web Developer • Tech Enthusiast • Content Creator
         </p>
 
-        <br>
+        <p>
+            I love technology, programming, web development and creating
+            useful digital experiences.
+        </p>
 
-        <div class="cards">
-            <div class="card">
-                <h3>💻 Programming</h3>
-                <p>Learning programming and building useful projects.</p>
-            </div>
-
-            <div class="card">
-                <h3>🌐 Web Development</h3>
-                <p>Creating modern and responsive websites.</p>
-            </div>
-
-            <div class="card">
-                <h3>🎬 Content Creation</h3>
-                <p>Creating videos and digital content.</p>
-            </div>
+        <div class="buttons">
+            <a href="#projects" class="btn btn-primary">Explore My Work</a>
+            <a href="#contact" class="btn btn-outline">Contact Me</a>
         </div>
-    </section>
 
-    <section id="services">
-        <h2>SERVICES</h2>
+    </div>
+</section>
 
-        <div class="cards">
-            <div class="card">
-                <h3>🌐 Website Development</h3>
-                <p>Modern responsive website development.</p>
-            </div>
 
-            <div class="card">
-                <h3>💻 Programming</h3>
-                <p>Programming and software development.</p>
-            </div>
+<!-- ABOUT -->
 
-            <div class="card">
-                <h3>🔐 Cybersecurity</h3>
-                <p>Learning ethical and defensive cybersecurity.</p>
-            </div>
+<section id="about">
 
-            <div class="card">
-                <h3>🎥 Content Creation</h3>
-                <p>Video and digital content creation.</p>
-            </div>
+    <div class="section-title">
+        <h2>About Me</h2>
+        <p>Get to know me</p>
+    </div>
+
+    <div class="about-box">
+
+        <p>
+            Hello, I'm Emtiaz 👋
+        </p>
+
+        <p>
+            I am passionate about technology, programming, web development,
+            cybersecurity and digital content creation.
+        </p>
+
+        <p>
+            I am continuously learning new technologies and building
+            projects to improve my skills and experience.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- SKILLS -->
+
+<section id="skills">
+
+    <div class="section-title">
+        <h2>My Skills</h2>
+        <p>Technologies and areas I am learning</p>
+    </div>
+
+    <div class="skills">
+
+        <div class="skill">HTML</div>
+        <div class="skill">CSS</div>
+        <div class="skill">JavaScript</div>
+        <div class="skill">Python</div>
+        <div class="skill">Git & GitHub</div>
+        <div class="skill">Linux</div>
+        <div class="skill">Web Development</div>
+        <div class="skill">Cybersecurity</div>
+        <div class="skill">Content Creation</div>
+
+    </div>
+
+</section>
+
+
+<!-- SERVICES -->
+
+<section id="services">
+
+    <div class="section-title">
+        <h2>Services</h2>
+        <p>Things I can work on</p>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="card-icon">🌐</div>
+            <h3>Web Development</h3>
+            <p>
+                Creating responsive and modern websites for personal
+                and project use.
+            </p>
         </div>
-    </section>
 
-    <section id="contact">
-        <h2>CONTACT ME</h2>
-
-        <div class="contact-info">
-
+        <div class="card">
+            <div class="card-icon">💻</div>
+            <h3>Programming</h3>
             <p>
-                📧 Email:
-                <a href="mailto:mdemtiaz36900@gmail.com">
-                    mdemtiaz36900@gmail.com
-                </a>
+                Building programming projects while continuously
+                improving development skills.
             </p>
-
-            <p>
-                📞 Phone:
-                <a href="tel:+8801798665955">
-                    01798665955
-                </a>
-            </p>
-
-            <br>
-
-            <p>
-                Feel free to contact me anytime.
-            </p>
-
         </div>
-    </section>
 
-    <footer>
-        <p>© 2026 Emtiaz Official. All Rights Reserved.</p>
-    </footer>
+        <div class="card">
+            <div class="card-icon">🔐</div>
+            <h3>Cybersecurity</h3>
+            <p>
+                Learning ethical, defensive and responsible
+                cybersecurity.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🎬</div>
+            <h3>Content Creation</h3>
+            <p>
+                Creating digital content and technology-focused
+                projects.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🚀</div>
+            <h3>Digital Projects</h3>
+            <p>
+                Turning ideas into useful digital projects and
+                experiments.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">📚</div>
+            <h3>Continuous Learning</h3>
+            <p>
+                Exploring new technologies and improving skills
+                every day.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PROJECTS -->
+
+<section id="projects">
+
+    <div class="section-title">
+        <h2>My Projects</h2>
+        <p>Some of my work</p>
+    </div>
+
+    <div class="cards">
+
+        <div class="card project-card">
+            <div class="card-icon">🌐</div>
+            <h3>Personal Portfolio</h3>
+            <p>
+                My personal portfolio website built with HTML, CSS
+                and JavaScript.
+            </p>
+            <a href="#home">View Project →</a>
+        </div>
+
+        <div class="card project-card">
+            <div class="card-icon">💻</div>
+            <h3>Programming Projects</h3>
+            <p>
+                More programming projects will be added here as
+                they are completed.
+            </p>
+            <a href="#contact">Coming Soon →</a>
+        </div>
+
+        <div class="card project-card">
+            <div class="card-icon">🧪</div>
+            <h3>Future Projects</h3>
+            <p>
+                New technology and development projects will be
+                published here.
+            </p>
+            <a href="#contact">Stay Tuned →</a>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- YOUTUBE -->
+
+<section id="youtube">
+
+    <div class="youtube-box">
+
+        <div class="section-title">
+            <h2>My YouTube</h2>
+            <p>Follow my content and upcoming videos</p>
+        </div>
+
+        <p>
+            I create and share digital content, interesting places,
+            technology and creative videos.
+        </p>
+
+        <!-- Add your real YouTube channel URL here later -->
+        <a
+            href="#"
+            class="btn btn-primary"
+            onclick="alert('YouTube channel link will be added soon.'); return false;"
+        >
+            Visit YouTube Channel
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+    <div class="section-title">
+        <h2>Contact Me</h2>
+        <p>Let's connect</p>
+    </div>
+
+    <div class="contact-box">
+
+        <div class="contact-item">
+            📧 Email:
+            <a href="mailto:mdemtiaz36900@gmail.com">
+                mdemtiaz36900@gmail.com
+            </a>
+        </div>
+
+        <div class="contact-item">
+            📞 Phone:
+            <a href="tel:+8801798665955">
+                +880 1798-665955
+            </a>
+        </div>
+
+        <p class="contact-item">
+            Feel free to contact me for collaboration,
+            projects and opportunities.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+    <p>© 2026 Emtiaz Official. All Rights Reserved.</p>
+    <p>Built with passion for technology 🚀</p>
+</footer>
+
+
+<script>
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+
+        link.addEventListener("click", function (event) {
+
+            const target = document.querySelector(this.getAttribute("href"));
+
+            if (target) {
+                event.preventDefault();
+
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            }
+
+        });
+
+    });
+</script>
 
 </body>
 </html>
