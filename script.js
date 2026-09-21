@@ -1,77 +1,158 @@
-// Welcome message
+// =====================================
+// Emtiaz Official - Professional JS
+// =====================================
 
-console.log("Welcome to Emtiaz Official!");
+document.addEventListener("DOMContentLoaded", function () {
 
-
-// Contact form
-
-const form = document.getElementById("contactForm");
-
-const formMessage = document.getElementById("formMessage");
+    console.log("Welcome to Emtiaz Official! 🚀");
 
 
-form.addEventListener("submit", function(event) {
+    // =====================================
+    // Contact Form
+    // =====================================
 
-    event.preventDefault();
+    const form = document.getElementById("contactForm");
+    const formMessage = document.getElementById("formMessage");
 
-    const name = document.getElementById("name").value;
+    if (form && formMessage) {
 
-    formMessage.textContent =
-        "Thank you, " + name + "! Your message has been received.";
+        form.addEventListener("submit", function (event) {
 
-    form.reset();
+            event.preventDefault();
 
-});
+            const nameInput = document.getElementById("name");
 
+            const name = nameInput
+                ? nameInput.value.trim()
+                : "there";
 
-// Smooth navigation
+            if (name) {
 
-const navLinks = document.querySelectorAll(".nav-links a");
+                formMessage.textContent =
+                    "Thank you, " + name +
+                    "! Your message has been received. 🖤";
 
+            } else {
 
-navLinks.forEach(function(link) {
-
-    link.addEventListener("click", function() {
-
-        console.log("Navigation clicked");
-
-    });
-
-});
-
-
-// Simple scroll animation
-
-const cards = document.querySelectorAll(".card");
-
-
-const observer = new IntersectionObserver(
-    function(entries) {
-
-        entries.forEach(function(entry) {
-
-            if (entry.isIntersecting) {
-
-                entry.target.style.opacity = "1";
-                entry.target.style.transform = "translateY(0)";
+                formMessage.textContent =
+                    "Thank you! Your message has been received. 🖤";
 
             }
 
+            form.reset();
+
         });
 
-    },
-    {
-        threshold: 0.2
     }
-);
 
 
-cards.forEach(function(card) {
+    // =====================================
+    // Navigation
+    // =====================================
 
-    card.style.opacity = "0";
-    card.style.transform = "translateY(30px)";
-    card.style.transition = "0.6s";
+    const navLinks =
+        document.querySelectorAll(".nav-links a");
 
-    observer.observe(card);
+    navLinks.forEach(function (link) {
+
+        link.addEventListener("click", function () {
+
+            console.log(
+                "Navigation clicked:",
+                link.textContent.trim()
+            );
+
+        });
+
+    });
+
+
+    // =====================================
+    // Scroll Animation
+    // =====================================
+
+    const animatedElements =
+        document.querySelectorAll(".card");
+
+    if ("IntersectionObserver" in window) {
+
+        const observer = new IntersectionObserver(
+            function (entries) {
+
+                entries.forEach(function (entry) {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add("show");
+
+                        observer.unobserve(entry.target);
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.15
+            }
+        );
+
+
+        animatedElements.forEach(function (element) {
+
+            element.classList.add("animate");
+
+            observer.observe(element);
+
+        });
+
+    } else {
+
+        animatedElements.forEach(function (element) {
+
+            element.classList.add("show");
+
+        });
+
+    }
+
+
+    // =====================================
+    // Button Click Effect
+    // =====================================
+
+    const buttons =
+        document.querySelectorAll(".btn");
+
+    buttons.forEach(function (button) {
+
+        button.addEventListener("click", function () {
+
+            button.style.transform = "scale(0.97)";
+
+            setTimeout(function () {
+
+                button.style.transform = "";
+
+            }, 120);
+
+        });
+
+    });
+
+
+    // =====================================
+    // Current Year
+    // =====================================
+
+    const yearElement =
+        document.getElementById("currentYear");
+
+    if (yearElement) {
+
+        yearElement.textContent =
+            new Date().getFullYear();
+
+    }
 
 });
