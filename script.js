@@ -1,7 +1,4 @@
-/* =====================================================
-   EMTIAZ OFFICIAL - WEBSITE JAVASCRIPT
-   ===================================================== */
-
+document.addEventListener("DOMContentLoaded", () => {
 
 /* ================= MOBILE MENU ================= */
 
@@ -10,176 +7,98 @@ const navMenu = document.getElementById("navMenu");
 
 if (menuToggle && navMenu) {
 
-  menuToggle.addEventListener("click", () => {
+menuToggle.addEventListener("click", () => {
+  navMenu.classList.toggle("active");
 
-    navMenu.classList.toggle("active");
+  const isOpen = navMenu.classList.contains("active");
 
-    if (navMenu.classList.contains("active")) {
-      menuToggle.textContent = "✕";
-    } else {
-      menuToggle.textContent = "☰";
-    }
+  menuToggle.setAttribute(
+    "aria-label",
+    isOpen ? "Close navigation menu" : "Open navigation menu"
+  );
+});
 
+navMenu.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    navMenu.classList.remove("active");
+    menuToggle.setAttribute("aria-label", "Open navigation menu");
   });
-
-
-  const navLinks = navMenu.querySelectorAll("a");
-
-  navLinks.forEach((link) => {
-
-    link.addEventListener("click", () => {
-
-      navMenu.classList.remove("active");
-
-      menuToggle.textContent = "☰";
-
-    });
-
-  });
+});
 
 }
-
 
 /* ================= CURRENT YEAR ================= */
 
 const yearElement = document.getElementById("year");
 
 if (yearElement) {
-
-  yearElement.textContent =
-    new Date().getFullYear();
-
+yearElement.textContent = new Date().getFullYear();
 }
-
 
 /* ================= CONTACT FORM ================= */
 
-const contactForm =
-  document.getElementById("contactForm");
+const contactForm = document.getElementById("contactForm");
 
 if (contactForm) {
 
-  contactForm.addEventListener("submit", (event) => {
+contactForm.addEventListener("submit", event => {
 
-    event.preventDefault();
+  event.preventDefault();
 
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const subject = document.getElementById("subject").value.trim();
+  const message = document.getElementById("message").value.trim();
 
-    const name =
-      document.getElementById("name").value.trim();
+  if (!name || !email || !subject || !message) {
+    alert("Please fill in all fields.");
+    return;
+  }
 
-    const email =
-      document.getElementById("email").value.trim();
+  const emailAddress = "mdemtiaz36900@gmail.com";
 
-    const subject =
-      document.getElementById("subject").value.trim();
+  const mailSubject =
+    encodeURIComponent("Website Contact: " + subject);
 
-    const message =
-      document.getElementById("message").value.trim();
+  const mailBody =
+    encodeURIComponent(
+      "Hello Emtiaz,\n\n" +
+      "Name: " + name + "\n" +
+      "Email: " + email + "\n\n" +
+      "Message:\n" +
+      message +
+      "\n\nSent from Emtiaz Official website."
+    );
 
+  const mailtoLink =
+    "mailto:" +
+    emailAddress +
+    "?subject=" +
+    mailSubject +
+    "&body=" +
+    mailBody;
 
-    const emailAddress =
-      "mdemtiaz36900@gmail.com";
+  window.location.href = mailtoLink;
 
-
-    const emailSubject =
-      encodeURIComponent(
-        subject || "Message from Emtiaz Website"
-      );
-
-
-    const emailBody =
-      encodeURIComponent(
-        `Hello Emtiaz,
-
-Name: ${name}
-Email: ${email}
-
-Message:
-${message}
-
-Sent from Emtiaz Official website.`
-      );
-
-
-    const mailtoLink =
-      `mailto:${emailAddress}?subject=${emailSubject}&body=${emailBody}`;
-
-
-    window.location.href = mailtoLink;
-
-  });
+});
 
 }
 
+/* ================= ESC KEY ================= */
 
-/* ================= SCROLL REVEAL ================= */
+document.addEventListener("keydown", event => {
 
-const revealElements =
-  document.querySelectorAll(
-    ".section-heading, .glass-card, .skill-card, .service-card, .project-card, .contact-card, .youtube-box"
-  );
+if (event.key === "Escape" && navMenu) {
+  navMenu.classList.remove("active");
 
-
-revealElements.forEach((element) => {
-
-  element.classList.add("reveal");
-
-});
-
-
-const revealObserver =
-  new IntersectionObserver(
-    (entries, observer) => {
-
-      entries.forEach((entry) => {
-
-        if (entry.isIntersecting) {
-
-          entry.target.classList.add("show");
-
-          observer.unobserve(entry.target);
-
-        }
-
-      });
-
-    },
-    {
-      threshold: 0.12
-    }
-  );
-
-
-revealElements.forEach((element) => {
-
-  revealObserver.observe(element);
+  if (menuToggle) {
+    menuToggle.setAttribute(
+      "aria-label",
+      "Open navigation menu"
+    );
+  }
+}
 
 });
 
-
-/* ================= HEADER SHADOW ================= */
-
-const header =
-  document.querySelector(".header");
-
-
-window.addEventListener(
-  "scroll",
-  () => {
-
-    if (!header) return;
-
-    if (window.scrollY > 20) {
-
-      header.style.boxShadow =
-        "0 10px 40px rgba(0,0,0,0.22)";
-
-    } else {
-
-      header.style.boxShadow = "none";
-
-    }
-
-  },
-  { passive: true }
-);
+});
