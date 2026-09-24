@@ -116,6 +116,7 @@ list-style: none;
 }
 
 .nav-menu a {
+position: relative;
 color: #b9c6d8;
 font-size: 0.95rem;
 transition: 0.3s ease;
@@ -123,6 +124,27 @@ transition: 0.3s ease;
 
 .nav-menu a:hover {
 color: #38bdf8;
+}
+
+/* =========================
+ACTIVE NAVIGATION
+========================= */
+
+.nav-menu a.active {
+color: #38bdf8;
+font-weight: 700;
+}
+
+.nav-menu a.active::after {
+content: "";
+position: absolute;
+left: 0;
+right: 0;
+bottom: -8px;
+height: 2px;
+border-radius: 10px;
+background: #38bdf8;
+box-shadow: 0 0 10px rgba(56, 189, 248, 0.7);
 }
 
 .menu-toggle {
@@ -882,6 +904,10 @@ width: 100%;
 .nav-menu a {
 display: block;
 padding: 12px 0;
+}
+
+.nav-menu a.active::after {
+bottom: 3px;
 }
 
 .about-grid,
