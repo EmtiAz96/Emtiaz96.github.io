@@ -1,6 +1,5 @@
 /* =========================================================
-   EMTIAZ OFFICIAL — PREMIUM PORTFOLIO STYLE
-   Step 7: Premium Hero Profile Card
+   EMTIAZ OFFICIAL — FINAL PREMIUM CSS
    ========================================================= */
 
 * {
@@ -36,6 +35,12 @@ img {
   max-width: 100%;
   display: block;
 }
+
+::selection {
+  background: rgba(56, 189, 248, 0.25);
+  color: #ffffff;
+}
+
 
 /* =========================================================
    GLOBAL
@@ -74,6 +79,7 @@ section {
 .section-title span {
   color: #38bdf8;
 }
+
 
 /* =========================================================
    NAVBAR
@@ -148,10 +154,11 @@ section {
   display: none;
   border: none;
   background: transparent;
-  color: #fff;
+  color: #ffffff;
   font-size: 1.8rem;
   cursor: pointer;
 }
+
 
 /* =========================================================
    HERO
@@ -163,6 +170,7 @@ section {
   align-items: center;
   padding-top: 120px;
   padding-bottom: 80px;
+
   background:
     radial-gradient(
       circle at 15% 20%,
@@ -185,10 +193,6 @@ section {
   align-items: center;
 }
 
-.hero-content {
-  position: relative;
-}
-
 .hero-content h1 {
   font-size: clamp(2.8rem, 7vw, 5rem);
   line-height: 1.05;
@@ -197,6 +201,27 @@ section {
 
 .hero-content h1 span {
   color: #38bdf8;
+}
+
+.hero-role {
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  margin-bottom: 18px;
+  min-height: 48px;
+}
+
+.typing-text {
+  color: #38bdf8;
+}
+
+.typing-cursor {
+  color: #38bdf8;
+  animation: cursorBlink 0.8s infinite;
+}
+
+@keyframes cursorBlink {
+  50% {
+    opacity: 0;
+  }
 }
 
 .hero-content p {
@@ -242,8 +267,9 @@ section {
   color: #7dd3fc;
 }
 
+
 /* =========================================================
-   STEP 7 — PREMIUM HERO PROFILE CARD
+   PREMIUM PROFILE CARD
    ========================================================= */
 
 .hero-card {
@@ -253,15 +279,16 @@ section {
   border-radius: 28px;
   background: rgba(255, 255, 255, 0.035);
   border: 1px solid rgba(56, 189, 248, 0.28);
+
   box-shadow:
     0 25px 70px rgba(0, 0, 0, 0.28),
     0 0 0 rgba(56, 189, 248, 0);
+
   animation:
     heroFloat 5s ease-in-out infinite,
     heroBorderGlow 4s ease-in-out infinite;
 }
 
-/* Outer glowing ring */
 .hero-card::before {
   content: "";
   position: absolute;
@@ -272,7 +299,6 @@ section {
   animation: heroRing 4s ease-in-out infinite;
 }
 
-/* Soft premium glow */
 .hero-card::after {
   content: "";
   position: absolute;
@@ -297,7 +323,53 @@ section {
   z-index: 2;
 }
 
-/* Floating animation */
+.hero-card-badge {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 7px 11px;
+  border-radius: 50px;
+
+  background: rgba(7, 17, 31, 0.82);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+
+  color: #d7f4ff;
+  font-size: 0.72rem;
+  font-weight: 700;
+
+  backdrop-filter: blur(10px);
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
+}
+
+.hero-card-info {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  padding-top: 18px;
+}
+
+.hero-card-info h3 {
+  font-size: 1.4rem;
+}
+
+.hero-card-info p {
+  color: #9fb0c5;
+  font-size: 0.9rem;
+}
+
 @keyframes heroFloat {
   0%,
   100% {
@@ -309,7 +381,6 @@ section {
   }
 }
 
-/* Animated border glow */
 @keyframes heroBorderGlow {
   0%,
   100% {
@@ -330,7 +401,6 @@ section {
   }
 }
 
-/* Animated outer ring */
 @keyframes heroRing {
   0%,
   100% {
@@ -343,6 +413,7 @@ section {
     transform: scale(1.015);
   }
 }
+
 
 /* =========================================================
    ABOUT
@@ -359,7 +430,8 @@ section {
 }
 
 .about-card {
-  padding: 28px;
+  position: relative;
+  padding: 30px;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.035);
   border: 1px solid rgba(255, 255, 255, 0.07);
@@ -371,6 +443,13 @@ section {
   border-color: rgba(56, 189, 248, 0.25);
 }
 
+.card-number {
+  color: rgba(56, 189, 248, 0.45);
+  font-size: 0.75rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
 .about-card h3 {
   margin-bottom: 10px;
 }
@@ -379,13 +458,14 @@ section {
   color: #9fb0c5;
 }
 
+
 /* =========================================================
    SKILLS
    ========================================================= */
 
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
 
@@ -402,25 +482,50 @@ section {
   border-color: rgba(56, 189, 248, 0.3);
 }
 
-.skill-card h3 {
-  margin-bottom: 15px;
-}
-
-.skill-list {
+.skill-top {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  list-style: none;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
 }
 
-.skill-list li {
-  padding: 7px 11px;
-  border-radius: 8px;
-  background: rgba(56, 189, 248, 0.08);
-  border: 1px solid rgba(56, 189, 248, 0.12);
-  color: #a5dfff;
-  font-size: 0.82rem;
+.skill-top h3 {
+  font-size: 1.05rem;
 }
+
+.skill-top span {
+  color: #7dd3fc;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.skill-bar {
+  width: 100%;
+  height: 8px;
+  overflow: hidden;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.07);
+  margin-bottom: 14px;
+}
+
+.skill-progress {
+  width: 0;
+  height: 100%;
+  border-radius: 50px;
+  background: linear-gradient(
+    90deg,
+    #38bdf8,
+    #6366f1
+  );
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.35);
+  transition: width 1.4s ease;
+}
+
+.skill-card p {
+  color: #8fa0b5;
+  font-size: 0.88rem;
+}
+
 
 /* =========================================================
    SERVICES
@@ -467,6 +572,7 @@ section {
   color: #9fb0c5;
 }
 
+
 /* =========================================================
    PROJECTS
    ========================================================= */
@@ -478,7 +584,7 @@ section {
 }
 
 .project-card {
-  padding: 26px;
+  padding: 28px;
   border-radius: 22px;
   background: rgba(255, 255, 255, 0.035);
   border: 1px solid rgba(255, 255, 255, 0.07);
@@ -489,6 +595,14 @@ section {
   transform: translateY(-7px);
   border-color: rgba(56, 189, 248, 0.3);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.22);
+}
+
+.project-number {
+  color: #38bdf8;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
 }
 
 .project-card h3 {
@@ -528,24 +642,24 @@ section {
 
 .project-details {
   background: rgba(99, 102, 241, 0.12);
-  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-color: rgba(99, 102, 241, 0.3);
   color: #c7d2fe;
   cursor: pointer;
 }
 
 .project-details:hover {
-  transform: translateY(-3px);
   border-color: #6366f1;
   color: #ffffff;
   box-shadow: 0 10px 25px rgba(99, 102, 241, 0.15);
 }
+
 
 /* =========================================================
    YOUTUBE
    ========================================================= */
 
 .youtube-card {
-  padding: 40px;
+  padding: 45px;
   text-align: center;
   border-radius: 25px;
   background:
@@ -558,6 +672,19 @@ section {
   border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
+.youtube-icon {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  border-radius: 20px;
+  background: rgba(56, 189, 248, 0.1);
+  color: #38bdf8;
+  font-size: 1.8rem;
+}
+
 .youtube-card h3 {
   font-size: 1.8rem;
   margin-bottom: 12px;
@@ -568,6 +695,7 @@ section {
   max-width: 650px;
   margin: 0 auto 25px;
 }
+
 
 /* =========================================================
    CONTACT
@@ -591,12 +719,21 @@ section {
   margin-bottom: 15px;
 }
 
-.contact-card p {
+.contact-card > p {
   color: #9fb0c5;
-  margin-bottom: 10px;
+  margin-bottom: 18px;
 }
 
-.contact-card a {
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  color: #c7d4e5;
+  word-break: break-word;
+}
+
+.contact-item a {
   color: #7dd3fc;
 }
 
@@ -634,8 +771,9 @@ section {
   cursor: pointer;
 }
 
+
 /* =========================================================
-   PROJECT DETAILS MODAL
+   PROJECT MODAL
    ========================================================= */
 
 .project-modal {
@@ -757,6 +895,7 @@ body.modal-open {
   overflow: hidden;
 }
 
+
 /* =========================================================
    SCROLL REVEAL
    ========================================================= */
@@ -775,18 +914,53 @@ body.modal-open {
   transform: translateY(0);
 }
 
-.about-card:nth-child(2),
-.skill-card:nth-child(2),
-.service-card:nth-child(2),
-.project-card:nth-child(2) {
-  transition-delay: 0.08s;
+
+/* =========================================================
+   BACK TO TOP
+   ========================================================= */
+
+.back-to-top {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 900;
+
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 50%;
+
+  background: rgba(7, 17, 31, 0.85);
+  color: #38bdf8;
+
+  font-size: 1.3rem;
+  cursor: pointer;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px);
+
+  transition: 0.3s ease;
+  backdrop-filter: blur(10px);
 }
 
-.skill-card:nth-child(3),
-.service-card:nth-child(3),
-.project-card:nth-child(3) {
-  transition-delay: 0.16s;
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
+
+.back-to-top:hover {
+  transform: translateY(-4px);
+  border-color: #38bdf8;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.18);
+}
+
 
 /* =========================================================
    FOOTER
@@ -803,11 +977,13 @@ footer span {
   color: #38bdf8;
 }
 
+
 /* =========================================================
    RESPONSIVE
    ========================================================= */
 
 @media (max-width: 900px) {
+
   .hero-container {
     grid-template-columns: 1fr;
     gap: 45px;
@@ -831,7 +1007,6 @@ footer span {
     margin: auto;
   }
 
-  .skills-grid,
   .services-grid,
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -842,7 +1017,9 @@ footer span {
   }
 }
 
+
 @media (max-width: 700px) {
+
   section {
     padding: 75px 0;
   }
@@ -861,10 +1038,12 @@ footer span {
     left: 0;
     width: 100%;
     padding: 18px 6%;
+
     display: none;
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
+
     background: rgba(7, 17, 31, 0.97);
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   }
@@ -900,6 +1079,12 @@ footer span {
 
   .hero-card img {
     border-radius: 17px;
+  }
+
+  .hero-card-badge {
+    top: 12px;
+    left: 12px;
+    font-size: 0.65rem;
   }
 
   .about-grid,
@@ -938,13 +1123,22 @@ footer span {
   .project-modal-buttons .project-btn {
     width: 100%;
   }
+
+  .back-to-top {
+    right: 15px;
+    bottom: 15px;
+    width: 44px;
+    height: 44px;
+  }
 }
+
 
 /* =========================================================
    REDUCED MOTION
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
+
   html {
     scroll-behavior: auto;
   }
@@ -956,7 +1150,13 @@ footer span {
   }
 
   .hero-card,
-  .hero-card::before {
+  .hero-card::before,
+  .typing-cursor {
     animation: none;
   }
+
+  .skill-progress {
+    transition: none;
+  }
+
 }
