@@ -272,6 +272,12 @@ header {
   border-radius: 22px;
   background: rgba(255, 255, 255, 0.035);
   border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: 0.3s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(56, 189, 248, 0.3);
 }
 
 .about-card h3 {
@@ -748,6 +754,46 @@ body.modal-open {
 
 
 /* =========================
+   PREMIUM SCROLL ANIMATION
+========================= */
+
+.about-card,
+.skill-card,
+.service-card,
+.project-card,
+.youtube-card,
+.contact-card,
+.contact-form {
+  animation: fadeUp 0.8s ease both;
+}
+
+.about-card:nth-child(2),
+.skill-card:nth-child(2),
+.service-card:nth-child(2),
+.project-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.skill-card:nth-child(3),
+.service-card:nth-child(3),
+.project-card:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================
    FOOTER
 ========================= */
 
@@ -768,6 +814,7 @@ footer span {
 ========================= */
 
 @media (max-width: 1000px) {
+
   .hero-grid {
     grid-template-columns: 1fr;
   }
@@ -804,6 +851,7 @@ footer span {
 
 
 @media (max-width: 700px) {
+
   section {
     padding: 70px 0;
   }
@@ -866,6 +914,7 @@ footer span {
 
 
 @media (max-width: 420px) {
+
   .hero-content h1 {
     font-size: 2.5rem;
   }
