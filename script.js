@@ -47,26 +47,39 @@ document.addEventListener("DOMContentLoaded", () => {
      PROJECT DETAILS MODAL
   ========================= */
 
-  const projectModal = document.getElementById("projectModal");
-  const projectModalClose = document.getElementById("projectModalClose");
-  const projectModalTitle = document.getElementById("projectModalTitle");
+  const projectModal =
+    document.getElementById("projectModal");
+
+  const projectModalClose =
+    document.getElementById("projectModalClose");
+
+  const projectModalTitle =
+    document.getElementById("projectModalTitle");
+
   const projectModalDescription =
     document.getElementById("projectModalDescription");
+
   const projectModalFeatures =
     document.getElementById("projectModalFeatures");
+
   const projectModalTech =
     document.getElementById("projectModalTech");
+
   const projectModalButtons =
     document.getElementById("projectModalButtons");
+
   const projectModalOverlay =
     document.querySelector(".project-modal-overlay");
+
 
   const projectData = {
 
     portfolio: {
       title: "Emtiaz Official Portfolio",
+
       description:
         "A modern personal portfolio website created to showcase my skills, services, projects, technology interests and online presence.",
+
       features: [
         "Modern responsive design",
         "Personal profile section",
@@ -76,7 +89,10 @@ document.addEventListener("DOMContentLoaded", () => {
         "Contact section",
         "Mobile-friendly navigation"
       ],
-      tech: "HTML5 • CSS3 • JavaScript",
+
+      tech:
+        "HTML5 • CSS3 • JavaScript",
+
       buttons: `
         <a
           href="https://emtiaz96.github.io/"
@@ -98,10 +114,14 @@ document.addEventListener("DOMContentLoaded", () => {
       `
     },
 
+
     programming: {
+
       title: "Programming Projects",
+
       description:
         "A collection of programming and development projects created while learning and improving my coding skills.",
+
       features: [
         "Programming practice",
         "Web development experiments",
@@ -109,7 +129,10 @@ document.addEventListener("DOMContentLoaded", () => {
         "Continuous learning",
         "Future project expansion"
       ],
-      tech: "Python • JavaScript • HTML • CSS • GitHub",
+
+      tech:
+        "Python • JavaScript • HTML • CSS • GitHub",
+
       buttons: `
         <a
           href="https://github.com/EmtiAz96"
@@ -122,10 +145,14 @@ document.addEventListener("DOMContentLoaded", () => {
       `
     },
 
+
     future: {
+
       title: "Future Projects",
+
       description:
         "This section is reserved for upcoming projects, software ideas and larger development work.",
+
       features: [
         "New web applications",
         "Programming projects",
@@ -133,7 +160,10 @@ document.addEventListener("DOMContentLoaded", () => {
         "Open-source experiments",
         "Future portfolio updates"
       ],
-      tech: "Coming Soon",
+
+      tech:
+        "Coming Soon",
+
       buttons: `
         <a
           href="#contact"
@@ -149,13 +179,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function openProjectModal(projectKey) {
 
-    if (!projectModal || !projectData[projectKey]) {
+    if (
+      !projectModal ||
+      !projectData[projectKey]
+    ) {
       return;
     }
 
-    const project = projectData[projectKey];
+    const project =
+      projectData[projectKey];
 
-    projectModalTitle.textContent = project.title;
+    projectModalTitle.textContent =
+      project.title;
 
     projectModalDescription.textContent =
       project.description;
@@ -164,7 +199,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     project.features.forEach(feature => {
 
-      const li = document.createElement("li");
+      const li =
+        document.createElement("li");
 
       li.textContent = feature;
 
@@ -172,17 +208,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-    projectModalTech.textContent = project.tech;
+    projectModalTech.textContent =
+      project.tech;
 
     projectModalButtons.innerHTML =
       project.buttons;
 
     projectModal.classList.add("active");
 
-    projectModal.setAttribute("aria-hidden", "false");
+    projectModal.setAttribute(
+      "aria-hidden",
+      "false"
+    );
 
-    document.body.classList.add("modal-open");
-
+    document.body.classList.add(
+      "modal-open"
+    );
   }
 
 
@@ -194,32 +235,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
     projectModal.classList.remove("active");
 
-    projectModal.setAttribute("aria-hidden", "true");
+    projectModal.setAttribute(
+      "aria-hidden",
+      "true"
+    );
 
-    document.body.classList.remove("modal-open");
-
+    document.body.classList.remove(
+      "modal-open"
+    );
   }
 
-
-  /* Details Buttons */
 
   document
     .querySelectorAll(".project-details")
     .forEach(button => {
 
-      button.addEventListener("click", () => {
+      button.addEventListener(
+        "click",
+        () => {
 
-        const projectKey =
-          button.getAttribute("data-project");
+          const projectKey =
+            button.getAttribute(
+              "data-project"
+            );
 
-        openProjectModal(projectKey);
-
-      });
+          openProjectModal(projectKey);
+        }
+      );
 
     });
 
-
-  /* Close Button */
 
   if (projectModalClose) {
 
@@ -231,8 +276,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* Overlay Click */
-
   if (projectModalOverlay) {
 
     projectModalOverlay.addEventListener(
@@ -243,28 +286,69 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* Escape Key */
+  /* =========================
+     SCROLL REVEAL
+  ========================= */
 
-  document.addEventListener("keydown", event => {
+  const revealElements =
+    document.querySelectorAll(
+      ".section-title, .about-card, .skill-card, .service-card, .project-card, .youtube-card, .contact-card, .contact-form"
+    );
 
-    if (event.key === "Escape") {
 
-      if (navMenu) {
-        navMenu.classList.remove("active");
+  revealElements.forEach(element => {
 
-        if (menuToggle) {
-          menuToggle.setAttribute(
-            "aria-label",
-            "Open navigation menu"
-          );
-        }
-      }
-
-      closeProjectModal();
-
-    }
+    element.classList.add(
+      "scroll-reveal"
+    );
 
   });
+
+
+  if ("IntersectionObserver" in window) {
+
+    const observer =
+      new IntersectionObserver(
+        (entries, observer) => {
+
+          entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+              entry.target.classList.add(
+                "show"
+              );
+
+              observer.unobserve(
+                entry.target
+              );
+
+            }
+
+          });
+
+        },
+        {
+          threshold: 0.12
+        }
+      );
+
+
+    revealElements.forEach(element => {
+
+      observer.observe(element);
+
+    });
+
+  } else {
+
+    revealElements.forEach(element => {
+
+      element.classList.add("show");
+
+    });
+
+  }
 
 
   /* =========================
@@ -272,7 +356,10 @@ document.addEventListener("DOMContentLoaded", () => {
   ========================= */
 
   const contactForm =
-    document.getElementById("contactForm");
+    document.getElementById(
+      "contactForm"
+    );
+
 
   if (contactForm) {
 
@@ -283,42 +370,71 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault();
 
         const name =
-          document.getElementById("name").value.trim();
+          document
+            .getElementById("name")
+            .value
+            .trim();
 
         const email =
-          document.getElementById("email").value.trim();
+          document
+            .getElementById("email")
+            .value
+            .trim();
 
         const subject =
-          document.getElementById("subject").value.trim();
+          document
+            .getElementById("subject")
+            .value
+            .trim();
 
         const message =
-          document.getElementById("message").value.trim();
+          document
+            .getElementById("message")
+            .value
+            .trim();
 
-        if (!name || !email || !subject || !message) {
 
-          alert("Please fill in all fields.");
+        if (
+          !name ||
+          !email ||
+          !subject ||
+          !message
+        ) {
+
+          alert(
+            "Please fill in all fields."
+          );
 
           return;
-
         }
+
 
         const emailAddress =
           "mdemtiaz36900@gmail.com";
 
+
         const mailSubject =
           encodeURIComponent(
-            "Website Contact: " + subject
+            "Website Contact: " +
+            subject
           );
+
 
         const mailBody =
           encodeURIComponent(
             "Hello Emtiaz,\n\n" +
-            "Name: " + name + "\n" +
-            "Email: " + email + "\n\n" +
+            "Name: " +
+            name +
+            "\n" +
+            "Email: " +
+            email +
+            "\n\n" +
             "Message:\n" +
             message +
-            "\n\nSent from Emtiaz Official website."
+            "\n\n" +
+            "Sent from Emtiaz Official website."
           );
+
 
         const mailtoLink =
           "mailto:" +
@@ -328,11 +444,48 @@ document.addEventListener("DOMContentLoaded", () => {
           "&body=" +
           mailBody;
 
-        window.location.href = mailtoLink;
+
+        window.location.href =
+          mailtoLink;
 
       }
     );
 
   }
+
+
+  /* =========================
+     ESCAPE KEY
+  ========================= */
+
+  document.addEventListener(
+    "keydown",
+    event => {
+
+      if (event.key === "Escape") {
+
+        if (navMenu) {
+
+          navMenu.classList.remove(
+            "active"
+          );
+
+          if (menuToggle) {
+
+            menuToggle.setAttribute(
+              "aria-label",
+              "Open navigation menu"
+            );
+
+          }
+
+        }
+
+        closeProjectModal();
+
+      }
+
+    }
+  );
 
 });
