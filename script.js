@@ -1,653 +1,684 @@
-document.addEventListener("DOMContentLoaded", () => {
+/* =========================================================
+   EMTIAZ OFFICIAL — PREMIUM PORTFOLIO SCRIPT
+   Step 8: Hero Typing / Role Animation
+   ========================================================= */
 
-/* =========================
-MOBILE MENU
-========================= */
 
-const menuToggle = document.getElementById("menuToggle");
-const navMenu = document.getElementById("navMenu");
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
+
+const menuToggle =
+  document.querySelector(".menu-toggle");
+
+const navMenu =
+  document.querySelector(".nav-menu");
 
 if (menuToggle && navMenu) {
 
-menuToggle.addEventListener("click", () => {
+  menuToggle.addEventListener("click", () => {
+    navMenu.classList.toggle("active");
+  });
 
-  navMenu.classList.toggle("active");
+  const navLinks =
+    document.querySelectorAll(".nav-menu a");
 
-  const isOpen =
-    navMenu.classList.contains("active");
+  navLinks.forEach(link => {
 
-  menuToggle.setAttribute(
-    "aria-label",
-    isOpen
-      ? "Close navigation menu"
-      : "Open navigation menu"
-  );
-});
-
-navMenu.querySelectorAll("a").forEach(link => {
-
-  link.addEventListener("click", () => {
-
-    navMenu.classList.remove("active");
-
-    menuToggle.setAttribute(
-      "aria-label",
-      "Open navigation menu"
-    );
+    link.addEventListener("click", () => {
+      navMenu.classList.remove("active");
+    });
 
   });
 
-});
-
 }
 
-/* =========================
-CURRENT YEAR
-========================= */
+
+/* =========================================================
+   CURRENT YEAR
+   ========================================================= */
 
 const yearElement =
-document.getElementById("year");
+  document.getElementById("year");
 
 if (yearElement) {
-
-yearElement.textContent =
-  new Date().getFullYear();
-
+  yearElement.textContent =
+    new Date().getFullYear();
 }
 
-/* =========================
-PROJECT DETAILS MODAL
-========================= */
+
+/* =========================================================
+   PROJECT DETAILS MODAL
+   ========================================================= */
 
 const projectModal =
-document.getElementById("projectModal");
+  document.getElementById("projectModal");
 
 const projectModalClose =
-document.getElementById("projectModalClose");
+  document.getElementById("projectModalClose");
 
 const projectModalTitle =
-document.getElementById("projectModalTitle");
+  document.getElementById("projectModalTitle");
 
 const projectModalDescription =
-document.getElementById("projectModalDescription");
+  document.getElementById("projectModalDescription");
 
 const projectModalFeatures =
-document.getElementById("projectModalFeatures");
+  document.getElementById("projectModalFeatures");
 
 const projectModalTech =
-document.getElementById("projectModalTech");
+  document.getElementById("projectModalTech");
 
 const projectModalButtons =
-document.getElementById("projectModalButtons");
+  document.getElementById("projectModalButtons");
 
-const projectModalOverlay =
-document.querySelector(".project-modal-overlay");
 
 const projectData = {
 
-portfolio: {
+  portfolio: {
 
-  title:
-    "Emtiaz Official Portfolio",
+    title: "Emtiaz Official Portfolio",
 
-  description:
-    "A modern personal portfolio website created to showcase my skills, services, projects, technology interests and online presence.",
+    description:
+      "A modern personal portfolio website created to showcase my skills, services, projects and online presence.",
 
-  features: [
+    features: [
+      "Responsive design",
+      "Modern dark interface",
+      "About and Skills sections",
+      "Services section",
+      "Project showcase",
+      "YouTube integration",
+      "Contact section"
+    ],
 
-    "Modern responsive design",
+    tech:
+      "HTML5 • CSS3 • JavaScript",
 
-    "Personal profile section",
+    buttons: `
+      <a
+        href="https://emtiaz96.github.io/"
+        target="_blank"
+        class="project-btn"
+      >
+        🌐 Live Demo
+      </a>
 
-    "Skills and services showcase",
-
-    "Project showcase",
-
-    "YouTube section",
-
-    "Contact section",
-
-    "Mobile-friendly navigation"
-
-  ],
-
-  tech:
-    "HTML5 • CSS3 • JavaScript",
-
-  buttons: `
-
-    <a
-      href="https://emtiaz96.github.io/"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="project-btn project-live"
-    >
-      🚀 Live Demo
-    </a>
-
-    <a
-      href="https://github.com/EmtiAz96/EmtiAz96.github.io"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="project-btn project-github"
-    >
-      💻 GitHub
-    </a>
-
-  `
-
-},
+      <a
+        href="https://github.com/EmtiAz96/EmtiAz96.github.io"
+        target="_blank"
+        class="project-btn"
+      >
+        💻 GitHub
+      </a>
+    `
+  },
 
 
-programming: {
+  programming: {
 
-  title:
-    "Programming Projects",
+    title: "Programming Projects",
 
-  description:
-    "A collection of programming and development projects created while learning and improving my coding skills.",
+    description:
+      "A collection of programming experiments, development projects and future software ideas.",
 
-  features: [
+    features: [
+      "Programming practice",
+      "Web development experiments",
+      "Future software projects",
+      "Continuous learning"
+    ],
 
-    "Programming practice",
+    tech:
+      "Python • JavaScript • HTML • CSS",
 
-    "Web development experiments",
-
-    "Problem solving",
-
-    "Continuous learning",
-
-    "Future project expansion"
-
-  ],
-
-  tech:
-    "Python • JavaScript • HTML • CSS • GitHub",
-
-  buttons: `
-
-    <a
-      href="https://github.com/EmtiAz96"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="project-btn project-github"
-    >
-      💻 GitHub Profile
-    </a>
-
-  `
-
-},
+    buttons: `
+      <a
+        href="https://github.com/EmtiAz96"
+        target="_blank"
+        class="project-btn"
+      >
+        💻 GitHub Profile
+      </a>
+    `
+  },
 
 
-future: {
+  future: {
 
-  title:
-    "Future Projects",
+    title: "Future Projects",
 
-  description:
-    "This section is reserved for upcoming projects, software ideas and larger development work.",
+    description:
+      "This section is reserved for upcoming projects that will be added as development progresses.",
 
-  features: [
+    features: [
+      "New web projects",
+      "Programming projects",
+      "Creative technology ideas",
+      "Future development work"
+    ],
 
-    "New web applications",
+    tech:
+      "More technologies coming soon",
 
-    "Programming projects",
-
-    "Creative technology ideas",
-
-    "Open-source experiments",
-
-    "Future portfolio updates"
-
-  ],
-
-  tech:
-    "Coming Soon",
-
-  buttons: `
-
-    <a
-      href="#contact"
-      class="project-btn project-live"
-    >
-      ✉️ Stay Connected
-    </a>
-
-  `
-
-}
+    buttons: `
+      <a
+        href="#contact"
+        class="project-btn"
+      >
+        ✉️ Stay Connected
+      </a>
+    `
+  }
 
 };
 
-function openProjectModal(projectKey) {
 
-if (
-  !projectModal ||
-  !projectData[projectKey]
-) {
-  return;
+function openProjectModal(projectName) {
+
+  const project =
+    projectData[projectName];
+
+  if (!project || !projectModal) {
+    return;
+  }
+
+  if (projectModalTitle) {
+    projectModalTitle.textContent =
+      project.title;
+  }
+
+  if (projectModalDescription) {
+    projectModalDescription.textContent =
+      project.description;
+  }
+
+  if (projectModalFeatures) {
+
+    projectModalFeatures.innerHTML =
+      project.features
+        .map(
+          feature =>
+            `<li>${feature}</li>`
+        )
+        .join("");
+  }
+
+  if (projectModalTech) {
+    projectModalTech.textContent =
+      project.tech;
+  }
+
+  if (projectModalButtons) {
+    projectModalButtons.innerHTML =
+      project.buttons;
+  }
+
+  projectModal.classList.add("active");
+
+  projectModal.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+  document.body.classList.add(
+    "modal-open"
+  );
 }
 
-const project =
-  projectData[projectKey];
-
-if (projectModalTitle) {
-
-  projectModalTitle.textContent =
-    project.title;
-
-}
-
-if (projectModalDescription) {
-
-  projectModalDescription.textContent =
-    project.description;
-
-}
-
-if (projectModalFeatures) {
-
-  projectModalFeatures.innerHTML = "";
-
-  project.features.forEach(feature => {
-
-    const li =
-      document.createElement("li");
-
-    li.textContent =
-      feature;
-
-    projectModalFeatures.appendChild(li);
-
-  });
-
-}
-
-if (projectModalTech) {
-
-  projectModalTech.textContent =
-    project.tech;
-
-}
-
-if (projectModalButtons) {
-
-  projectModalButtons.innerHTML =
-    project.buttons;
-
-}
-
-projectModal.classList.add("active");
-
-projectModal.setAttribute(
-  "aria-hidden",
-  "false"
-);
-
-document.body.classList.add(
-  "modal-open"
-);
-
-}
 
 function closeProjectModal() {
 
-if (!projectModal) {
-  return;
+  if (!projectModal) {
+    return;
+  }
+
+  projectModal.classList.remove(
+    "active"
+  );
+
+  projectModal.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  document.body.classList.remove(
+    "modal-open"
+  );
 }
 
-projectModal.classList.remove(
-  "active"
-);
 
-projectModal.setAttribute(
-  "aria-hidden",
-  "true"
-);
+const projectDetailButtons =
+  document.querySelectorAll(
+    ".project-details"
+  );
 
-document.body.classList.remove(
-  "modal-open"
-);
 
-}
-
-document
-.querySelectorAll(".project-details")
-.forEach(button => {
+projectDetailButtons.forEach(button => {
 
   button.addEventListener(
     "click",
     () => {
 
-      const projectKey =
+      const projectName =
         button.getAttribute(
           "data-project"
         );
 
       openProjectModal(
-        projectKey
+        projectName
       );
 
     }
   );
 
 });
+
 
 if (projectModalClose) {
 
-projectModalClose.addEventListener(
-  "click",
-  closeProjectModal
-);
+  projectModalClose.addEventListener(
+    "click",
+    closeProjectModal
+  );
 
 }
+
+
+const projectModalOverlay =
+  document.querySelector(
+    ".project-modal-overlay"
+  );
+
 
 if (projectModalOverlay) {
 
-projectModalOverlay.addEventListener(
-  "click",
-  closeProjectModal
-);
+  projectModalOverlay.addEventListener(
+    "click",
+    closeProjectModal
+  );
 
 }
 
-/* =========================
-SCROLL REVEAL
-========================= */
 
-const revealElements =
-document.querySelectorAll(
-".section-title, .about-card, .skill-card, .service-card, .project-card, .youtube-card, .contact-card, .contact-form"
-);
+/* =========================================================
+   ESCAPE KEY
+   ========================================================= */
 
-revealElements.forEach(element => {
+document.addEventListener(
+  "keydown",
+  event => {
 
-element.classList.add(
-  "scroll-reveal"
-);
+    if (
+      event.key === "Escape"
+    ) {
 
-});
+      closeProjectModal();
 
-if (
-"IntersectionObserver" in window
-) {
-
-const observer =
-  new IntersectionObserver(
-    (entries, observer) => {
-
-      entries.forEach(entry => {
-
-        if (
-          entry.isIntersecting
-        ) {
-
-          entry.target.classList.add(
-            "show"
-          );
-
-          observer.unobserve(
-            entry.target
-          );
-
-        }
-
-      });
-
-    },
-    {
-      threshold: 0.12
     }
-  );
-
-
-revealElements.forEach(element => {
-
-  observer.observe(element);
-
-});
-
-} else {
-
-revealElements.forEach(element => {
-
-  element.classList.add(
-    "show"
-  );
-
-});
-
-}
-
-/* =========================
-ACTIVE NAVIGATION
-========================= */
-
-const sections =
-document.querySelectorAll(
-"main section[id]"
-);
-
-const navLinks =
-document.querySelectorAll(
-".nav-menu a"
-);
-
-function updateActiveNavigation() {
-
-let currentSection = "";
-
-const scrollPosition =
-  window.scrollY + 140;
-
-
-sections.forEach(section => {
-
-  const sectionTop =
-    section.offsetTop;
-
-  const sectionHeight =
-    section.offsetHeight;
-
-  if (
-    scrollPosition >= sectionTop &&
-    scrollPosition <
-      sectionTop + sectionHeight
-  ) {
-
-    currentSection =
-      section.getAttribute("id");
 
   }
-
-});
-
-
-navLinks.forEach(link => {
-
-  const href =
-    link.getAttribute("href");
-
-  link.classList.remove(
-    "active"
-  );
-
-
-  if (
-    href === "#" + currentSection
-  ) {
-
-    link.classList.add(
-      "active"
-    );
-
-  }
-
-});
-
-}
-
-window.addEventListener(
-"scroll",
-updateActiveNavigation,
-{
-passive: true
-}
 );
 
-updateActiveNavigation();
 
-/* =========================
-CONTACT FORM
-========================= */
+/* =========================================================
+   CONTACT FORM
+   ========================================================= */
 
 const contactForm =
-document.getElementById(
-"contactForm"
-);
+  document.querySelector(
+    ".contact-form"
+  );
+
 
 if (contactForm) {
 
-contactForm.addEventListener(
-  "submit",
-  event => {
+  contactForm.addEventListener(
+    "submit",
+    event => {
 
-    event.preventDefault();
+      event.preventDefault();
 
+      const name =
+        document.getElementById(
+          "name"
+        )?.value.trim() || "";
 
-    const name =
-      document
-        .getElementById("name")
-        .value
-        .trim();
+      const email =
+        document.getElementById(
+          "email"
+        )?.value.trim() || "";
 
-
-    const email =
-      document
-        .getElementById("email")
-        .value
-        .trim();
-
-
-    const subject =
-      document
-        .getElementById("subject")
-        .value
-        .trim();
+      const message =
+        document.getElementById(
+          "message"
+        )?.value.trim() || "";
 
 
-    const message =
-      document
-        .getElementById("message")
-        .value
-        .trim();
+      const subject =
+        encodeURIComponent(
+          "Message from Emtiaz Official Website"
+        );
 
 
-    if (
-      !name ||
-      !email ||
-      !subject ||
-      !message
-    ) {
+      const body =
+        encodeURIComponent(
+          `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+        );
 
-      alert(
-        "Please fill in all fields."
-      );
 
-      return;
+      window.location.href =
+        `mailto:mdemtiaz36900@gmail.com?subject=${subject}&body=${body}`;
 
     }
+  );
+
+}
 
 
-    const emailAddress =
-      "mdemtiaz36900@gmail.com";
+/* =========================================================
+   SCROLL REVEAL ANIMATION
+   ========================================================= */
+
+const revealElements =
+  document.querySelectorAll(
+    ".section-title, .about-card, .skill-card, .service-card, .project-card, .youtube-card, .contact-card, .contact-form"
+  );
 
 
-    const mailSubject =
-      encodeURIComponent(
-        "Website Contact: " +
-        subject
-      );
+revealElements.forEach(
+  element => {
 
-
-    const mailBody =
-      encodeURIComponent(
-
-        "Hello Emtiaz,\n\n" +
-
-        "Name: " +
-        name +
-        "\n" +
-
-        "Email: " +
-        email +
-        "\n\n" +
-
-        "Message:\n" +
-        message +
-
-        "\n\n" +
-
-        "Sent from Emtiaz Official website."
-
-      );
-
-
-    const mailtoLink =
-      "mailto:" +
-      emailAddress +
-      "?subject=" +
-      mailSubject +
-      "&body=" +
-      mailBody;
-
-
-    window.location.href =
-      mailtoLink;
+    element.classList.add(
+      "scroll-reveal"
+    );
 
   }
 );
 
+
+if (
+  "IntersectionObserver" in window
+) {
+
+  const observer =
+    new IntersectionObserver(
+      (
+        entries,
+        observer
+      ) => {
+
+        entries.forEach(
+          entry => {
+
+            if (
+              entry.isIntersecting
+            ) {
+
+              entry.target.classList.add(
+                "show"
+              );
+
+              observer.unobserve(
+                entry.target
+              );
+
+            }
+
+          }
+        );
+
+      },
+      {
+        threshold: 0.12
+      }
+    );
+
+
+  revealElements.forEach(
+    element => {
+
+      observer.observe(
+        element
+      );
+
+    }
+  );
+
+} else {
+
+  revealElements.forEach(
+    element => {
+
+      element.classList.add(
+        "show"
+      );
+
+    }
+  );
+
 }
 
-/* =========================
-ESCAPE KEY
-========================= */
 
-document.addEventListener(
-"keydown",
-event => {
+/* =========================================================
+   ACTIVE NAVIGATION
+   ========================================================= */
 
-  if (
-    event.key === "Escape"
-  ) {
+const sections =
+  document.querySelectorAll(
+    "main section[id]"
+  );
 
-    if (navMenu) {
 
-      navMenu.classList.remove(
+const navLinks =
+  document.querySelectorAll(
+    ".nav-menu a"
+  );
+
+
+function updateActiveNavigation() {
+
+  let currentSection = "";
+
+  const scrollPosition =
+    window.scrollY + 140;
+
+
+  sections.forEach(
+    section => {
+
+      const sectionTop =
+        section.offsetTop;
+
+      const sectionHeight =
+        section.offsetHeight;
+
+
+      if (
+        scrollPosition >=
+          sectionTop &&
+        scrollPosition <
+          sectionTop +
+            sectionHeight
+      ) {
+
+        currentSection =
+          section.getAttribute(
+            "id"
+          );
+
+      }
+
+    }
+  );
+
+
+  navLinks.forEach(
+    link => {
+
+      const href =
+        link.getAttribute(
+          "href"
+        );
+
+
+      link.classList.remove(
         "active"
       );
 
 
-      if (menuToggle) {
+      if (
+        href ===
+        "#" + currentSection
+      ) {
 
-        menuToggle.setAttribute(
-          "aria-label",
-          "Open navigation menu"
+        link.classList.add(
+          "active"
         );
 
       }
 
     }
-
-
-    closeProjectModal();
-
-  }
+  );
 
 }
 
+
+window.addEventListener(
+  "scroll",
+  updateActiveNavigation,
+  {
+    passive: true
+  }
 );
 
-});
+
+updateActiveNavigation();
+
+
+/* =========================================================
+   STEP 8 — HERO ROLE TYPING ANIMATION
+   ========================================================= */
+
+const typingElement =
+  document.querySelector(
+    ".typing-text"
+  );
+
+
+if (typingElement) {
+
+  const roles = [
+    "Programmer",
+    "Web Developer",
+    "Content Creator",
+    "Technology Enthusiast"
+  ];
+
+
+  let roleIndex = 0;
+
+  let characterIndex = 0;
+
+  let isDeleting = false;
+
+
+  const typingSpeed = 90;
+
+  const deletingSpeed = 55;
+
+  const pauseAfterTyping = 1500;
+
+  const pauseAfterDeleting = 500;
+
+
+  function typeRole() {
+
+    const currentRole =
+      roles[roleIndex];
+
+
+    if (!isDeleting) {
+
+      characterIndex++;
+
+
+      typingElement.textContent =
+        currentRole.substring(
+          0,
+          characterIndex
+        );
+
+
+      if (
+        characterIndex ===
+        currentRole.length
+      ) {
+
+        isDeleting = true;
+
+        setTimeout(
+          typeRole,
+          pauseAfterTyping
+        );
+
+        return;
+      }
+
+
+      setTimeout(
+        typeRole,
+        typingSpeed
+      );
+
+    } else {
+
+      characterIndex--;
+
+
+      typingElement.textContent =
+        currentRole.substring(
+          0,
+          characterIndex
+        );
+
+
+      if (
+        characterIndex === 0
+      ) {
+
+        isDeleting = false;
+
+
+        roleIndex =
+          (roleIndex + 1) %
+          roles.length;
+
+
+        setTimeout(
+          typeRole,
+          pauseAfterDeleting
+        );
+
+        return;
+      }
+
+
+      setTimeout(
+        typeRole,
+        deletingSpeed
+      );
+
+    }
+
+  }
+
+
+  typeRole();
+
+}
+
+
+/* =========================================================
+   END OF SCRIPT
+   ========================================================= */
