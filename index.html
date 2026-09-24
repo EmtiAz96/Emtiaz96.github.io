@@ -2,137 +2,209 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Emtiaz Official | Programmer & Web Developer</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <meta
     name="description"
-    content="Emtiaz Official - Personal portfolio of Emtiaz, programmer, web developer, technology enthusiast and content creator."
+    content="Emtiaz Official — Personal portfolio of Emtiaz, Programmer, Web Developer, Technology Enthusiast and Content Creator."
   >
 
   <meta
     name="keywords"
-    content="Emtiaz, programmer, web developer, cybersecurity, technology, content creator, portfolio"
+    content="Emtiaz, Programmer, Web Developer, JavaScript, HTML, CSS, Technology, Content Creator, Cybersecurity"
   >
 
-  <meta name="author" content="Emtiaz">
-  <meta name="robots" content="index, follow">
-
-  <link rel="canonical" href="https://emtiaz96.github.io/">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-
-  <meta property="og:title" content="Emtiaz Official | Programmer & Web Developer">
   <meta
-    property="og:description"
-    content="Official personal website of Emtiaz."
+    name="author"
+    content="Emtiaz"
   >
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://emtiaz96.github.io/">
 
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Emtiaz Official">
   <meta
-    name="twitter:description"
-    content="Programmer, Web Developer & Creator."
+    name="theme-color"
+    content="#07111f"
   >
 
-  <link rel="stylesheet" href="style.css">
+  <title>
+    Emtiaz Official | Programmer & Web Developer
+  </title>
+
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="favicon.svg"
+  >
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
 </head>
 
 <body>
 
-  <!-- ================= HEADER ================= -->
 
-  <header class="header">
+  <!-- =====================================================
+       NAVBAR
+       ===================================================== -->
 
-    <div class="container nav-container">
+  <header class="navbar">
 
-      <a href="#home" class="logo">
+    <div class="nav-container">
+
+      <a
+        href="#home"
+        class="logo"
+      >
         Emtiaz<span>.</span>
       </a>
 
+
       <button
         class="menu-toggle"
-        id="menuToggle"
+        type="button"
         aria-label="Open navigation menu"
       >
         ☰
       </button>
 
-      <nav class="nav-menu" id="navMenu">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#services">Services</a>
-        <a href="#projects">Projects</a>
-        <a href="#youtube">YouTube</a>
-        <a href="#contact">Contact</a>
-      </nav>
+
+      <ul class="nav-menu">
+
+        <li>
+          <a
+            href="#home"
+            class="active"
+          >
+            Home
+          </a>
+        </li>
+
+        <li>
+          <a href="#about">
+            About
+          </a>
+        </li>
+
+        <li>
+          <a href="#skills">
+            Skills
+          </a>
+        </li>
+
+        <li>
+          <a href="#services">
+            Services
+          </a>
+        </li>
+
+        <li>
+          <a href="#projects">
+            Projects
+          </a>
+        </li>
+
+        <li>
+          <a href="#youtube">
+            YouTube
+          </a>
+        </li>
+
+        <li>
+          <a href="#contact">
+            Contact
+          </a>
+        </li>
+
+      </ul>
 
     </div>
 
   </header>
 
 
-  <!-- ================= MAIN ================= -->
+  <!-- =====================================================
+       MAIN
+       ===================================================== -->
 
   <main>
 
-    <!-- ================= HERO ================= -->
 
-    <section id="home" class="hero">
+    <!-- ===================================================
+         HERO
+         =================================================== -->
 
-      <div class="container hero-grid">
+    <section
+      class="hero"
+      id="home"
+    >
+
+      <div class="hero-container">
+
 
         <div class="hero-content">
 
-          <span class="hero-tag">
+          <span class="section-tag">
             Welcome to my website
           </span>
 
+
           <h1>
-            Hi, I'm <span>Emtiaz</span>
+
+            Hi, I'm
+            <span>
+              Emtiaz
+            </span>
+
           </h1>
 
-          <h2>
-            Programmer • Web Developer • Creator
+
+          <h2
+            style="
+              font-size: clamp(1.4rem, 4vw, 2.2rem);
+              margin-bottom: 18px;
+              color: #ffffff;
+              min-height: 45px;
+            "
+          >
+
+            I'm a
+            <span
+              class="typing-text"
+              style="color: #38bdf8;"
+            >
+              Programmer
+            </span>
+
           </h2>
 
+
           <p>
-            I am passionate about programming, web development,
-            technology, cybersecurity and content creation.
-            I am continuously learning and building new things.
+            I am a programmer, web developer,
+            technology enthusiast and content creator.
+            I love learning new technologies and
+            building useful digital experiences.
           </p>
+
 
           <div class="hero-buttons">
 
-            <a href="#projects" class="btn btn-primary">
-              Explore My Work
+            <a
+              href="#projects"
+              class="hero-btn"
+            >
+              🚀 Explore Projects
             </a>
 
-            <a href="#contact" class="btn btn-secondary">
-              Contact Me
-            </a>
-
-          </div>
-
-          <div class="social-links">
 
             <a
-              href="https://github.com/EmtiAz96"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#contact"
+              class="hero-btn secondary"
             >
-              GitHub
-            </a>
-
-            <a
-              href="https://www.youtube.com/@emtiaz-official01"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              YouTube
+              ✉️ Contact Me
             </a>
 
           </div>
@@ -140,24 +212,14 @@
         </div>
 
 
+        <!-- PREMIUM PROFILE CARD -->
+
         <div class="hero-card">
 
-          <div class="profile-placeholder">
-
-            <img
-              src="profile.jpg"
-              alt="Emtiaz"
-            >
-
-          </div>
-
-          <h3>
-            Emtiaz
-          </h3>
-
-          <p>
-            Programmer & Web Developer
-          </p>
+          <img
+            src="profile.jpg"
+            alt="Emtiaz Profile Photo"
+          >
 
         </div>
 
@@ -166,44 +228,41 @@
     </section>
 
 
-    <!-- ================= ABOUT ================= -->
+    <!-- ===================================================
+         ABOUT
+         =================================================== -->
 
-    <section id="about" class="section">
+    <section
+      class="about"
+      id="about"
+    >
 
       <div class="container">
 
-        <div class="section-heading">
+        <span class="section-tag">
+          About Me
+        </span>
 
-          <span class="section-tag">
-            About Me
-          </span>
 
-          <h2>
-            Who I Am
-          </h2>
-
-          <p>
-            A passionate learner who loves technology,
-            programming and creating useful digital experiences.
-          </p>
-
-        </div>
+        <h2 class="section-title">
+          Get to Know <span>Emtiaz</span>
+        </h2>
 
 
         <div class="about-grid">
 
+
           <div class="about-card">
 
             <h3>
-              My Journey
+              👨‍💻 Who I Am
             </h3>
 
             <p>
-              My journey in technology started with curiosity.
-              Since then, I have been learning programming,
-              web development, Linux and cybersecurity.
-              My goal is to keep improving my skills and
-              create meaningful projects.
+              I am Emtiaz, a passionate programmer
+              and technology enthusiast. I enjoy
+              exploring programming, web development
+              and modern technology.
             </p>
 
           </div>
@@ -212,19 +271,17 @@
           <div class="about-card">
 
             <h3>
-              My Interests
+              🎯 My Goal
             </h3>
 
-            <ul>
-              <li>Programming</li>
-              <li>Web Development</li>
-              <li>Cybersecurity</li>
-              <li>Technology</li>
-              <li>Content Creation</li>
-              <li>YouTube</li>
-            </ul>
+            <p>
+              My goal is to continuously improve my
+              programming and development skills and
+              create useful projects for people.
+            </p>
 
           </div>
+
 
         </div>
 
@@ -233,145 +290,116 @@
     </section>
 
 
-    <!-- ================= SKILLS ================= -->
+    <!-- ===================================================
+         SKILLS
+         =================================================== -->
 
-    <section id="skills" class="section">
+    <section
+      class="skills"
+      id="skills"
+    >
 
       <div class="container">
 
-        <div class="section-heading">
+        <span class="section-tag">
+          My Skills
+        </span>
 
-          <span class="section-tag">
-            My Skills
-          </span>
 
-          <h2>
-            Skills & Technologies
-          </h2>
-
-          <p>
-            I am continuously learning and improving my skills
-            in programming, web development, technology and
-            cybersecurity.
-          </p>
-
-        </div>
+        <h2 class="section-title">
+          Skills I'm <span>Learning & Building</span>
+        </h2>
 
 
         <div class="skills-grid">
 
+
           <div class="skill-card">
 
-            <div class="skill-icon">
-              🐍
-            </div>
+            <h3>
+              🌐 Web Development
+            </h3>
 
-            <h3>Python</h3>
+            <ul class="skill-list">
 
-            <p>
-              Programming, automation and problem solving.
-            </p>
+              <li>
+                HTML5
+              </li>
 
-            <div class="skill-bar">
-              <span style="width: 80%;"></span>
-            </div>
+              <li>
+                CSS3
+              </li>
+
+              <li>
+                JavaScript
+              </li>
+
+              <li>
+                Responsive Design
+              </li>
+
+            </ul>
 
           </div>
 
 
           <div class="skill-card">
 
-            <div class="skill-icon">
-              🌐
-            </div>
+            <h3>
+              💻 Programming
+            </h3>
 
-            <h3>HTML & CSS</h3>
+            <ul class="skill-list">
 
-            <p>
-              Modern, responsive and professional websites.
-            </p>
+              <li>
+                Python
+              </li>
 
-            <div class="skill-bar">
-              <span style="width: 85%;"></span>
-            </div>
+              <li>
+                JavaScript
+              </li>
 
-          </div>
+              <li>
+                Problem Solving
+              </li>
 
+              <li>
+                Git & GitHub
+              </li>
 
-          <div class="skill-card">
-
-            <div class="skill-icon">
-              ⚡
-            </div>
-
-            <h3>JavaScript</h3>
-
-            <p>
-              Interactive and dynamic web experiences.
-            </p>
-
-            <div class="skill-bar">
-              <span style="width: 70%;"></span>
-            </div>
+            </ul>
 
           </div>
 
 
           <div class="skill-card">
 
-            <div class="skill-icon">
-              🐧
-            </div>
+            <h3>
+              🔐 Technology
+            </h3>
 
-            <h3>Linux</h3>
+            <ul class="skill-list">
 
-            <p>
-              Linux environment, terminal and system basics.
-            </p>
+              <li>
+                Linux
+              </li>
 
-            <div class="skill-bar">
-              <span style="width: 75%;"></span>
-            </div>
+              <li>
+                Networking
+              </li>
 
-          </div>
+              <li>
+                Cybersecurity Basics
+              </li>
 
+              <li>
+                Technology Research
+              </li>
 
-          <div class="skill-card">
-
-            <div class="skill-icon">
-              🔐
-            </div>
-
-            <h3>Cybersecurity</h3>
-
-            <p>
-              Learning ethical cybersecurity and security concepts.
-            </p>
-
-            <div class="skill-bar">
-              <span style="width: 65%;"></span>
-            </div>
+            </ul>
 
           </div>
 
-
-          <div class="skill-card">
-
-            <div class="skill-icon">
-              🎬
-            </div>
-
-            <h3>Content Creation</h3>
-
-            <p>
-              Video editing, creative content and YouTube.
-            </p>
-
-            <div class="skill-bar">
-              <span style="width: 80%;"></span>
-            </div>
-
-          </div>
 
         </div>
 
@@ -380,36 +408,34 @@
     </section>
 
 
-    <!-- ================= SERVICES ================= -->
+    <!-- ===================================================
+         SERVICES
+         =================================================== -->
 
-    <section id="services" class="section">
+    <section
+      class="services"
+      id="services"
+    >
 
       <div class="container">
 
-        <div class="section-heading">
-
-          <span class="section-tag">
-            Services
-          </span>
-
-          <h2>
-            What I Do
-          </h2>
-
-          <p>
-            Some areas where I am building my skills and
-            creating digital solutions.
-          </p>
-
-        </div>
+        <span class="section-tag">
+          Services
+        </span>
 
 
-        <div class="cards-grid">
+        <h2 class="section-title">
+          What I Can <span>Do</span>
+        </h2>
+
+
+        <div class="services-grid">
+
 
           <div class="service-card">
 
-            <div class="card-icon">
-              💻
+            <div class="service-icon">
+              🌐
             </div>
 
             <h3>
@@ -417,8 +443,8 @@
             </h3>
 
             <p>
-              Creating responsive and modern websites
-              using HTML, CSS and JavaScript.
+              Modern, responsive and user-friendly
+              websites using HTML, CSS and JavaScript.
             </p>
 
           </div>
@@ -426,8 +452,8 @@
 
           <div class="service-card">
 
-            <div class="card-icon">
-              🧑‍💻
+            <div class="service-icon">
+              💻
             </div>
 
             <h3>
@@ -435,8 +461,8 @@
             </h3>
 
             <p>
-              Learning programming and building useful
-              software and automation projects.
+              Programming practice, automation ideas
+              and useful software development projects.
             </p>
 
           </div>
@@ -444,26 +470,8 @@
 
           <div class="service-card">
 
-            <div class="card-icon">
-              🔒
-            </div>
-
-            <h3>
-              Cybersecurity Learning
-            </h3>
-
-            <p>
-              Studying ethical cybersecurity, Linux,
-              networking and security concepts.
-            </p>
-
-          </div>
-
-
-          <div class="service-card">
-
-            <div class="card-icon">
-              🎥
+            <div class="service-icon">
+              🎨
             </div>
 
             <h3>
@@ -471,11 +479,12 @@
             </h3>
 
             <p>
-              Creating digital content and developing
-              my YouTube presence.
+              Creative digital content, video ideas
+              and technology-focused content creation.
             </p>
 
           </div>
+
 
         </div>
 
@@ -484,28 +493,25 @@
     </section>
 
 
-    <!-- ================= PROJECTS ================= -->
+    <!-- ===================================================
+         PROJECTS
+         =================================================== -->
 
-    <section id="projects" class="section">
+    <section
+      class="projects"
+      id="projects"
+    >
 
       <div class="container">
 
-        <div class="section-heading">
+        <span class="section-tag">
+          My Projects
+        </span>
 
-          <span class="section-tag">
-            My Work
-          </span>
 
-          <h2>
-            Projects & Work
-          </h2>
-
-          <p>
-            Explore my projects, experiments and development work.
-            More projects will be added as I continue building.
-          </p>
-
-        </div>
+        <h2 class="section-title">
+          Projects & <span>Experiments</span>
+        </h2>
 
 
         <div class="projects-grid">
@@ -513,142 +519,129 @@
 
           <!-- PROJECT 01 -->
 
-          <article class="project-card">
-
-            <span class="project-number">
-              01
-            </span>
+          <div class="project-card">
 
             <h3>
-              Emtiaz Official Website
+              🌐 Emtiaz Official Portfolio
             </h3>
 
             <p>
-              My personal portfolio website featuring my skills,
-              projects, services, YouTube channel and contact information.
+              My personal portfolio website where
+              I showcase my skills, services, projects
+              and online presence.
             </p>
 
-            <div class="project-tech">
-              HTML • CSS • JavaScript • GitHub Pages
-            </div>
 
             <div class="project-buttons">
 
               <button
+                type="button"
                 class="project-btn project-details"
                 data-project="portfolio"
               >
                 📋 Details
               </button>
 
+
               <a
                 href="https://emtiaz96.github.io/"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="project-btn project-live"
+                class="project-btn"
               >
-                🔗 Live Demo
+                🌐 Live Demo
               </a>
 
+
               <a
-                href="https://github.com/EmtiAz96"
+                href="https://github.com/EmtiAz96/EmtiAz96.github.io"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="project-btn project-github"
+                class="project-btn"
               >
                 💻 GitHub
               </a>
 
             </div>
 
-          </article>
+          </div>
 
 
           <!-- PROJECT 02 -->
 
-          <article class="project-card">
-
-            <span class="project-number">
-              02
-            </span>
+          <div class="project-card">
 
             <h3>
-              Programming Projects
+              💻 Programming Projects
             </h3>
 
             <p>
-              A collection of programming experiments and
-              learning projects created while improving my
-              development skills.
+              Programming experiments, development
+              projects and software ideas that I am
+              working on and learning from.
             </p>
 
-            <div class="project-tech">
-              Python • Programming • Development
-            </div>
 
             <div class="project-buttons">
 
               <button
+                type="button"
                 class="project-btn project-details"
                 data-project="programming"
               >
                 📋 Details
               </button>
 
+
               <a
                 href="https://github.com/EmtiAz96"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="project-btn project-github"
+                class="project-btn"
               >
                 💻 GitHub
               </a>
 
             </div>
 
-          </article>
+          </div>
 
 
           <!-- PROJECT 03 -->
 
-          <article class="project-card">
-
-            <span class="project-number">
-              03
-            </span>
+          <div class="project-card">
 
             <h3>
-              Future Web Projects
+              🚀 Future Projects
             </h3>
 
             <p>
-              New websites, applications and technology projects
-              will be published here as they are completed.
+              More exciting technology and programming
+              projects will be added here in the future.
             </p>
 
-            <div class="project-tech">
-              Coming Soon
-            </div>
 
             <div class="project-buttons">
 
               <button
+                type="button"
                 class="project-btn project-details"
                 data-project="future"
               >
                 📋 Details
               </button>
 
+
               <a
                 href="#contact"
-                class="project-btn project-live"
+                class="project-btn"
               >
-                🚀 Stay Connected
+                ✉️ Stay Connected
               </a>
 
             </div>
 
-          </article>
+          </div>
 
 
         </div>
@@ -658,120 +651,46 @@
     </section>
 
 
-    <!-- ================= PROJECT DETAILS MODAL ================= -->
+    <!-- ===================================================
+         YOUTUBE
+         =================================================== -->
 
-    <div
-      class="project-modal"
-      id="projectModal"
-      aria-hidden="true"
+    <section
+      class="youtube"
+      id="youtube"
     >
-
-      <div class="project-modal-overlay"></div>
-
-      <div
-        class="project-modal-content"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="projectModalTitle"
-      >
-
-        <button
-          class="project-modal-close"
-          id="projectModalClose"
-          aria-label="Close project details"
-        >
-          ×
-        </button>
-
-        <span class="section-tag">
-          Project Details
-        </span>
-
-        <h2 id="projectModalTitle">
-          Project
-        </h2>
-
-        <p id="projectModalDescription">
-          Project description.
-        </p>
-
-        <div class="project-modal-features">
-
-          <h3>
-            Features
-          </h3>
-
-          <ul id="projectModalFeatures">
-          </ul>
-
-        </div>
-
-        <div class="project-modal-tech">
-
-          <h3>
-            Technologies
-          </h3>
-
-          <p id="projectModalTech">
-          </p>
-
-        </div>
-
-        <div
-          class="project-modal-buttons"
-          id="projectModalButtons"
-        >
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- ================= YOUTUBE ================= -->
-
-    <section id="youtube" class="section">
 
       <div class="container">
 
-        <div class="section-heading">
+        <span class="section-tag">
+          YouTube
+        </span>
 
-          <span class="section-tag">
-            YouTube
-          </span>
 
-          <h2>
-            Emtiaz Official
-          </h2>
-
-          <p>
-            Follow my YouTube journey and explore my latest content.
-          </p>
-
-        </div>
+        <h2 class="section-title">
+          My <span>YouTube Channel</span>
+        </h2>
 
 
         <div class="youtube-card">
 
-          <div class="youtube-icon">
-            ▶
-          </div>
-
           <h3>
-            Emtiaz Official
+            🎬 Emtiaz Official
           </h3>
 
           <p>
-            Technology, creative content and more.
+            Follow my YouTube channel for creative
+            content, technology, programming and more.
           </p>
+
 
           <a
             href="https://www.youtube.com/@emtiaz-official01"
             target="_blank"
             rel="noopener noreferrer"
-            class="btn btn-primary"
+            class="hero-btn"
           >
-            Visit My YouTube
+            ▶️ Visit My YouTube
           </a>
 
         </div>
@@ -781,100 +700,77 @@
     </section>
 
 
-    <!-- ================= CONTACT ================= -->
+    <!-- ===================================================
+         CONTACT
+         =================================================== -->
 
-    <section id="contact" class="section">
+    <section
+      class="contact"
+      id="contact"
+    >
 
       <div class="container">
 
-        <div class="section-heading">
+        <span class="section-tag">
+          Contact
+        </span>
 
-          <span class="section-tag">
-            Contact
-          </span>
 
-          <h2>
-            Let's Connect
-          </h2>
-
-          <p>
-            Have a question, idea or project?
-            Feel free to contact me.
-          </p>
-
-        </div>
+        <h2 class="section-title">
+          Let's <span>Connect</span>
+        </h2>
 
 
         <div class="contact-grid">
 
 
-          <div class="contact-info">
+          <div class="contact-card">
 
-            <div class="contact-item">
+            <h3>
+              📩 Get In Touch
+            </h3>
 
-              <span>📧</span>
-
-              <div>
-
-                <h3>
-                  Email
-                </h3>
-
-                <a href="mailto:mdemtiaz36900@gmail.com">
-                  mdemtiaz36900@gmail.com
-                </a>
-
-              </div>
-
-            </div>
+            <p>
+              Have a project idea or want to connect?
+              Feel free to contact me.
+            </p>
 
 
-            <div class="contact-item">
-
-              <span>📱</span>
-
-              <div>
-
-                <h3>
-                  Phone
-                </h3>
-
-                <a href="tel:+8801798665955">
-                  +880 1798-665955
-                </a>
-
-              </div>
-
-            </div>
+            <p>
+              📧
+              <a
+                href="mailto:mdemtiaz36900@gmail.com"
+              >
+                mdemtiaz36900@gmail.com
+              </a>
+            </p>
 
 
-            <div class="contact-item">
+            <p>
+              📱
+              <a
+                href="tel:+8801798665955"
+              >
+                +8801798665955
+              </a>
+            </p>
 
-              <span>▶️</span>
 
-              <div>
-
-                <h3>
-                  YouTube
-                </h3>
-
-                <a
-                  href="https://www.youtube.com/@emtiaz-official01"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Emtiaz Official
-                </a>
-
-              </div>
-
-            </div>
+            <p>
+              ▶️
+              <a
+                href="https://www.youtube.com/@emtiaz-official01"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                YouTube
+              </a>
+            </p>
 
           </div>
 
 
           <form
-            id="contactForm"
             class="contact-form"
           >
 
@@ -886,6 +782,7 @@
               required
             >
 
+
             <input
               type="email"
               id="email"
@@ -894,30 +791,24 @@
               required
             >
 
-            <input
-              type="text"
-              id="subject"
-              name="subject"
-              placeholder="Subject"
-              required
-            >
 
             <textarea
               id="message"
               name="message"
-              rows="6"
               placeholder="Your Message"
               required
             ></textarea>
 
+
             <button
               type="submit"
-              class="btn btn-primary"
+              class="hero-btn"
             >
-              Send Message
+              🚀 Send Message
             </button>
 
           </form>
+
 
         </div>
 
@@ -925,28 +816,110 @@
 
     </section>
 
+
   </main>
 
 
-  <!-- ================= FOOTER ================= -->
+  <!-- =====================================================
+       PROJECT DETAILS MODAL
+       ===================================================== -->
 
-  <footer class="footer">
+  <div
+    class="project-modal"
+    id="projectModal"
+    aria-hidden="true"
+  >
+
+    <div class="project-modal-overlay"></div>
+
+
+    <div
+      class="project-modal-content"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="projectModalTitle"
+    >
+
+      <button
+        class="project-modal-close"
+        id="projectModalClose"
+        type="button"
+        aria-label="Close project details"
+      >
+        ×
+      </button>
+
+
+      <span class="section-tag">
+        Project Details
+      </span>
+
+
+      <h2 id="projectModalTitle">
+        Project
+      </h2>
+
+
+      <p id="projectModalDescription">
+        Project description.
+      </p>
+
+
+      <div class="project-modal-features">
+
+        <h3>
+          Features
+        </h3>
+
+        <ul id="projectModalFeatures"></ul>
+
+      </div>
+
+
+      <div class="project-modal-tech">
+
+        <h3>
+          Technologies
+        </h3>
+
+        <p id="projectModalTech"></p>
+
+      </div>
+
+
+      <div
+        class="project-modal-buttons"
+        id="projectModalButtons"
+      ></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       FOOTER
+       ===================================================== -->
+
+  <footer>
 
     <div class="container">
 
       <p>
-        © <span id="year"></span> Emtiaz Official.
+        ©
+        <span id="year"></span>
+        <span>Emtiaz Official</span>.
         All rights reserved.
-      </p>
-
-      <p>
-        Built with passion by Emtiaz.
       </p>
 
     </div>
 
   </footer>
 
+
+  <!-- =====================================================
+       JAVASCRIPT
+       ===================================================== -->
 
   <script src="script.js"></script>
 
