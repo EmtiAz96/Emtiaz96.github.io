@@ -1,6 +1,5 @@
 /* =========================================================
-   EMTIAZ OFFICIAL — PREMIUM PORTFOLIO SCRIPT
-   Step 8: Hero Typing / Role Animation
+   EMTIAZ OFFICIAL — FINAL PREMIUM JAVASCRIPT
    ========================================================= */
 
 
@@ -14,19 +13,26 @@ const menuToggle =
 const navMenu =
   document.querySelector(".nav-menu");
 
+
 if (menuToggle && navMenu) {
 
   menuToggle.addEventListener("click", () => {
+
     navMenu.classList.toggle("active");
+
   });
+
 
   const navLinks =
     document.querySelectorAll(".nav-menu a");
 
+
   navLinks.forEach(link => {
 
     link.addEventListener("click", () => {
+
       navMenu.classList.remove("active");
+
     });
 
   });
@@ -41,37 +47,18 @@ if (menuToggle && navMenu) {
 const yearElement =
   document.getElementById("year");
 
+
 if (yearElement) {
+
   yearElement.textContent =
     new Date().getFullYear();
+
 }
 
 
 /* =========================================================
-   PROJECT DETAILS MODAL
+   PROJECT DATA
    ========================================================= */
-
-const projectModal =
-  document.getElementById("projectModal");
-
-const projectModalClose =
-  document.getElementById("projectModalClose");
-
-const projectModalTitle =
-  document.getElementById("projectModalTitle");
-
-const projectModalDescription =
-  document.getElementById("projectModalDescription");
-
-const projectModalFeatures =
-  document.getElementById("projectModalFeatures");
-
-const projectModalTech =
-  document.getElementById("projectModalTech");
-
-const projectModalButtons =
-  document.getElementById("projectModalButtons");
-
 
 const projectData = {
 
@@ -85,9 +72,11 @@ const projectData = {
     features: [
       "Responsive design",
       "Modern dark interface",
-      "About and Skills sections",
+      "Animated hero section",
+      "Skills progress bars",
       "Services section",
       "Project showcase",
+      "Project details modal",
       "YouTube integration",
       "Contact section"
     ],
@@ -99,6 +88,7 @@ const projectData = {
       <a
         href="https://emtiaz96.github.io/"
         target="_blank"
+        rel="noopener noreferrer"
         class="project-btn"
       >
         🌐 Live Demo
@@ -107,6 +97,7 @@ const projectData = {
       <a
         href="https://github.com/EmtiAz96/EmtiAz96.github.io"
         target="_blank"
+        rel="noopener noreferrer"
         class="project-btn"
       >
         💻 GitHub
@@ -125,17 +116,19 @@ const projectData = {
     features: [
       "Programming practice",
       "Web development experiments",
-      "Future software projects",
-      "Continuous learning"
+      "Software ideas",
+      "Continuous learning",
+      "GitHub project management"
     ],
 
     tech:
-      "Python • JavaScript • HTML • CSS",
+      "Python • JavaScript • HTML • CSS • Git",
 
     buttons: `
       <a
         href="https://github.com/EmtiAz96"
         target="_blank"
+        rel="noopener noreferrer"
         class="project-btn"
       >
         💻 GitHub Profile
@@ -174,24 +167,58 @@ const projectData = {
 };
 
 
+/* =========================================================
+   PROJECT MODAL
+   ========================================================= */
+
+const projectModal =
+  document.getElementById("projectModal");
+
+const projectModalClose =
+  document.getElementById("projectModalClose");
+
+const projectModalTitle =
+  document.getElementById("projectModalTitle");
+
+const projectModalDescription =
+  document.getElementById("projectModalDescription");
+
+const projectModalFeatures =
+  document.getElementById("projectModalFeatures");
+
+const projectModalTech =
+  document.getElementById("projectModalTech");
+
+const projectModalButtons =
+  document.getElementById("projectModalButtons");
+
+
 function openProjectModal(projectName) {
 
   const project =
     projectData[projectName];
 
+
   if (!project || !projectModal) {
     return;
   }
 
+
   if (projectModalTitle) {
+
     projectModalTitle.textContent =
       project.title;
+
   }
 
+
   if (projectModalDescription) {
+
     projectModalDescription.textContent =
       project.description;
+
   }
+
 
   if (projectModalFeatures) {
 
@@ -202,17 +229,25 @@ function openProjectModal(projectName) {
             `<li>${feature}</li>`
         )
         .join("");
+
   }
+
 
   if (projectModalTech) {
+
     projectModalTech.textContent =
       project.tech;
+
   }
 
+
   if (projectModalButtons) {
+
     projectModalButtons.innerHTML =
       project.buttons;
+
   }
+
 
   projectModal.classList.add("active");
 
@@ -224,6 +259,7 @@ function openProjectModal(projectName) {
   document.body.classList.add(
     "modal-open"
   );
+
 }
 
 
@@ -233,18 +269,22 @@ function closeProjectModal() {
     return;
   }
 
+
   projectModal.classList.remove(
     "active"
   );
+
 
   projectModal.setAttribute(
     "aria-hidden",
     "true"
   );
 
+
   document.body.classList.remove(
     "modal-open"
   );
+
 }
 
 
@@ -309,9 +349,7 @@ document.addEventListener(
   "keydown",
   event => {
 
-    if (
-      event.key === "Escape"
-    ) {
+    if (event.key === "Escape") {
 
       closeProjectModal();
 
@@ -339,15 +377,18 @@ if (contactForm) {
 
       event.preventDefault();
 
+
       const name =
         document.getElementById(
           "name"
         )?.value.trim() || "";
 
+
       const email =
         document.getElementById(
           "email"
         )?.value.trim() || "";
+
 
       const message =
         document.getElementById(
@@ -377,7 +418,7 @@ if (contactForm) {
 
 
 /* =========================================================
-   SCROLL REVEAL ANIMATION
+   SCROLL REVEAL
    ========================================================= */
 
 const revealElements =
@@ -386,47 +427,41 @@ const revealElements =
   );
 
 
-revealElements.forEach(
-  element => {
+revealElements.forEach(element => {
 
-    element.classList.add(
-      "scroll-reveal"
-    );
+  element.classList.add(
+    "scroll-reveal"
+  );
 
-  }
-);
+});
 
 
 if (
   "IntersectionObserver" in window
 ) {
 
-  const observer =
+  const revealObserver =
     new IntersectionObserver(
       (
         entries,
         observer
       ) => {
 
-        entries.forEach(
-          entry => {
+        entries.forEach(entry => {
 
-            if (
-              entry.isIntersecting
-            ) {
+          if (entry.isIntersecting) {
 
-              entry.target.classList.add(
-                "show"
-              );
+            entry.target.classList.add(
+              "show"
+            );
 
-              observer.unobserve(
-                entry.target
-              );
-
-            }
+            observer.unobserve(
+              entry.target
+            );
 
           }
-        );
+
+        });
 
       },
       {
@@ -435,27 +470,23 @@ if (
     );
 
 
-  revealElements.forEach(
-    element => {
+  revealElements.forEach(element => {
 
-      observer.observe(
-        element
-      );
+    revealObserver.observe(
+      element
+    );
 
-    }
-  );
+  });
 
 } else {
 
-  revealElements.forEach(
-    element => {
+  revealElements.forEach(element => {
 
-      element.classList.add(
-        "show"
-      );
+    element.classList.add(
+      "show"
+    );
 
-    }
-  );
+  });
 
 }
 
@@ -484,62 +515,56 @@ function updateActiveNavigation() {
     window.scrollY + 140;
 
 
-  sections.forEach(
-    section => {
+  sections.forEach(section => {
 
-      const sectionTop =
-        section.offsetTop;
+    const sectionTop =
+      section.offsetTop;
 
-      const sectionHeight =
-        section.offsetHeight;
-
-
-      if (
-        scrollPosition >=
-          sectionTop &&
-        scrollPosition <
-          sectionTop +
-            sectionHeight
-      ) {
-
-        currentSection =
-          section.getAttribute(
-            "id"
-          );
-
-      }
-
-    }
-  );
+    const sectionHeight =
+      section.offsetHeight;
 
 
-  navLinks.forEach(
-    link => {
+    if (
+      scrollPosition >= sectionTop &&
+      scrollPosition <
+        sectionTop + sectionHeight
+    ) {
 
-      const href =
-        link.getAttribute(
-          "href"
+      currentSection =
+        section.getAttribute(
+          "id"
         );
 
+    }
 
-      link.classList.remove(
-        "active"
+  });
+
+
+  navLinks.forEach(link => {
+
+    const href =
+      link.getAttribute(
+        "href"
       );
 
 
-      if (
-        href ===
-        "#" + currentSection
-      ) {
+    link.classList.remove(
+      "active"
+    );
 
-        link.classList.add(
-          "active"
-        );
 
-      }
+    if (
+      href ===
+      "#" + currentSection
+    ) {
+
+      link.classList.add(
+        "active"
+      );
 
     }
-  );
+
+  });
 
 }
 
@@ -557,7 +582,7 @@ updateActiveNavigation();
 
 
 /* =========================================================
-   STEP 8 — HERO ROLE TYPING ANIMATION
+   TYPING ANIMATION
    ========================================================= */
 
 const typingElement =
@@ -623,6 +648,7 @@ if (typingElement) {
         );
 
         return;
+
       }
 
 
@@ -643,9 +669,7 @@ if (typingElement) {
         );
 
 
-      if (
-        characterIndex === 0
-      ) {
+      if (characterIndex === 0) {
 
         isDeleting = false;
 
@@ -661,6 +685,7 @@ if (typingElement) {
         );
 
         return;
+
       }
 
 
@@ -680,5 +705,174 @@ if (typingElement) {
 
 
 /* =========================================================
-   END OF SCRIPT
+   SKILL PROGRESS ANIMATION
+   ========================================================= */
+
+const skillCards =
+  document.querySelectorAll(
+    ".skill-card"
+  );
+
+
+if (
+  "IntersectionObserver" in window &&
+  skillCards.length > 0
+) {
+
+  const skillObserver =
+    new IntersectionObserver(
+      (
+        entries,
+        observer
+      ) => {
+
+        entries.forEach(entry => {
+
+          if (
+            entry.isIntersecting
+          ) {
+
+            const progress =
+              entry.target.querySelector(
+                ".skill-progress"
+              );
+
+
+            if (progress) {
+
+              const value =
+                progress.getAttribute(
+                  "data-progress"
+                );
+
+
+              progress.style.width =
+                value + "%";
+
+            }
+
+
+            observer.unobserve(
+              entry.target
+            );
+
+          }
+
+        });
+
+      },
+      {
+        threshold: 0.25
+      }
+    );
+
+
+  skillCards.forEach(card => {
+
+    skillObserver.observe(
+      card
+    );
+
+  });
+
+} else {
+
+  document
+    .querySelectorAll(
+      ".skill-progress"
+    )
+    .forEach(progress => {
+
+      const value =
+        progress.getAttribute(
+          "data-progress"
+        );
+
+      progress.style.width =
+        value + "%";
+
+    });
+
+}
+
+
+/* =========================================================
+   BACK TO TOP
+   ========================================================= */
+
+const backToTop =
+  document.getElementById(
+    "backToTop"
+  );
+
+
+if (backToTop) {
+
+  window.addEventListener(
+    "scroll",
+    () => {
+
+      if (
+        window.scrollY > 500
+      ) {
+
+        backToTop.classList.add(
+          "show"
+        );
+
+      } else {
+
+        backToTop.classList.remove(
+          "show"
+        );
+
+      }
+
+    },
+    {
+      passive: true
+    }
+  );
+
+
+  backToTop.addEventListener(
+    "click",
+    () => {
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   CLOSE MOBILE MENU WITH ESCAPE
+   ========================================================= */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if (
+      event.key === "Escape" &&
+      navMenu
+    ) {
+
+      navMenu.classList.remove(
+        "active"
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   END
    ========================================================= */
