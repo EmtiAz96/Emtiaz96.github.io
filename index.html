@@ -5,40 +5,31 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Emtiaz Official | Programmer & Web Developer</title>
+
   <meta
     name="description"
-    content="Emtiaz Official — Personal portfolio of Emtiaz, Programmer, Web Developer, Technology Enthusiast and Content Creator."
+    content="Emtiaz Official - Personal portfolio of a programmer, web developer, technology enthusiast and content creator."
   >
 
   <meta
     name="keywords"
-    content="Emtiaz, Programmer, Web Developer, HTML, CSS, JavaScript, Python, Technology, Content Creator"
+    content="Emtiaz, programmer, web developer, cybersecurity, technology, content creator, portfolio"
   >
 
   <meta name="author" content="Emtiaz">
 
-  <meta name="theme-color" content="#07111f">
-
-  <title>Emtiaz Official | Programmer & Web Developer</title>
-
-  <link
-    rel="icon"
-    type="image/svg+xml"
-    href="favicon.svg"
-  >
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- =========================
-       NAVBAR
-       ========================= -->
+  <!-- ================= NAVBAR ================= -->
 
   <header class="navbar">
-
-    <div class="nav-container">
+    <div class="container nav-container">
 
       <a href="#home" class="logo">
         Emtiaz<span>.</span>
@@ -46,91 +37,97 @@
 
       <button
         class="menu-toggle"
-        type="button"
+        id="menuToggle"
         aria-label="Open navigation menu"
       >
         ☰
       </button>
 
-      <ul class="nav-menu">
+      <nav class="nav-menu" id="navMenu">
 
-        <li>
-          <a href="#home" class="active">Home</a>
-        </li>
+        <a href="#home" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#services">Services</a>
+        <a href="#projects">Projects</a>
+        <a href="#youtube">YouTube</a>
+        <a href="#contact">Contact</a>
 
-        <li>
-          <a href="#about">About</a>
-        </li>
-
-        <li>
-          <a href="#skills">Skills</a>
-        </li>
-
-        <li>
-          <a href="#services">Services</a>
-        </li>
-
-        <li>
-          <a href="#projects">Projects</a>
-        </li>
-
-        <li>
-          <a href="#youtube">YouTube</a>
-        </li>
-
-        <li>
-          <a href="#contact">Contact</a>
-        </li>
-
-      </ul>
+      </nav>
 
     </div>
-
   </header>
 
 
   <main>
 
-    <!-- =========================
-         HERO
-         ========================= -->
+    <!-- ================= HERO ================= -->
 
-    <section class="hero" id="home">
+    <section class="hero section" id="home">
 
-      <div class="hero-container">
+      <div class="container hero-container">
 
         <div class="hero-content">
 
           <span class="section-tag">
-            Welcome to my website
+            Welcome to my digital world
           </span>
 
           <h1>
             Hi, I'm
-            <span>Emtiaz</span>
+            <span class="gradient-text">Emtiaz</span>
           </h1>
 
-          <h2 class="hero-role">
+          <h2 class="typing-wrapper">
             I'm a
-            <span class="typing-text">Programmer</span>
-            <span class="typing-cursor">|</span>
+            <span id="typingText"></span>
           </h2>
 
-          <p>
-            I am a programmer, web developer,
-            technology enthusiast and content creator.
-            I enjoy learning new technologies and
-            building useful digital experiences.
+          <p class="hero-description">
+            I create modern digital experiences, explore technology,
+            build websites and continuously improve my programming skills.
           </p>
+
+          <!-- PREMIUM CTA BUTTONS -->
 
           <div class="hero-buttons">
 
-            <a href="#projects" class="hero-btn">
-              🚀 Explore Projects
+            <a href="#skills" class="btn btn-primary">
+              View My Skills
+              <span>→</span>
             </a>
 
-            <a href="#contact" class="hero-btn secondary">
-              ✉️ Contact Me
+            <a href="#projects" class="btn btn-secondary">
+              Explore Projects
+              <span>↗</span>
+            </a>
+
+          </div>
+
+          <!-- SOCIAL LINKS -->
+
+          <div class="hero-socials">
+
+            <a
+              href="https://github.com/EmtiAz96"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+            >
+              GitHub
+            </a>
+
+            <a
+              href="https://www.youtube.com/@emtiaz-official01"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="YouTube"
+            >
+              YouTube
+            </a>
+
+            <a href="mailto:mdemtiaz36900@gmail.com">
+              Email
             </a>
 
           </div>
@@ -138,19 +135,23 @@
         </div>
 
 
-        <div class="hero-card">
+        <!-- PREMIUM PROFILE CARD -->
 
-          <div class="hero-card-badge">
-            <span class="status-dot"></span>
-            Available for Projects
-          </div>
+        <div class="hero-visual">
 
-          <img
-            src="profile.jpg"
-            alt="Emtiaz Profile Photo"
-          >
+          <div class="hero-card">
 
-          <div class="hero-card-info">
+            <div class="hero-card-glow"></div>
+
+            <div class="profile-image-wrapper">
+
+              <img
+                src="profile.jpg"
+                alt="Emtiaz profile"
+                class="profile-image"
+              >
+
+            </div>
 
             <h3>Emtiaz</h3>
 
@@ -158,6 +159,11 @@
               Programmer • Web Developer
             </p>
 
+            <div class="profile-status">
+              <span></span>
+              Available for new projects
+            </div>
+
           </div>
 
         </div>
@@ -167,287 +173,76 @@
     </section>
 
 
-    <!-- =========================
-         ABOUT
-         ========================= -->
+    <!-- ================= ABOUT ================= -->
 
-    <section class="about" id="about">
+    <section class="section" id="about">
 
       <div class="container">
 
-        <span class="section-tag">
-          About Me
-        </span>
+        <div class="section-heading scroll-reveal">
 
-        <h2 class="section-title">
-          Get to Know <span>Emtiaz</span>
-        </h2>
+          <span class="section-tag">
+            About Me
+          </span>
+
+          <h2>
+            Turning Ideas Into
+            <span class="gradient-text">Digital Experiences</span>
+          </h2>
+
+          <p>
+            I'm passionate about programming, web development,
+            technology and creating useful digital projects.
+          </p>
+
+        </div>
+
 
         <div class="about-grid">
 
-          <div class="about-card">
+          <div class="about-card scroll-reveal">
 
-            <div class="card-number">
-              01
-            </div>
-
-            <h3>
-              👨‍💻 Who I Am
-            </h3>
-
-            <p>
-              I am Emtiaz, a passionate programmer
-              and technology enthusiast. I enjoy
-              exploring programming, web development
-              and modern technology.
-            </p>
-
-          </div>
-
-
-          <div class="about-card">
-
-            <div class="card-number">
-              02
-            </div>
-
-            <h3>
-              🎯 My Goal
-            </h3>
-
-            <p>
-              My goal is to continuously improve my
-              development skills and create useful,
-              creative and meaningful digital projects.
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         SKILLS
-         ========================= -->
-
-    <section class="skills" id="skills">
-
-      <div class="container">
-
-        <span class="section-tag">
-          My Skills
-        </span>
-
-        <h2 class="section-title">
-          Skills I'm <span>Learning & Building</span>
-        </h2>
-
-        <div class="skills-grid">
-
-          <div class="skill-card">
-
-            <div class="skill-top">
-              <h3>HTML5</h3>
-              <span>90%</span>
-            </div>
-
-            <div class="skill-bar">
-              <div
-                class="skill-progress"
-                data-progress="90"
-              ></div>
-            </div>
-
-            <p>
-              Building semantic and structured web pages.
-            </p>
-
-          </div>
-
-
-          <div class="skill-card">
-
-            <div class="skill-top">
-              <h3>CSS3</h3>
-              <span>85%</span>
-            </div>
-
-            <div class="skill-bar">
-              <div
-                class="skill-progress"
-                data-progress="85"
-              ></div>
-            </div>
-
-            <p>
-              Creating responsive and modern interfaces.
-            </p>
-
-          </div>
-
-
-          <div class="skill-card">
-
-            <div class="skill-top">
-              <h3>JavaScript</h3>
-              <span>75%</span>
-            </div>
-
-            <div class="skill-bar">
-              <div
-                class="skill-progress"
-                data-progress="75"
-              ></div>
-            </div>
-
-            <p>
-              Adding interaction and dynamic functionality.
-            </p>
-
-          </div>
-
-
-          <div class="skill-card">
-
-            <div class="skill-top">
-              <h3>Python</h3>
-              <span>70%</span>
-            </div>
-
-            <div class="skill-bar">
-              <div
-                class="skill-progress"
-                data-progress="70"
-              ></div>
-            </div>
-
-            <p>
-              Learning programming, automation and
-              problem solving.
-            </p>
-
-          </div>
-
-
-          <div class="skill-card">
-
-            <div class="skill-top">
-              <h3>Git & GitHub</h3>
-              <span>75%</span>
-            </div>
-
-            <div class="skill-bar">
-              <div
-                class="skill-progress"
-                data-progress="75"
-              ></div>
-            </div>
-
-            <p>
-              Managing projects and version control.
-            </p>
-
-          </div>
-
-
-          <div class="skill-card">
-
-            <div class="skill-top">
-              <h3>Linux</h3>
-              <span>65%</span>
-            </div>
-
-            <div class="skill-bar">
-              <div
-                class="skill-progress"
-                data-progress="65"
-              ></div>
-            </div>
-
-            <p>
-              Exploring Linux systems and development tools.
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         SERVICES
-         ========================= -->
-
-    <section class="services" id="services">
-
-      <div class="container">
-
-        <span class="section-tag">
-          Services
-        </span>
-
-        <h2 class="section-title">
-          What I Can <span>Do</span>
-        </h2>
-
-        <div class="services-grid">
-
-          <div class="service-card">
-
-            <div class="service-icon">
-              🌐
-            </div>
-
-            <h3>
-              Web Development
-            </h3>
-
-            <p>
-              Modern, responsive and user-friendly
-              websites using HTML, CSS and JavaScript.
-            </p>
-
-          </div>
-
-
-          <div class="service-card">
-
-            <div class="service-icon">
+            <div class="card-icon">
               💻
             </div>
 
-            <h3>
-              Programming
-            </h3>
+            <h3>Programming</h3>
 
             <p>
-              Programming practice, automation ideas
-              and useful software development projects.
+              I enjoy learning programming concepts and building
+              projects that improve my technical skills.
             </p>
 
           </div>
 
 
-          <div class="service-card">
+          <div class="about-card scroll-reveal">
 
-            <div class="service-icon">
-              🎨
+            <div class="card-icon">
+              🌐
             </div>
 
-            <h3>
-              Content Creation
-            </h3>
+            <h3>Web Development</h3>
 
             <p>
-              Creative digital content, video ideas
-              and technology-focused content creation.
+              I create responsive and modern websites with a focus
+              on clean design and good user experience.
+            </p>
+
+          </div>
+
+
+          <div class="about-card scroll-reveal">
+
+            <div class="card-icon">
+              🚀
+            </div>
+
+            <h3>Future Vision</h3>
+
+            <p>
+              My goal is to keep learning, create meaningful projects
+              and grow as a professional technology creator.
             </p>
 
           </div>
@@ -459,45 +254,310 @@
     </section>
 
 
-    <!-- =========================
-         PROJECTS
-         ========================= -->
+    <!-- ================= SKILLS ================= -->
 
-    <section class="projects" id="projects">
+    <section class="section" id="skills">
 
       <div class="container">
 
-        <span class="section-tag">
-          My Projects
-        </span>
+        <div class="section-heading scroll-reveal">
 
-        <h2 class="section-title">
-          Projects & <span>Experiments</span>
-        </h2>
+          <span class="section-tag">
+            My Skills
+          </span>
+
+          <h2>
+            Skills I'm
+            <span class="gradient-text">Building</span>
+          </h2>
+
+          <p>
+            These are the technologies and areas I'm currently
+            learning and improving.
+          </p>
+
+        </div>
+
+
+        <div class="skills-grid">
+
+          <div
+            class="skill-card scroll-reveal"
+            data-progress="90"
+          >
+
+            <div class="skill-top">
+
+              <div class="skill-name">
+                HTML
+              </div>
+
+              <div class="skill-percent">
+                90%
+              </div>
+
+            </div>
+
+            <div class="skill-bar">
+              <span></span>
+            </div>
+
+          </div>
+
+
+          <div
+            class="skill-card scroll-reveal"
+            data-progress="85"
+          >
+
+            <div class="skill-top">
+
+              <div class="skill-name">
+                CSS
+              </div>
+
+              <div class="skill-percent">
+                85%
+              </div>
+
+            </div>
+
+            <div class="skill-bar">
+              <span></span>
+            </div>
+
+          </div>
+
+
+          <div
+            class="skill-card scroll-reveal"
+            data-progress="75"
+          >
+
+            <div class="skill-top">
+
+              <div class="skill-name">
+                JavaScript
+              </div>
+
+              <div class="skill-percent">
+                75%
+              </div>
+
+            </div>
+
+            <div class="skill-bar">
+              <span></span>
+            </div>
+
+          </div>
+
+
+          <div
+            class="skill-card scroll-reveal"
+            data-progress="70"
+          >
+
+            <div class="skill-top">
+
+              <div class="skill-name">
+                Python
+              </div>
+
+              <div class="skill-percent">
+                70%
+              </div>
+
+            </div>
+
+            <div class="skill-bar">
+              <span></span>
+            </div>
+
+          </div>
+
+
+          <div
+            class="skill-card scroll-reveal"
+            data-progress="65"
+          >
+
+            <div class="skill-top">
+
+              <div class="skill-name">
+                Linux
+              </div>
+
+              <div class="skill-percent">
+                65%
+              </div>
+
+            </div>
+
+            <div class="skill-bar">
+              <span></span>
+            </div>
+
+          </div>
+
+
+          <div
+            class="skill-card scroll-reveal"
+            data-progress="60"
+          >
+
+            <div class="skill-top">
+
+              <div class="skill-name">
+                Git & GitHub
+              </div>
+
+              <div class="skill-percent">
+                60%
+              </div>
+
+            </div>
+
+            <div class="skill-bar">
+              <span></span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= SERVICES ================= -->
+
+    <section class="section" id="services">
+
+      <div class="container">
+
+        <div class="section-heading scroll-reveal">
+
+          <span class="section-tag">
+            Services
+          </span>
+
+          <h2>
+            What I
+            <span class="gradient-text">Can Do</span>
+          </h2>
+
+        </div>
+
+
+        <div class="services-grid">
+
+          <div class="service-card scroll-reveal">
+
+            <div class="card-icon">
+              🌐
+            </div>
+
+            <h3>Website Development</h3>
+
+            <p>
+              Modern responsive websites with clean layouts
+              and mobile-friendly design.
+            </p>
+
+          </div>
+
+
+          <div class="service-card scroll-reveal">
+
+            <div class="card-icon">
+              🎨
+            </div>
+
+            <h3>Web Design</h3>
+
+            <p>
+              Professional interfaces focused on usability,
+              structure and visual presentation.
+            </p>
+
+          </div>
+
+
+          <div class="service-card scroll-reveal">
+
+            <div class="card-icon">
+              🛠️
+            </div>
+
+            <h3>Technical Projects</h3>
+
+            <p>
+              Small programming and technology projects
+              for learning and experimentation.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= PROJECTS ================= -->
+
+    <section class="section" id="projects">
+
+      <div class="container">
+
+        <div class="section-heading scroll-reveal">
+
+          <span class="section-tag">
+            My Projects
+          </span>
+
+          <h2>
+            Projects I've
+            <span class="gradient-text">Built</span>
+          </h2>
+
+        </div>
+
 
         <div class="projects-grid">
 
 
-          <div class="project-card">
+          <!-- PROJECT 01 -->
+
+          <article class="project-card scroll-reveal">
 
             <div class="project-number">
-              PROJECT 01
+              01
+            </div>
+
+            <div class="project-icon">
+              🌐
             </div>
 
             <h3>
-              🌐 Emtiaz Official Portfolio
+              Personal Portfolio
             </h3>
 
             <p>
-              My personal portfolio website where
-              I showcase my skills, services, projects
-              and online presence.
+              A modern personal portfolio website created
+              to showcase my skills, projects and online presence.
             </p>
+
+            <div class="project-tech">
+              HTML • CSS • JavaScript
+            </div>
 
             <div class="project-buttons">
 
               <button
-                type="button"
                 class="project-btn project-details"
                 data-project="portfolio"
               >
@@ -508,45 +568,53 @@
                 href="https://emtiaz96.github.io/"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="project-btn"
+                class="project-btn project-live"
               >
-                🌐 Live Demo
+                Live Demo ↗
               </a>
 
               <a
                 href="https://github.com/EmtiAz96/EmtiAz96.github.io"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="project-btn"
+                class="project-btn project-github"
               >
-                💻 GitHub
+                GitHub ↗
               </a>
 
             </div>
 
-          </div>
+          </article>
 
 
-          <div class="project-card">
+          <!-- PROJECT 02 -->
+
+          <article class="project-card scroll-reveal">
 
             <div class="project-number">
-              PROJECT 02
+              02
+            </div>
+
+            <div class="project-icon">
+              💻
             </div>
 
             <h3>
-              💻 Programming Projects
+              Programming Projects
             </h3>
 
             <p>
-              Programming experiments, development
-              projects and software ideas that I am
-              working on and learning from.
+              A collection of programming experiments and
+              projects created while learning development.
             </p>
+
+            <div class="project-tech">
+              Python • JavaScript • Linux
+            </div>
 
             <div class="project-buttons">
 
               <button
-                type="button"
                 class="project-btn project-details"
                 data-project="programming"
               >
@@ -557,35 +625,44 @@
                 href="https://github.com/EmtiAz96"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="project-btn"
+                class="project-btn project-github"
               >
-                💻 GitHub
+                GitHub ↗
               </a>
 
             </div>
 
-          </div>
+          </article>
 
 
-          <div class="project-card">
+          <!-- PROJECT 03 -->
+
+          <article class="project-card scroll-reveal">
 
             <div class="project-number">
-              PROJECT 03
+              03
+            </div>
+
+            <div class="project-icon">
+              🚀
             </div>
 
             <h3>
-              🚀 Future Projects
+              Future Projects
             </h3>
 
             <p>
-              More technology and programming projects
-              will be added here as development progresses.
+              More creative technology and development projects
+              are planned for the future.
             </p>
+
+            <div class="project-tech">
+              Coming Soon
+            </div>
 
             <div class="project-buttons">
 
               <button
-                type="button"
                 class="project-btn project-details"
                 data-project="future"
               >
@@ -594,14 +671,14 @@
 
               <a
                 href="#contact"
-                class="project-btn"
+                class="project-btn project-live"
               >
-                ✉️ Stay Connected
+                Stay Connected
               </a>
 
             </div>
 
-          </div>
+          </article>
 
         </div>
 
@@ -610,44 +687,52 @@
     </section>
 
 
-    <!-- =========================
-         YOUTUBE
-         ========================= -->
+    <!-- ================= YOUTUBE ================= -->
 
-    <section class="youtube" id="youtube">
+    <section class="section" id="youtube">
 
       <div class="container">
 
-        <span class="section-tag">
-          YouTube
-        </span>
+        <div class="section-heading scroll-reveal">
 
-        <h2 class="section-title">
-          My <span>YouTube Channel</span>
-        </h2>
+          <span class="section-tag">
+            YouTube
+          </span>
 
-        <div class="youtube-card">
+          <h2>
+            Follow My
+            <span class="gradient-text">Journey</span>
+          </h2>
+
+        </div>
+
+
+        <div class="youtube-card scroll-reveal">
 
           <div class="youtube-icon">
             ▶
           </div>
 
-          <h3>
-            Emtiaz Official
-          </h3>
+          <div>
 
-          <p>
-            Follow my YouTube channel for creative
-            content, technology, programming and more.
-          </p>
+            <h3>
+              Emtiaz Official
+            </h3>
+
+            <p>
+              Technology, creative content, Shorts and
+              my digital journey.
+            </p>
+
+          </div>
 
           <a
             href="https://www.youtube.com/@emtiaz-official01"
             target="_blank"
             rel="noopener noreferrer"
-            class="hero-btn"
+            class="btn btn-primary"
           >
-            ▶️ Visit My YouTube
+            Visit Channel ↗
           </a>
 
         </div>
@@ -657,70 +742,113 @@
     </section>
 
 
-    <!-- =========================
-         CONTACT
-         ========================= -->
+    <!-- ================= CONTACT ================= -->
 
-    <section class="contact" id="contact">
+    <section class="section" id="contact">
 
       <div class="container">
 
-        <span class="section-tag">
-          Contact
-        </span>
+        <div class="section-heading scroll-reveal">
 
-        <h2 class="section-title">
-          Let's <span>Connect</span>
-        </h2>
+          <span class="section-tag">
+            Contact
+          </span>
+
+          <h2>
+            Let's
+            <span class="gradient-text">Connect</span>
+          </h2>
+
+          <p>
+            Have an idea, project or simply want to connect?
+            Feel free to reach out.
+          </p>
+
+        </div>
+
 
         <div class="contact-grid">
 
 
-          <div class="contact-card">
-
-            <h3>
-              📩 Get In Touch
-            </h3>
-
-            <p>
-              Have a project idea or want to connect?
-              Feel free to contact me.
-            </p>
+          <div class="contact-card scroll-reveal">
 
             <div class="contact-item">
-              📧
-              <a href="mailto:mdemtiaz36900@gmail.com">
-                mdemtiaz36900@gmail.com
-              </a>
+
+              <span>
+                📧
+              </span>
+
+              <div>
+
+                <small>
+                  Email
+                </small>
+
+                <a href="mailto:mdemtiaz36900@gmail.com">
+                  mdemtiaz36900@gmail.com
+                </a>
+
+              </div>
+
             </div>
 
-            <div class="contact-item">
-              📱
-              <a href="tel:+8801798665955">
-                +8801798665955
-              </a>
-            </div>
 
             <div class="contact-item">
-              ▶️
-              <a
-                href="https://www.youtube.com/@emtiaz-official01"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                YouTube
-              </a>
+
+              <span>
+                📱
+              </span>
+
+              <div>
+
+                <small>
+                  Phone
+                </small>
+
+                <a href="tel:+8801798665955">
+                  +880 1798665955
+                </a>
+
+              </div>
+
+            </div>
+
+
+            <div class="contact-item">
+
+              <span>
+                ▶
+              </span>
+
+              <div>
+
+                <small>
+                  YouTube
+                </small>
+
+                <a
+                  href="https://www.youtube.com/@emtiaz-official01"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Emtiaz Official
+                </a>
+
+              </div>
+
             </div>
 
           </div>
 
 
-          <form class="contact-form">
+          <form
+            class="contact-form scroll-reveal"
+            id="contactForm"
+          >
 
             <input
               type="text"
               id="name"
-              name="name"
               placeholder="Your Name"
               required
             >
@@ -728,23 +856,22 @@
             <input
               type="email"
               id="email"
-              name="email"
               placeholder="Your Email"
               required
             >
 
             <textarea
               id="message"
-              name="message"
+              rows="6"
               placeholder="Your Message"
               required
             ></textarea>
 
             <button
               type="submit"
-              class="hero-btn"
+              class="btn btn-primary"
             >
-              🚀 Send Message
+              Send Message →
             </button>
 
           </form>
@@ -758,9 +885,7 @@
   </main>
 
 
-  <!-- =========================
-       PROJECT MODAL
-       ========================= -->
+  <!-- ================= PROJECT MODAL ================= -->
 
   <div
     class="project-modal"
@@ -780,7 +905,6 @@
       <button
         class="project-modal-close"
         id="projectModalClose"
-        type="button"
         aria-label="Close project details"
       >
         ×
@@ -828,33 +952,30 @@
   </div>
 
 
-  <!-- =========================
-       BACK TO TOP
-       ========================= -->
+  <!-- ================= BACK TO TOP ================= -->
 
   <button
-    class="back-to-top"
     id="backToTop"
-    type="button"
+    class="back-to-top"
     aria-label="Back to top"
   >
     ↑
   </button>
 
 
-  <!-- =========================
-       FOOTER
-       ========================= -->
+  <!-- ================= FOOTER ================= -->
 
-  <footer>
+  <footer class="footer">
 
     <div class="container">
 
       <p>
-        ©
-        <span id="year"></span>
-        <span>Emtiaz Official</span>.
-        All rights reserved.
+        © <span id="currentYear"></span>
+        Emtiaz. All rights reserved.
+      </p>
+
+      <p>
+        Built with passion & technology.
       </p>
 
     </div>
