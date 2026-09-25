@@ -127,7 +127,7 @@ function animateSkills() {
    ========================================= */
 
 const revealElements = document.querySelectorAll(
-  ".section-title, .about-card, .skill-card, .service-card, .project-card, .youtube-card, .contact-card, .contact-form, .stat-card"
+  ".hero-content, .hero-profile, .section-title, .about-card, .skill-card, .service-card, .project-card, .youtube-card, .contact-card, .contact-form, .stat-card"
 );
 
 if ("IntersectionObserver" in window) {
@@ -495,6 +495,7 @@ document
       });
 
       projectModal.classList.add("active");
+
       projectModal.setAttribute(
         "aria-hidden",
         "false"
