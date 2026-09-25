@@ -64,6 +64,7 @@
       color: #fb7185;
     }
 
+    /* RGB FRIEND NAME */
     .friend-name {
       padding: 12px;
       margin: 8px 0;
@@ -72,18 +73,42 @@
       font-size: 1.1rem;
       font-weight: 700;
 
-      background: linear-gradient(
-        90deg,
-        #38bdf8,
-        #a78bfa,
-        #f472b6
-      );
+      color: #ff0000;
 
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      animation: rgbName 4s linear infinite;
 
-      text-shadow: 0 0 18px rgba(56, 189, 248, 0.25);
+      transition: transform 0.3s ease;
+    }
+
+    .friend-name:hover {
+      transform: scale(1.05);
+    }
+
+    @keyframes rgbName {
+      0% {
+        color: rgb(255, 0, 0);
+        text-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+      }
+
+      25% {
+        color: rgb(0, 255, 0);
+        text-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
+      }
+
+      50% {
+        color: rgb(0, 140, 255);
+        text-shadow: 0 0 15px rgba(0, 140, 255, 0.7);
+      }
+
+      75% {
+        color: rgb(180, 0, 255);
+        text-shadow: 0 0 15px rgba(180, 0, 255, 0.7);
+      }
+
+      100% {
+        color: rgb(255, 0, 0);
+        text-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+      }
     }
 
     .back-home {
@@ -128,7 +153,6 @@
 
     </div>
 
-
     <div class="friend-group">
 
       <h2 class="best-title">
@@ -140,7 +164,6 @@
       </div>
 
     </div>
-
 
     <a href="index.html" class="back-home">
       ← Back to Home
