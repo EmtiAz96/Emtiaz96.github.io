@@ -1,13 +1,8 @@
-/* =========================================
-   EMTIAZ OFFICIAL
-   COMPLETE JAVASCRIPT
-========================================= */
-
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* =======================================
+  /* =========================================
      MOBILE MENU
-  ======================================= */
+  ========================================== */
 
   const menuToggle = document.getElementById("menuToggle");
   const navMenu = document.getElementById("navMenu");
@@ -18,13 +13,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
       navMenu.classList.toggle("active");
 
-      if (navMenu.classList.contains("active")) {
-        menuToggle.textContent = "✕";
-        menuToggle.setAttribute("aria-label", "Close Menu");
-      } else {
-        menuToggle.textContent = "☰";
-        menuToggle.setAttribute("aria-label", "Open Menu");
-      }
+      const isOpen = navMenu.classList.contains("active");
+
+      menuToggle.textContent = isOpen ? "✕" : "☰";
+
+      menuToggle.setAttribute(
+        "aria-label",
+        isOpen ? "Close Menu" : "Open Menu"
+      );
 
     });
 
@@ -49,9 +45,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =======================================
+  /* =========================================
      CURRENT YEAR
-  ======================================= */
+  ========================================== */
 
   const currentYear = document.getElementById("currentYear");
 
@@ -60,9 +56,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =======================================
+  /* =========================================
      TYPING ANIMATION
-  ======================================= */
+  ========================================== */
 
   const typingText = document.getElementById("typingText");
 
@@ -129,9 +125,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =======================================
-     SKILL ANIMATION
-  ======================================= */
+  /* =========================================
+     SKILL BAR ANIMATION
+  ========================================== */
 
   function animateSkills() {
 
@@ -139,13 +135,16 @@ document.addEventListener("DOMContentLoaded", () => {
       .querySelectorAll(".skill-progress")
       .forEach(bar => {
 
-        const targetWidth =
-          bar.style.width;
+        const targetWidth = bar.style.width;
+
+        if (!targetWidth) return;
 
         bar.style.width = "0";
 
         setTimeout(() => {
+
           bar.style.width = targetWidth;
+
         }, 250);
 
       });
@@ -155,9 +154,9 @@ document.addEventListener("DOMContentLoaded", () => {
   animateSkills();
 
 
-  /* =======================================
+  /* =========================================
      SCROLL REVEAL
-  ======================================= */
+  ========================================== */
 
   const revealElements =
     document.querySelectorAll(".scroll-reveal");
@@ -187,21 +186,25 @@ document.addEventListener("DOMContentLoaded", () => {
       );
 
     revealElements.forEach(element => {
+
       observer.observe(element);
+
     });
 
   } else {
 
     revealElements.forEach(element => {
+
       element.classList.add("show");
+
     });
 
   }
 
 
-  /* =======================================
+  /* =========================================
      ACTIVE NAVIGATION
-  ======================================= */
+  ========================================== */
 
   const sections =
     document.querySelectorAll("main section[id]");
@@ -210,6 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(
       '.nav-menu a[href^="#"]'
     );
+
 
   function updateActiveNav() {
 
@@ -221,10 +225,13 @@ document.addEventListener("DOMContentLoaded", () => {
         section.offsetTop - 150;
 
       if (window.scrollY >= sectionTop) {
+
         currentSection = section.id;
+
       }
 
     });
+
 
     navLinks.forEach(link => {
 
@@ -234,29 +241,34 @@ document.addEventListener("DOMContentLoaded", () => {
         link.getAttribute("href") ===
         `#${currentSection}`
       ) {
+
         link.classList.add("active");
+
       }
 
     });
 
   }
 
+
   window.addEventListener(
     "scroll",
-    updateActiveNav
+    updateActiveNav,
+    { passive: true }
   );
 
   updateActiveNav();
 
 
-  /* =======================================
+  /* =========================================
      STAT COUNTERS
-  ======================================= */
+  ========================================== */
 
   const counters =
     document.querySelectorAll(".counter");
 
   let countersStarted = false;
+
 
   function startCounters() {
 
@@ -270,19 +282,35 @@ document.addEventListener("DOMContentLoaded", () => {
     const rect =
       statsSection.getBoundingClientRect();
 
-    if (rect.top < window.innerHeight * 0.85) {
+
+    if (
+      rect.top <
+      window.innerHeight * 0.85
+    ) {
 
       countersStarted = true;
+
 
       counters.forEach(counter => {
 
         const target =
           Number(counter.dataset.target);
 
+        if (
+          !Number.isFinite(target) ||
+          target < 0
+        ) {
+          return;
+        }
+
         let current = 0;
 
         const increment =
-          Math.max(1, Math.ceil(target / 50));
+          Math.max(
+            1,
+            Math.ceil(target / 50)
+          );
+
 
         const timer =
           setInterval(() => {
@@ -308,17 +336,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   }
 
+
   window.addEventListener(
     "scroll",
-    startCounters
+    startCounters,
+    { passive: true }
   );
 
   startCounters();
 
 
-  /* =======================================
+  /* =========================================
      PROJECT DATA
-  ======================================= */
+  ========================================== */
 
   const projectData = {
 
@@ -347,14 +377,17 @@ document.addEventListener("DOMContentLoaded", () => {
       ],
 
       links: [
+
         {
           text: "Live Website",
           url: "https://emtiaz96.github.io/"
         },
+
         {
           text: "GitHub",
           url: "https://github.com/EmtiAz96"
         }
+
       ]
 
     },
@@ -383,14 +416,17 @@ document.addEventListener("DOMContentLoaded", () => {
       ],
 
       links: [
+
         {
           text: "Open Friendship Page",
           url: "friendship.html"
         },
+
         {
           text: "GitHub",
           url: "https://github.com/EmtiAz96"
         }
+
       ]
 
     },
@@ -423,9 +459,9 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
 
-  /* =======================================
-     PROJECT MODAL
-  ======================================= */
+  /* =========================================
+     PROJECT MODAL ELEMENTS
+  ========================================== */
 
   const projectModal =
     document.getElementById("projectModal");
@@ -459,6 +495,10 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
+  /* =========================================
+     OPEN PROJECT MODAL
+  ========================================== */
+
   function openProjectModal(projectName) {
 
     const project =
@@ -466,19 +506,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (
       !project ||
-      !projectModal
+      !projectModal ||
+      !projectModalTitle ||
+      !projectModalDescription ||
+      !projectModalFeatures ||
+      !projectModalTech ||
+      !projectModalButtons
     ) {
       return;
     }
 
+
     projectModalTitle.textContent =
       project.title;
+
 
     projectModalDescription.textContent =
       project.description;
 
 
-    projectModalFeatures.innerHTML = "";
+    projectModalFeatures.replaceChildren();
+
 
     project.features.forEach(feature => {
 
@@ -492,7 +540,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    projectModalTech.innerHTML = "";
+    projectModalTech.replaceChildren();
+
 
     project.tech.forEach(tech => {
 
@@ -506,7 +555,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    projectModalButtons.innerHTML = "";
+    projectModalButtons.replaceChildren();
+
 
     project.links.forEach(link => {
 
@@ -519,7 +569,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       a.target = "_blank";
 
-      a.rel = "noopener noreferrer";
+      a.rel =
+        "noopener noreferrer";
 
       a.className =
         "btn primary-btn";
@@ -535,8 +586,10 @@ document.addEventListener("DOMContentLoaded", () => {
       "modal-open"
     );
 
-  }
-
+  } 
+   /* =========================================
+     CLOSE PROJECT MODAL
+  ========================================== */
 
   function closeProjectModal() {
 
@@ -551,6 +604,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
+  /* =========================================
+     PROJECT DETAILS BUTTONS
+  ========================================== */
+
   document
     .querySelectorAll(".project-details")
     .forEach(button => {
@@ -562,15 +619,17 @@ document.addEventListener("DOMContentLoaded", () => {
           const projectName =
             button.dataset.project;
 
-          openProjectModal(
-            projectName
-          );
+          openProjectModal(projectName);
 
         }
       );
 
     });
 
+
+  /* =========================================
+     MODAL CLOSE BUTTON
+  ========================================== */
 
   if (projectModalClose) {
 
@@ -581,6 +640,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   }
 
+
+  /* =========================================
+     MODAL OVERLAY
+  ========================================== */
 
   const modalOverlay =
     document.querySelector(
@@ -597,6 +660,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
+  /* =========================================
+     ESCAPE KEY
+  ========================================== */
+
   document.addEventListener(
     "keydown",
     event => {
@@ -604,9 +671,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (
         event.key === "Escape" &&
         projectModal &&
-        projectModal.classList.contains(
-          "active"
-        )
+        projectModal.classList.contains("active")
       ) {
 
         closeProjectModal();
@@ -617,9 +682,9 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
 
-  /* =======================================
+  /* =========================================
      CONTACT FORM
-  ======================================= */
+  ========================================== */
 
   const contactForm =
     document.getElementById(
@@ -631,6 +696,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "formMessage"
     );
 
+
   if (contactForm) {
 
     contactForm.addEventListener(
@@ -639,32 +705,53 @@ document.addEventListener("DOMContentLoaded", () => {
 
         event.preventDefault();
 
-        const name =
+
+        const nameInput =
           document.getElementById(
             "contactName"
-          ).value.trim();
+          );
 
-        const email =
+        const emailInput =
           document.getElementById(
             "contactEmail"
-          ).value.trim();
+          );
 
-        const message =
+        const messageInput =
           document.getElementById(
             "contactMessage"
-          ).value.trim();
+          );
 
 
         if (
-          !name ||
-          !email ||
-          !message
+          !nameInput ||
+          !emailInput ||
+          !messageInput
+        ) {
+          return;
+        }
+
+
+        const name =
+          nameInput.value.trim();
+
+        const email =
+          emailInput.value.trim();
+
+        const message =
+          messageInput.value.trim();
+
+
+        /* Basic length protection */
+
+        if (
+          name.length < 2 ||
+          name.length > 100
         ) {
 
           if (formMessage) {
 
             formMessage.textContent =
-              "Please fill in all fields.";
+              "Please enter a valid name.";
 
           }
 
@@ -672,6 +759,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
+
+        if (
+          email.length > 150 ||
+          !emailInput.checkValidity()
+        ) {
+
+          if (formMessage) {
+
+            formMessage.textContent =
+              "Please enter a valid email address.";
+
+          }
+
+          return;
+
+        }
+
+
+        if (
+          message.length < 3 ||
+          message.length > 2000
+        ) {
+
+          if (formMessage) {
+
+            formMessage.textContent =
+              "Please enter a message between 3 and 2000 characters.";
+
+          }
+
+          return;
+
+        }
+
+
+        /* Safe URL encoding */
 
         const subject =
           encodeURIComponent(
@@ -684,10 +807,6 @@ document.addEventListener("DOMContentLoaded", () => {
           );
 
 
-        window.location.href =
-          `mailto:mdemtiaz36900@gmail.com?subject=${subject}&body=${body}`;
-
-
         if (formMessage) {
 
           formMessage.textContent =
@@ -695,20 +814,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
+
+        window.location.href =
+          `mailto:mdemtiaz36900@gmail.com?subject=${subject}&body=${body}`;
+
       }
     );
 
   }
 
 
-  /* =======================================
+  /* =========================================
      BACK TO TOP
-  ======================================= */
+  ========================================== */
 
   const backToTop =
     document.getElementById(
       "backToTop"
     );
+
 
   if (backToTop) {
 
@@ -718,19 +842,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (window.scrollY > 500) {
 
-          backToTop.classList.add(
-            "show"
-          );
+          backToTop.classList.add("show");
 
         } else {
 
-          backToTop.classList.remove(
-            "show"
-          );
+          backToTop.classList.remove("show");
 
         }
 
-      }
+      },
+      { passive: true }
     );
 
 
@@ -749,9 +870,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =======================================
-     BUTTON EFFECT
-  ======================================= */
+  /* =========================================
+     BUTTON CLICK ANIMATION
+  ========================================== */
 
   document
     .querySelectorAll(".btn")
@@ -763,6 +884,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
           button.style.transform =
             "scale(0.97)";
+
 
           setTimeout(() => {
 
@@ -776,9 +898,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-  /* =======================================
+  /* =========================================
      DARK / LIGHT MODE
-  ======================================= */
+  ========================================== */
 
   const themeToggle =
     document.getElementById(
@@ -789,6 +911,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateThemeIcon() {
 
     if (!themeToggle) return;
+
 
     const lightMode =
       document.body.classList.contains(
@@ -825,10 +948,24 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  const savedTheme =
-    localStorage.getItem(
-      "emtiaz-theme"
-    );
+  /* =========================================
+     LOAD SAVED THEME
+  ========================================== */
+
+  let savedTheme = null;
+
+  try {
+
+    savedTheme =
+      localStorage.getItem(
+        "emtiaz-theme"
+      );
+
+  } catch (error) {
+
+    savedTheme = null;
+
+  }
 
 
   if (savedTheme === "light") {
@@ -842,6 +979,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateThemeIcon();
 
+
+  /* =========================================
+     THEME TOGGLE
+  ========================================== */
 
   if (themeToggle) {
 
@@ -862,10 +1003,18 @@ document.addEventListener("DOMContentLoaded", () => {
             : "dark";
 
 
-        localStorage.setItem(
-          "emtiaz-theme",
-          currentTheme
-        );
+        try {
+
+          localStorage.setItem(
+            "emtiaz-theme",
+            currentTheme
+          );
+
+        } catch (error) {
+
+          /* Ignore storage errors */
+
+        }
 
 
         updateThemeIcon();
@@ -876,3 +1025,4 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+   
