@@ -1,175 +1,1048 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <!-- SECURITY POLICY -->
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="
+      default-src 'self';
+      script-src 'self';
+      style-src 'self' 'unsafe-inline';
+      img-src 'self' data:;
+      font-src 'self';
+      connect-src 'self';
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self';
+      upgrade-insecure-requests;
+    "
+  >
+
+  <meta
+    name="referrer"
+    content="strict-origin-when-cross-origin"
+  >
+
+  <!-- SEO -->
   <title>Friendship | Emtiaz Official</title>
 
+  <meta
+    name="description"
+    content="Emtiaz Official friendship page featuring close friends and best friend."
+  >
+
+  <meta
+    name="author"
+    content="Emtiaz"
+  >
+
+  <meta
+    name="robots"
+    content="index, follow"
+  >
+
+  <link
+    rel="canonical"
+    href="https://emtiaz96.github.io/friendship.html"
+  >
+
+  <!-- FAVICON -->
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="favicon.svg"
+  >
+
   <style>
+
+    /* =========================================
+       ROOT
+    ========================================== */
+
+    :root {
+
+      --bg: #050505;
+      --card: #101010;
+      --card-border: rgba(255,255,255,0.10);
+      --text: #ffffff;
+      --muted: #b8b8b8;
+
+    }
+
+
+    /* =========================================
+       RESET
+    ========================================== */
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+
     body {
+
       min-height: 100vh;
-      font-family: Arial, sans-serif;
-      background: #07111f;
-      color: #fff;
+
+      background:
+        radial-gradient(
+          circle at top,
+          rgba(80,80,80,0.15),
+          transparent 45%
+        ),
+        var(--bg);
+
+      color: var(--text);
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      overflow-x: hidden;
+
+    }
+
+
+    /* =========================================
+       NAVBAR
+    ========================================== */
+
+    .navbar {
+
+      width: 100%;
+
+      padding: 20px;
+
+      border-bottom:
+        1px solid
+        rgba(255,255,255,0.08);
+
+      background:
+        rgba(5,5,5,0.85);
+
+      backdrop-filter:
+        blur(12px);
+
+      position: sticky;
+
+      top: 0;
+
+      z-index: 100;
+
+    }
+
+
+    .nav-container {
+
+      width: min(1100px, 92%);
+
+      margin: auto;
+
       display: flex;
+
       align-items: center;
-      justify-content: center;
-      padding: 30px 20px;
+
+      justify-content: space-between;
+
+      gap: 20px;
+
     }
 
-    .friendship-box {
-      width: min(600px, 100%);
-      padding: 35px;
-      border-radius: 25px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
-      text-align: center;
+
+    .logo {
+
+      color: white;
+
+      text-decoration: none;
+
+      font-size: 1.25rem;
+
+      font-weight: 800;
+
+      letter-spacing: 0.5px;
+
     }
 
-    h1 {
-      font-size: 2.4rem;
-      margin-bottom: 30px;
+
+    .logo span {
+
+      background:
+        linear-gradient(
+          90deg,
+          #ff004c,
+          #00ff88,
+          #0088ff,
+          #b000ff,
+          #ff004c
+        );
+
+      background-size: 300% 300%;
+
+      -webkit-background-clip: text;
+
+      background-clip: text;
+
+      color: transparent;
+
+      animation:
+        logoRGB 5s linear infinite;
+
     }
 
-    .gradient {
-      color: #38bdf8;
-    }
 
-    .friend-group {
-      margin-bottom: 25px;
-      padding: 22px;
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
+    @keyframes logoRGB {
 
-    .friend-group h2 {
-      margin-bottom: 15px;
-      font-size: 1.35rem;
-    }
-
-    .close-title {
-      color: #60a5fa;
-    }
-
-    .best-title {
-      color: #fb7185;
-    }
-
-    /* RGB FRIEND NAME */
-    .friend-name {
-      padding: 12px;
-      margin: 8px 0;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.06);
-      font-size: 1.1rem;
-      font-weight: 700;
-
-      color: #ff0000;
-
-      animation: rgbName 4s linear infinite;
-
-      transition: transform 0.3s ease;
-    }
-
-    .friend-name:hover {
-      transform: scale(1.05);
-    }
-
-    @keyframes rgbName {
       0% {
-        color: rgb(255, 0, 0);
-        text-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
-      }
-
-      25% {
-        color: rgb(0, 255, 0);
-        text-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
+        background-position: 0% 50%;
       }
 
       50% {
-        color: rgb(0, 140, 255);
-        text-shadow: 0 0 15px rgba(0, 140, 255, 0.7);
-      }
-
-      75% {
-        color: rgb(180, 0, 255);
-        text-shadow: 0 0 15px rgba(180, 0, 255, 0.7);
+        background-position: 100% 50%;
       }
 
       100% {
-        color: rgb(255, 0, 0);
-        text-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+        background-position: 0% 50%;
       }
+
     }
+
 
     .back-home {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 12px 22px;
-      border-radius: 12px;
+
+      color: var(--muted);
+
       text-decoration: none;
-      color: #fff;
-      background: #2563eb;
-      transition: 0.3s ease;
+
+      padding: 9px 15px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.15);
+
+      border-radius: 10px;
+
+      transition:
+        0.3s ease;
+
     }
 
+
     .back-home:hover {
-      transform: translateY(-3px);
-      background: #38bdf8;
+
+      color: white;
+
+      border-color:
+        rgba(255,255,255,0.4);
+
+      transform:
+        translateY(-2px);
+
     }
+
+
+    /* =========================================
+       HERO
+    ========================================== */
+
+    .friendship-hero {
+
+      width: min(1000px, 92%);
+
+      margin:
+        70px auto 40px;
+
+      text-align: center;
+
+    }
+
+
+    .friendship-tag {
+
+      display: inline-block;
+
+      margin-bottom: 15px;
+
+      padding: 7px 14px;
+
+      border-radius: 999px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.15);
+
+      color: #cfcfcf;
+
+      font-size: 0.85rem;
+
+      letter-spacing: 1px;
+
+    }
+
+
+    .friendship-hero h1 {
+
+      font-size:
+        clamp(2.2rem, 7vw, 4.5rem);
+
+      line-height: 1.05;
+
+      margin-bottom: 18px;
+
+    }
+
+
+    .gradient-title {
+
+      background:
+        linear-gradient(
+          90deg,
+          #ff004c,
+          #00ff88,
+          #0088ff,
+          #b000ff,
+          #ff004c
+        );
+
+      background-size: 400% 400%;
+
+      -webkit-background-clip: text;
+
+      background-clip: text;
+
+      color: transparent;
+
+      animation:
+        gradientMove 6s ease infinite;
+
+    }
+
+
+    @keyframes gradientMove {
+
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+
+    }
+
+
+    .friendship-hero p {
+
+      max-width: 700px;
+
+      margin: auto;
+
+      color: var(--muted);
+
+      line-height: 1.7;
+
+      font-size: 1rem;
+
+    }
+
+
+    /* =========================================
+       FRIENDSHIP SECTIONS
+    ========================================== */
+
+    .friends-section {
+
+      width: min(1100px, 92%);
+
+      margin: 60px auto;
+
+    }
+
+
+    .section-title {
+
+      text-align: center;
+
+      font-size: 2rem;
+
+      margin-bottom: 30px;
+
+    }
+
+
+    .friends-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(230px, 1fr)
+        );
+
+      gap: 22px;
+
+    }
+
+
+    /* =========================================
+       FRIEND CARD
+    ========================================== */
+
+    .friend-card {
+
+      position: relative;
+
+      padding: 30px 20px;
+
+      text-align: center;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,0.07),
+          rgba(255,255,255,0.02)
+        );
+
+      border:
+        1px solid
+        var(--card-border);
+
+      border-radius: 20px;
+
+      overflow: hidden;
+
+      transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+
+    }
+
+
+    .friend-card::before {
+
+      content: "";
+
+      position: absolute;
+
+      inset: -2px;
+
+      background:
+        linear-gradient(
+          120deg,
+          #ff004c,
+          #00ff88,
+          #0088ff,
+          #b000ff,
+          #ff004c
+        );
+
+      background-size: 300% 300%;
+
+      animation:
+        borderRGB 5s linear infinite;
+
+      z-index: -2;
+
+    }
+
+
+    .friend-card::after {
+
+      content: "";
+
+      position: absolute;
+
+      inset: 2px;
+
+      background: var(--card);
+
+      border-radius: 18px;
+
+      z-index: -1;
+
+    }
+
+
+    @keyframes borderRGB {
+
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+
+    }
+
+
+    .friend-card:hover {
+
+      transform:
+        translateY(-8px);
+
+      border-color:
+        rgba(255,255,255,0.4);
+
+      box-shadow:
+        0 15px 45px
+        rgba(0,0,0,0.45);
+
+    }
+
+
+    .friend-icon {
+
+      font-size: 2.5rem;
+
+      margin-bottom: 15px;
+
+    }
+
+
+    /* =========================================
+       RGB FRIEND NAME
+    ========================================== */
+
+    .friend-name {
+
+      display: inline-block;
+
+      font-size: 1.5rem;
+
+      font-weight: 800;
+
+      background:
+        linear-gradient(
+          90deg,
+          #ff0000,
+          #00ff00,
+          #0088ff,
+          #b000ff,
+          #ff0000
+        );
+
+      background-size: 400% 400%;
+
+      -webkit-background-clip: text;
+
+      background-clip: text;
+
+      color: transparent;
+
+      animation:
+        rgbName 4s linear infinite;
+
+      text-shadow:
+        0 0 12px
+        rgba(255,255,255,0.15);
+
+      transition:
+        transform 0.3s ease;
+
+    }
+
+
+    @keyframes rgbName {
+
+      0% {
+        background-position: 0% 50%;
+      }
+
+      25% {
+        background-position: 50% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      75% {
+        background-position: 50% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+
+    }
+
+
+    .friend-card:hover .friend-name {
+
+      transform:
+        scale(1.08);
+
+    }
+
+
+    .friend-role {
+
+      margin-top: 9px;
+
+      color: var(--muted);
+
+      font-size: 0.9rem;
+
+    } 
+    /* =========================================
+       BEST FRIEND
+    ========================================== */
+
+    .best-friend {
+
+      margin-top: 70px;
+
+    }
+
+
+    .best-friend .friend-card {
+
+      max-width: 500px;
+
+      margin: auto;
+
+      padding:
+        40px 25px;
+
+    }
+
+
+    .best-friend .friend-name {
+
+      font-size: 2rem;
+
+    }
+
+
+    /* =========================================
+       FRIENDSHIP QUOTE
+    ========================================== */
+
+    .friendship-quote {
+
+      width: min(850px, 92%);
+
+      margin: 70px auto;
+
+      padding: 30px;
+
+      text-align: center;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.12);
+
+      border-radius: 20px;
+
+      background:
+        rgba(255,255,255,0.04);
+
+    }
+
+
+    .friendship-quote p {
+
+      color: #d5d5d5;
+
+      font-size: 1.05rem;
+
+      line-height: 1.8;
+
+      font-style: italic;
+
+    }
+
+
+    /* =========================================
+       FOOTER
+    ========================================== */
+
+    .footer {
+
+      margin-top: 80px;
+
+      padding: 25px 20px;
+
+      text-align: center;
+
+      border-top:
+        1px solid
+        rgba(255,255,255,0.08);
+
+      color: #999;
+
+      font-size: 0.9rem;
+
+    }
+
+
+    /* =========================================
+       RESPONSIVE
+    ========================================== */
+
+    @media (max-width: 600px) {
+
+      .navbar {
+
+        padding: 16px;
+
+      }
+
+
+      .nav-container {
+
+        width: 94%;
+
+      }
+
+
+      .logo {
+
+        font-size: 1.05rem;
+
+      }
+
+
+      .back-home {
+
+        padding: 8px 12px;
+
+        font-size: 0.85rem;
+
+      }
+
+
+      .friendship-hero {
+
+        margin-top: 50px;
+
+      }
+
+
+      .friendship-hero h1 {
+
+        font-size: 2.4rem;
+
+      }
+
+
+      .friendship-hero p {
+
+        font-size: 0.92rem;
+
+      }
+
+
+      .friends-section {
+
+        margin-top: 45px;
+
+      }
+
+
+      .section-title {
+
+        font-size: 1.6rem;
+
+      }
+
+
+      .friends-grid {
+
+        grid-template-columns: 1fr;
+
+      }
+
+
+      .friend-card {
+
+        padding: 28px 18px;
+
+      }
+
+
+      .best-friend {
+
+        margin-top: 50px;
+
+      }
+
+
+      .friendship-quote {
+
+        margin-top: 50px;
+
+        padding: 24px 18px;
+
+      }
+
+    }
+
+
+    /* =========================================
+       REDUCED MOTION
+    ========================================== */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      html {
+
+        scroll-behavior: auto;
+
+      }
+
+
+      *,
+      *::before,
+      *::after {
+
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+
+      }
+
+    }
+
   </style>
+
 </head>
+
 
 <body>
 
-  <div class="friendship-box">
 
-    <h1>
-      🤝 <span class="gradient">Friendship</span>
-    </h1>
+  <!-- =========================================
+       NAVBAR
+  ========================================== -->
 
-    <div class="friend-group">
+  <header class="navbar">
 
-      <h2 class="close-title">
-        💙 Close Friends
-      </h2>
+    <div class="nav-container">
 
-      <div class="friend-name">
-        Fuyad
-      </div>
+      <a
+        href="index.html"
+        class="logo"
+      >
+        <span>Emtiaz</span> Official
+      </a>
 
-      <div class="friend-name">
-        Rishat
-      </div>
 
-    </div>
-
-    <div class="friend-group">
-
-      <h2 class="best-title">
-        ❤️ Best Friend
-      </h2>
-
-      <div class="friend-name">
-        Sara
-      </div>
+      <a
+        href="index.html"
+        class="back-home"
+      >
+        ← Back Home
+      </a>
 
     </div>
 
-    <a href="index.html" class="back-home">
-      ← Back to Home
-    </a>
+  </header>
 
-  </div>
+
+  <!-- =========================================
+       HERO
+  ========================================== -->
+
+  <main>
+
+    <section class="friendship-hero">
+
+      <span class="friendship-tag">
+        🤝 Special People
+      </span>
+
+      <h1>
+
+        My
+        <span class="gradient-title">
+          Friendship
+        </span>
+
+      </h1>
+
+      <p>
+        Some people make life more beautiful simply
+        by being a part of it. This page is dedicated
+        to my special friends.
+      </p>
+
+    </section>
+
+
+    <!-- =======================================
+         CLOSE FRIENDS
+    ======================================== -->
+
+    <section class="friends-section">
+
+      <h2 class="section-title">
+        🫂 Close Friends
+      </h2>
+
+
+      <div class="friends-grid">
+
+
+        <!-- FUYAD -->
+
+        <div class="friend-card">
+
+          <div class="friend-icon">
+            🧑‍💻
+          </div>
+
+          <h3 class="friend-name">
+            Fuyad
+          </h3>
+
+          <p class="friend-role">
+            Close Friend
+          </p>
+
+        </div>
+
+
+        <!-- RISHAT -->
+
+        <div class="friend-card">
+
+          <div class="friend-icon">
+            😎
+          </div>
+
+          <h3 class="friend-name">
+            Rishat
+          </h3>
+
+          <p class="friend-role">
+            Close Friend
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================
+         BEST FRIEND
+    ======================================== -->
+
+    <section
+      class="friends-section best-friend"
+    >
+
+      <h2 class="section-title">
+        💖 Best Friend
+      </h2>
+
+
+      <div class="friend-card">
+
+        <div class="friend-icon">
+          🌸
+        </div>
+
+        <h3 class="friend-name">
+          Sara
+        </h3>
+
+        <p class="friend-role">
+          Best Friend
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================
+         QUOTE
+    ======================================== -->
+
+    <section class="friendship-quote">
+
+      <p>
+        True friendship is not about being together
+        every moment; it is about knowing that someone
+        will always be there when it matters.
+      </p>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================================
+       FOOTER
+  ========================================== -->
+
+  <footer class="footer">
+
+    <p>
+      © <span id="currentYear"></span>
+      Emtiaz Official. All Rights Reserved.
+    </p>
+
+  </footer>
+
+
+  <!-- =========================================
+       SIMPLE YEAR SCRIPT
+  ========================================== -->
+
+  <script>
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      () => {
+
+        const currentYear =
+          document.getElementById(
+            "currentYear"
+          );
+
+        if (currentYear) {
+
+          currentYear.textContent =
+            new Date().getFullYear();
+
+        }
+
+      }
+    );
+
+  </script>
 
 </body>
 </html>
+    
