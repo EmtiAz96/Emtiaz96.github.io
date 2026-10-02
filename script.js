@@ -1,4 +1,25 @@
+/* =========================================================
+   EMTIAZ OFFICIAL — SCRIPT.JS
+   STEP 1 / 3
+========================================================= */
+
+
+/* =========================================
+   DOM READY
+========================================= */
+
 document.addEventListener("DOMContentLoaded", () => {
+
+  /* =========================================
+     CURRENT YEAR
+  ========================================= */
+
+  const currentYear = document.getElementById("currentYear");
+
+  if (currentYear) {
+    currentYear.textContent = new Date().getFullYear();
+  }
+
 
   /* =========================================
      MOBILE MENU
@@ -10,49 +31,122 @@ document.addEventListener("DOMContentLoaded", () => {
   if (menuToggle && navMenu) {
 
     menuToggle.addEventListener("click", () => {
-
       navMenu.classList.toggle("active");
 
-      const isOpen =
-        navMenu.classList.contains("active");
-
-      menuToggle.textContent =
-        isOpen ? "✕" : "☰";
+      const isOpen = navMenu.classList.contains("active");
 
       menuToggle.setAttribute(
-        "aria-label",
-        isOpen ? "Close Menu" : "Open Menu"
+        "aria-expanded",
+        String(isOpen)
       );
     });
 
-    navMenu.querySelectorAll("a").forEach(link => {
+
+    /* Close menu after clicking a navigation link */
+
+    const navLinks = navMenu.querySelectorAll("a");
+
+    navLinks.forEach((link) => {
 
       link.addEventListener("click", () => {
 
         navMenu.classList.remove("active");
 
-        menuToggle.textContent = "☰";
-
         menuToggle.setAttribute(
-          "aria-label",
-          "Open Menu"
+          "aria-expanded",
+          "false"
         );
+
       });
 
     });
+
+
+    /* Close menu when clicking outside */
+
+    document.addEventListener("click", (event) => {
+
+      if (
+        !navMenu.contains(event.target) &&
+        !menuToggle.contains(event.target)
+      ) {
+
+        navMenu.classList.remove("active");
+
+        menuToggle.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+      }
+
+    });
+
   }
 
 
   /* =========================================
-     CURRENT YEAR
+     THEME TOGGLE
   ========================================= */
 
-  const currentYear =
-    document.getElementById("currentYear");
+  const themeToggle = document.getElementById("themeToggle");
 
-  if (currentYear) {
-    currentYear.textContent =
-      new Date().getFullYear();
+  if (themeToggle) {
+
+    const savedTheme =
+      localStorage.getItem("emtiaz-theme");
+
+    if (savedTheme === "light") {
+      document.body.classList.add("light-theme");
+    }
+
+
+    updateThemeIcon();
+
+
+    themeToggle.addEventListener("click", () => {
+
+      document.body.classList.toggle("light-theme");
+
+      const isLight =
+        document.body.classList.contains("light-theme");
+
+      localStorage.setItem(
+        "emtiaz-theme",
+        isLight ? "light" : "dark"
+      );
+
+      updateThemeIcon();
+
+    });
+
+  }
+
+
+  function updateThemeIcon() {
+
+    if (!themeToggle) return;
+
+    const isLight =
+      document.body.classList.contains("light-theme");
+
+    themeToggle.textContent =
+      isLight ? "🌙" : "☀️";
+
+    themeToggle.setAttribute(
+      "aria-label",
+      isLight
+        ? "Switch to dark mode"
+        : "Switch to light mode"
+    );
+
+    themeToggle.setAttribute(
+      "title",
+      isLight
+        ? "Dark Mode"
+        : "Light Mode"
+    );
+
   }
 
 
@@ -60,112 +154,104 @@ document.addEventListener("DOMContentLoaded", () => {
      TYPING EFFECT
   ========================================= */
 
-  const typingText =
+  const typingElement =
     document.getElementById("typingText");
 
-  if (typingText) {
+  if (typingElement) {
 
-    const words = [
-      "I am a Programmer",
-      "I am a Content Creator",
-      "I am a Web Developer",
-      "I am a Technology Enthusiast"
+    const typingWords = [
+      "Programmer",
+      "Web Developer",
+      "Digital Creator",
+      "Freelancer",
+      "Technology Learner"
     ];
 
     let wordIndex = 0;
-    let charIndex = 0;
-    let deleting = false;
+    let characterIndex = 0;
+
+    let isDeleting = false;
+
 
     function typeEffect() {
 
       const currentWord =
-        words[wordIndex];
+        typingWords[wordIndex];
 
-      if (!deleting) {
 
-        typingText.textContent =
+      if (!isDeleting) {
+
+        characterIndex++;
+
+        typingElement.textContent =
           currentWord.substring(
             0,
-            charIndex + 1
+            characterIndex
           );
 
-        charIndex++;
 
         if (
-          charIndex ===
+          characterIndex >=
           currentWord.length
         ) {
 
-          deleting = true;
+          isDeleting = true;
 
           setTimeout(
             typeEffect,
-            1700
+            1300
           );
 
           return;
         }
 
+
+        setTimeout(
+          typeEffect,
+          90
+        );
+
       } else {
 
-        typingText.textContent =
+        characterIndex--;
+
+        typingElement.textContent =
           currentWord.substring(
             0,
-            charIndex - 1
+            characterIndex
           );
 
-        charIndex--;
 
-        if (charIndex === 0) {
+        if (characterIndex <= 0) {
 
-          deleting = false;
+          isDeleting = false;
 
           wordIndex =
             (wordIndex + 1) %
-            words.length;
+            typingWords.length;
+
+          setTimeout(
+            typeEffect,
+            350
+          );
+
+          return;
         }
+
+
+        setTimeout(
+          typeEffect,
+          55
+        );
+
       }
 
-      setTimeout(
-        typeEffect,
-        deleting ? 45 : 75
-      );
     }
 
+
     typeEffect();
+
   }
-
-
-  /* =========================================
-     SKILL BAR ANIMATION
-  ========================================= */
-
-  const skillBars =
-    document.querySelectorAll(
-      ".skill-progress"
-    );
-
-  skillBars.forEach(bar => {
-
-    const targetWidth =
-      bar.style.width;
-
-    if (!targetWidth) return;
-
-    bar.style.width = "0";
-
-    requestAnimationFrame(() => {
-
-      requestAnimationFrame(() => {
-
-        bar.style.width =
-          targetWidth;
-
-      });
-
-    });
-
-  });
 
 
   /* =========================================
@@ -177,317 +263,23 @@ document.addEventListener("DOMContentLoaded", () => {
       ".scroll-reveal"
     );
 
+
   if (
-    "IntersectionObserver" in window &&
-    revealElements.length
+    revealElements.length &&
+    "IntersectionObserver" in window
   ) {
 
     const revealObserver =
       new IntersectionObserver(
         (entries, observer) => {
 
-          entries.forEach(entry => {
+          entries.forEach((entry) => {
 
-            if (!entry.isIntersecting) {
-              return;
-            }
+            if (entry.isIntersecting) {
 
-            entry.target.classList.add(
-              "show"
-            );
-
-            observer.unobserve(
-              entry.target
-            );
-
-          });
-
-        },
-        {
-          threshold: 0.12
-        }
-      );
-
-    revealElements.forEach(element => {
-
-      revealObserver.observe(element);
-
-    });
-
-  } else {
-
-    revealElements.forEach(element => {
-
-      element.classList.add("show");
-
-    });
-
-  }
-
-
-  /* =========================================
-     SECTION + NAVIGATION REFERENCES
-  ========================================= */
-
-  const sections =
-    document.querySelectorAll(
-      "main section[id]"
-    );
-
-  const navLinks =
-    document.querySelectorAll(
-      '.nav-menu a[href^="#"]'
-    );
-
-
-  /* =========================================
-     ACTIVE NAVIGATION
-  ========================================= */
-
-  function updateActiveNav() {
-
-    if (!sections.length) {
-      return;
-    }
-
-    const scrollPosition =
-      window.scrollY + 150;
-
-    let currentSection = "";
-
-    sections.forEach(section => {
-
-      if (
-        scrollPosition >=
-        section.offsetTop
-      ) {
-
-        currentSection =
-          section.id;
-
-      }
-
-    });
-
-    navLinks.forEach(link => {
-
-      const isActive =
-        link.getAttribute("href") ===
-        `#${currentSection}`;
-
-      link.classList.toggle(
-        "active",
-        isActive
-      );
-
-    });
-
-  }
-
-
-  /* =========================================
-     PERFORMANCE SCROLL SYSTEM
-  ========================================= */
-
-  let scrollTicking = false;
-
-  function handleScroll() {
-
-    if (scrollTicking) {
-      return;
-    }
-
-    scrollTicking = true;
-
-    requestAnimationFrame(() => {
-
-      updateActiveNav();
-
-      updateBackToTop();
-
-      scrollTicking = false;
-
-    });
-
-  }
-
-
-  /* =========================================
-     BACK TO TOP
-  ========================================= */
-
-  const backToTop =
-    document.getElementById(
-      "backToTop"
-    );
-
-  function updateBackToTop() {
-
-    if (!backToTop) {
-      return;
-    }
-
-    backToTop.classList.toggle(
-      "show",
-      window.scrollY > 500
-    );
-
-  }
-
-
-  if (backToTop) {
-
-    backToTop.addEventListener(
-      "click",
-      () => {
-
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
-
-      }
-    );
-
-  }
-
-
-  window.addEventListener(
-    "scroll",
-    handleScroll,
-    {
-      passive: true
-    }
-  );
-
-
-  updateActiveNav();
-
-  updateBackToTop();
-
-
-  /* =========================================
-     STATS COUNTER
-  ========================================= */
-
-  const counters =
-    document.querySelectorAll(
-      ".counter"
-    );
-
-  const statsSection =
-    document.querySelector(
-      ".stats-section"
-    );
-
-  let countersStarted = false;
-
-  function animateCounter(counter) {
-
-    const target =
-      Number(
-        counter.dataset.target
-      );
-
-    if (
-      !Number.isFinite(target) ||
-      target < 0
-    ) {
-      return;
-    }
-
-    const duration = 1200;
-
-    const startTime =
-      performance.now();
-
-    function updateCounter(
-      currentTime
-    ) {
-
-      const elapsed =
-        currentTime -
-        startTime;
-
-      const progress =
-        Math.min(
-          elapsed / duration,
-          1
-        );
-
-      const easedProgress =
-        1 -
-        Math.pow(
-          1 - progress,
-          3
-        );
-
-      const currentValue =
-        Math.floor(
-          target *
-          easedProgress
-        );
-
-      counter.textContent =
-        currentValue + "+";
-
-      if (progress < 1) {
-
-        requestAnimationFrame(
-          updateCounter
-        );
-
-      } else {
-
-        counter.textContent =
-          target + "+";
-      }
-
-    }
-
-    requestAnimationFrame(
-      updateCounter
-    );
-  }
-
-
-  function startCounters() {
-
-    if (
-      countersStarted ||
-      !statsSection ||
-      !counters.length
-    ) {
-      return;
-    }
-
-    countersStarted = true;
-
-    counters.forEach(counter => {
-
-      animateCounter(counter);
-
-    });
-
-  }
-
-
-  if (
-    statsSection &&
-    "IntersectionObserver" in window
-  ) {
-
-    const statsObserver =
-      new IntersectionObserver(
-        (entries, observer) => {
-
-          entries.forEach(entry => {
-
-            if (
-              entry.isIntersecting
-            ) {
-
-              startCounters();
+              entry.target.classList.add(
+                "visible"
+              );
 
               observer.unobserve(
                 entry.target
@@ -499,375 +291,528 @@ document.addEventListener("DOMContentLoaded", () => {
 
         },
         {
-          threshold: 0.25
+          threshold: 0.12
         }
       );
 
-    statsObserver.observe(
-      statsSection
-    );
+
+    revealElements.forEach((element) => {
+
+      revealObserver.observe(element);
+
+    });
 
   } else {
 
-    startCounters();
+    revealElements.forEach((element) => {
+
+      element.classList.add("visible");
+
+    });
 
   }
-  /* =========================================
-     PROJECT DATA
-  ========================================= */
-
-  const projectData = {
-
-    portfolio: {
-      title: "Personal Portfolio",
-
-      description:
-        "A modern responsive portfolio website created to showcase Emtiaz's skills, projects, learning journey and digital presence.",
-
-      features: [
-        "Responsive modern design",
-        "Animated hero section",
-        "Typing animation",
-        "Skills section",
-        "Project showcase",
-        "YouTube section",
-        "Contact form",
-        "Dark and Light Mode"
-      ],
-
-      tech: [
-        "HTML",
-        "CSS",
-        "JavaScript"
-      ],
-
-      links: [
-        {
-          text: "Live Website",
-          url: "https://emtiaz96.github.io/"
-        },
-        {
-          text: "GitHub",
-          url: "https://github.com/EmtiAz96"
-        }
-      ]
-    },
-
-
-    friendship: {
-      title: "Friendship Page",
-
-      description:
-        "A dedicated friendship page created for Emtiaz's close friends and best friend, with animated RGB names and a clean design.",
-
-      features: [
-        "Dedicated friendship page",
-        "Close friends section",
-        "Best friend section",
-        "RGB animated names",
-        "Responsive design",
-        "Standalone HTML page"
-      ],
-
-      tech: [
-        "HTML",
-        "CSS",
-        "Animation"
-      ],
-
-      links: [
-        {
-          text: "Open Friendship Page",
-          url: "friendship.html"
-        },
-        {
-          text: "GitHub",
-          url: "https://github.com/EmtiAz96"
-        }
-      ]
-    },
-
-
-    future: {
-      title: "Future Project",
-
-      description:
-        "A future project area reserved for new technology experiments, creative ideas and upcoming development work.",
-
-      features: [
-        "Future technology experiments",
-        "New project ideas",
-        "Programming experiments",
-        "Creative digital projects"
-      ],
-
-      tech: [
-        "Future",
-        "Technology",
-        "Innovation"
-      ],
-
-      links: []
-    }
-
-  };
 
 
   /* =========================================
-     PROJECT MODAL ELEMENTS
+     STAT COUNTER
   ========================================= */
 
-  const projectModal =
-    document.getElementById(
-      "projectModal"
-    );
-
-  const projectModalTitle =
-    document.getElementById(
-      "projectModalTitle"
-    );
-
-  const projectModalDescription =
-    document.getElementById(
-      "projectModalDescription"
-    );
-
-  const projectModalFeatures =
-    document.getElementById(
-      "projectModalFeatures"
-    );
-
-  const projectModalTech =
-    document.getElementById(
-      "projectModalTech"
-    );
-
-  const projectModalButtons =
-    document.getElementById(
-      "projectModalButtons"
-    );
-
-  const projectModalClose =
-    document.getElementById(
-      "projectModalClose"
+  const statNumbers =
+    document.querySelectorAll(
+      ".stat-number"
     );
 
 
-  /* =========================================
-     OPEN PROJECT MODAL
-  ========================================= */
+  function animateCounter(element) {
 
-  function openProjectModal(
-    projectName
-  ) {
+    const target =
+      Number(
+        element.getAttribute(
+          "data-target"
+        )
+      );
 
-    const project =
-      projectData[projectName];
 
     if (
-      !project ||
-      !projectModal ||
-      !projectModalTitle ||
-      !projectModalDescription ||
-      !projectModalFeatures ||
-      !projectModalTech ||
-      !projectModalButtons
+      !Number.isFinite(target)
     ) {
       return;
     }
 
 
-    projectModalTitle.textContent =
-      project.title;
+    const duration = 1600;
+
+    const startTime =
+      performance.now();
 
 
-    projectModalDescription.textContent =
-      project.description;
+    function updateCounter(currentTime) {
 
+      const elapsed =
+        currentTime - startTime;
 
-    /* ---------- FEATURES ---------- */
-
-    projectModalFeatures.replaceChildren();
-
-    project.features.forEach(
-      feature => {
-
-        const li =
-          document.createElement("li");
-
-        li.textContent =
-          feature;
-
-        projectModalFeatures.appendChild(
-          li
+      const progress =
+        Math.min(
+          elapsed / duration,
+          1
         );
 
-      }
-    );
 
-
-    /* ---------- TECHNOLOGIES ---------- */
-
-    projectModalTech.replaceChildren();
-
-    project.tech.forEach(
-      tech => {
-
-        const span =
-          document.createElement("span");
-
-        span.textContent =
-          tech;
-
-        projectModalTech.appendChild(
-          span
+      const easedProgress =
+        1 -
+        Math.pow(
+          1 - progress,
+          3
         );
 
-      }
-    );
 
-
-    /* ---------- PROJECT LINKS ---------- */
-
-    projectModalButtons.replaceChildren();
-
-    project.links.forEach(
-      link => {
-
-        const anchor =
-          document.createElement("a");
-
-        anchor.href =
-          link.url;
-
-        anchor.textContent =
-          link.text;
-
-        anchor.target =
-          "_blank";
-
-        anchor.rel =
-          "noopener noreferrer";
-
-        anchor.className =
-          "btn primary-btn";
-
-        projectModalButtons.appendChild(
-          anchor
+      const currentValue =
+        Math.floor(
+          target * easedProgress
         );
 
+
+      element.textContent =
+        currentValue.toLocaleString();
+
+
+      if (progress < 1) {
+
+        requestAnimationFrame(
+          updateCounter
+        );
+
+      } else {
+
+        element.textContent =
+          target.toLocaleString();
+
       }
-    );
 
-
-    /* ---------- SHOW MODAL ---------- */
-
-    projectModal.classList.add(
-      "active"
-    );
-
-    document.body.classList.add(
-      "modal-open"
-    );
-
-  }
-
-
-  /* =========================================
-     CLOSE PROJECT MODAL
-  ========================================= */
-
-  function closeProjectModal() {
-
-    if (!projectModal) {
-      return;
     }
 
-    projectModal.classList.remove(
-      "active"
-    );
 
-    document.body.classList.remove(
-      "modal-open"
+    requestAnimationFrame(
+      updateCounter
     );
 
   }
 
 
-  /* =========================================
-     PROJECT DETAILS BUTTONS
-  ========================================= */
+  if (
+    statNumbers.length &&
+    "IntersectionObserver" in window
+  ) {
 
-  document
-    .querySelectorAll(
-      ".project-details"
-    )
-    .forEach(button => {
+    const statObserver =
+      new IntersectionObserver(
+        (entries, observer) => {
 
-      button.addEventListener(
-        "click",
-        () => {
+          entries.forEach((entry) => {
 
-          const projectName =
-            button.dataset.project;
+            if (
+              entry.isIntersecting
+            ) {
 
-          openProjectModal(
-            projectName
-          );
+              animateCounter(
+                entry.target
+              );
 
+              observer.unobserve(
+                entry.target
+              );
+
+            }
+
+          });
+
+        },
+        {
+          threshold: 0.5
         }
       );
+
+
+    statNumbers.forEach((element) => {
+
+      statObserver.observe(element);
+
+    });
+
+  } else {
+
+    statNumbers.forEach((element) => {
+
+      animateCounter(element);
+
+    });
+
+  }
+
+
+  /* =========================================
+     LIVE AGE COUNTER
+     Born: 16 August 2006
+     Time: 12:00 AM
+     Bangladesh Time: UTC+06:00
+  ========================================= */
+
+  const ageYears =
+    document.getElementById("ageYears");
+
+  const ageDays =
+    document.getElementById("ageDays");
+
+  const ageHours =
+    document.getElementById("ageHours");
+
+  const ageMinutes =
+    document.getElementById("ageMinutes");
+
+  const ageSeconds =
+    document.getElementById("ageSeconds");
+
+
+  const birthDate =
+    new Date(
+      "2006-08-16T00:00:00+06:00"
+    );
+
+
+  function getDhakaDateParts(date) {
+
+    const formatter =
+      new Intl.DateTimeFormat(
+        "en-US",
+        {
+          timeZone: "Asia/Dhaka",
+
+          year: "numeric",
+          month: "numeric",
+          day: "numeric"
+        }
+      );
+
+
+    const parts =
+      formatter.formatToParts(date);
+
+
+    const result = {};
+
+
+    parts.forEach((part) => {
+
+      if (
+        part.type !== "literal"
+      ) {
+
+        result[part.type] =
+          Number(part.value);
+
+      }
 
     });
 
 
-  /* =========================================
-     MODAL CLOSE BUTTON
-  ========================================= */
+    return result;
 
-  if (projectModalClose) {
+  }
 
-    projectModalClose.addEventListener(
-      "click",
-      closeProjectModal
+
+  function calculateAgeYears(now) {
+
+    const dhakaDate =
+      getDhakaDateParts(now);
+
+
+    let years =
+      dhakaDate.year - 2006;
+
+
+    const birthdayPassed =
+      (
+        dhakaDate.month > 8
+      ) ||
+      (
+        dhakaDate.month === 8 &&
+        dhakaDate.day >= 16
+      );
+
+
+    if (!birthdayPassed) {
+
+      years--;
+
+    }
+
+
+    return Math.max(
+      0,
+      years
     );
 
   }
 
 
-  /* =========================================
-     MODAL OVERLAY
-  ========================================= */
+  function updateAgeCounter() {
 
-  const modalOverlay =
-    document.querySelector(
-      ".project-modal-overlay"
-    );
+    const now =
+      new Date();
 
-  if (modalOverlay) {
 
-    modalOverlay.addEventListener(
-      "click",
-      closeProjectModal
+    const elapsedMilliseconds =
+      Math.max(
+        0,
+        now.getTime() -
+        birthDate.getTime()
+      );
+
+
+    const totalSeconds =
+      Math.floor(
+        elapsedMilliseconds / 1000
+      );
+
+
+    const totalMinutes =
+      Math.floor(
+        totalSeconds / 60
+      );
+
+
+    const totalHours =
+      Math.floor(
+        totalMinutes / 60
+      );
+
+
+    const totalDays =
+      Math.floor(
+        totalHours / 24
+      );
+
+
+    const years =
+      calculateAgeYears(now);
+
+
+    if (ageYears) {
+
+      ageYears.textContent =
+        years.toLocaleString();
+
+    }
+
+
+    if (ageDays) {
+
+      ageDays.textContent =
+        totalDays.toLocaleString();
+
+    }
+
+
+    if (ageHours) {
+
+      ageHours.textContent =
+        totalHours.toLocaleString();
+
+    }
+
+
+    if (ageMinutes) {
+
+      ageMinutes.textContent =
+        totalMinutes.toLocaleString();
+
+    }
+
+
+    if (ageSeconds) {
+
+      ageSeconds.textContent =
+        totalSeconds.toLocaleString();
+
+    }
+
+  }
+
+
+  if (
+    ageYears ||
+    ageDays ||
+    ageHours ||
+    ageMinutes ||
+    ageSeconds
+  ) {
+
+    updateAgeCounter();
+
+    setInterval(
+      updateAgeCounter,
+      1000
     );
 
   }
 
 
-  /* =========================================
-     ESCAPE KEY
-  ========================================= */
+});
+/* =========================================================
+   EMTIAZ OFFICIAL — SCRIPT.JS
+   STEP 2 / 3
+========================================================= */
 
-  document.addEventListener(
-    "keydown",
-    event => {
+
+/* =========================================
+   PROJECT MODAL
+========================================= */
+
+const projectModal =
+  document.getElementById("projectModal");
+
+const modalTitle =
+  document.getElementById("modalTitle");
+
+const modalDescription =
+  document.getElementById("modalDescription");
+
+const modalClose =
+  document.getElementById("modalClose");
+
+
+/* =========================================
+   OPEN PROJECT MODAL
+========================================= */
+
+function openProjectModal(
+  title,
+  description
+) {
+
+  if (!projectModal) {
+    return;
+  }
+
+
+  if (modalTitle) {
+
+    modalTitle.textContent =
+      title || "Project Details";
+
+  }
+
+
+  if (modalDescription) {
+
+    modalDescription.textContent =
+      description ||
+      "More information about this project will be available soon.";
+
+  }
+
+
+  projectModal.classList.add(
+    "active"
+  );
+
+
+  document.body.style.overflow =
+    "hidden";
+
+}
+
+
+/* =========================================
+   CLOSE PROJECT MODAL
+========================================= */
+
+function closeProjectModal() {
+
+  if (!projectModal) {
+    return;
+  }
+
+
+  projectModal.classList.remove(
+    "active"
+  );
+
+
+  document.body.style.overflow =
+    "";
+
+}
+
+
+/* =========================================
+   PROJECT DETAIL BUTTONS
+========================================= */
+
+const projectDetailButtons =
+  document.querySelectorAll(
+    ".project-details-btn"
+  );
+
+
+projectDetailButtons.forEach(
+  (button) => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        const title =
+          button.getAttribute(
+            "data-title"
+          );
+
+
+        const description =
+          button.getAttribute(
+            "data-description"
+          );
+
+
+        openProjectModal(
+          title,
+          description
+        );
+
+      }
+    );
+
+  }
+);
+
+
+/* =========================================
+   MODAL CLOSE BUTTON
+========================================= */
+
+if (modalClose) {
+
+  modalClose.addEventListener(
+    "click",
+    closeProjectModal
+  );
+
+}
+
+
+/* =========================================
+   CLOSE MODAL BY CLICKING BACKDROP
+========================================= */
+
+if (projectModal) {
+
+  projectModal.addEventListener(
+    "click",
+    (event) => {
 
       if (
-        event.key === "Escape" &&
-        projectModal &&
-        projectModal.classList.contains(
-          "active"
-        )
+        event.target ===
+        projectModal
       ) {
 
         closeProjectModal();
@@ -877,376 +822,647 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
-
-  /* =========================================
-     CONTACT FORM
-  ========================================= */
-
-  const contactForm =
-    document.getElementById(
-      "contactForm"
-    );
-
-  const formMessage =
-    document.getElementById(
-      "formMessage"
-    );
+}
 
 
-  if (contactForm) {
+/* =========================================
+   CLOSE MODAL WITH ESCAPE
+========================================= */
 
-    const nameInput =
-      document.getElementById(
-        "contactName"
-      );
+document.addEventListener(
+  "keydown",
+  (event) => {
 
-    const emailInput =
-      document.getElementById(
-        "contactEmail"
-      );
+    if (
+      event.key === "Escape" &&
+      projectModal &&
+      projectModal.classList.contains(
+        "active"
+      )
+    ) {
 
-    const messageInput =
-      document.getElementById(
-        "contactMessage"
-      );
+      closeProjectModal();
 
+    }
 
-    contactForm.addEventListener(
-      "submit",
-      event => {
-
-        event.preventDefault();
-
-
-        if (
-          !nameInput ||
-          !emailInput ||
-          !messageInput
-        ) {
-          return;
-        }
+  }
+);
 
 
-        const name =
-          nameInput.value.trim();
+/* =========================================
+   CONTACT FORM
+========================================= */
 
-        const email =
-          emailInput.value.trim();
+const contactForm =
+  document.getElementById(
+    "contactForm"
+  );
 
-        const message =
-          messageInput.value.trim();
-
-
-        /* ---------- NAME VALIDATION ---------- */
-
-        if (
-          name.length < 2 ||
-          name.length > 100
-        ) {
-
-          if (formMessage) {
-
-            formMessage.textContent =
-              "Please enter a valid name.";
-
-          }
-
-          return;
-        }
+const formMessage =
+  document.getElementById(
+    "formMessage"
+  );
 
 
-        /* ---------- EMAIL VALIDATION ---------- */
+if (contactForm) {
 
-        if (
-          email.length > 150 ||
-          !emailInput.checkValidity()
-        ) {
+  contactForm.addEventListener(
+    "submit",
+    (event) => {
 
-          if (formMessage) {
-
-            formMessage.textContent =
-              "Please enter a valid email address.";
-
-          }
-
-          return;
-        }
+      event.preventDefault();
 
 
-        /* ---------- MESSAGE VALIDATION ---------- */
+      const nameInput =
+        document.getElementById(
+          "name"
+        );
 
-        if (
-          message.length < 3 ||
-          message.length > 2000
-        ) {
+      const emailInput =
+        document.getElementById(
+          "email"
+        );
 
-          if (formMessage) {
-
-            formMessage.textContent =
-              "Please enter a message between 3 and 2000 characters.";
-
-          }
-
-          return;
-        }
+      const messageInput =
+        document.getElementById(
+          "message"
+        );
 
 
-        /* ---------- MAILTO DATA ---------- */
-
-        const subject =
-          encodeURIComponent(
-            `Message from ${name}`
-          );
+      const name =
+        nameInput
+          ? nameInput.value.trim()
+          : "";
 
 
-        const body =
-          encodeURIComponent(
-            `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
-          );
+      const email =
+        emailInput
+          ? emailInput.value.trim()
+          : "";
 
+
+      const message =
+        messageInput
+          ? messageInput.value.trim()
+          : "";
+
+
+      if (
+        !name ||
+        !email ||
+        !message
+      ) {
 
         if (formMessage) {
 
           formMessage.textContent =
-            "Opening your email app...";
+            "Please fill in all fields.";
 
         }
-
-
-        window.location.href =
-          `mailto:mdemtiaz36900@gmail.com?subject=${subject}&body=${body}`;
-
-      }
-    );
-
-  }
-
-
-  /* =========================================
-     BUTTON PRESS EFFECT
-  ========================================= */
-
-  document
-    .querySelectorAll(".btn")
-    .forEach(button => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          button.style.transform =
-            "scale(0.97)";
-
-
-          setTimeout(() => {
-
-            button.style.transform =
-              "";
-
-          }, 120);
-
-        }
-      );
-
-    });
-  /* =========================================
-     DARK / LIGHT MODE
-  ========================================= */
-
-  const themeToggle =
-    document.getElementById(
-      "themeToggle"
-    );
-
-
-  function updateThemeIcon() {
-
-    if (!themeToggle) {
-      return;
-    }
-
-
-    const lightMode =
-      document.body.classList.contains(
-        "light-theme"
-      );
-
-
-    if (lightMode) {
-
-      themeToggle.textContent =
-        "🌙";
-
-      themeToggle.setAttribute(
-        "aria-label",
-        "Switch to Dark Mode"
-      );
-
-      themeToggle.title =
-        "Switch to Dark Mode";
-
-    } else {
-
-      themeToggle.textContent =
-        "☀️";
-
-      themeToggle.setAttribute(
-        "aria-label",
-        "Switch to Light Mode"
-      );
-
-      themeToggle.title =
-        "Switch to Light Mode";
-
-    }
-
-  }
-
-
-  /* =========================================
-     LOAD SAVED THEME
-  ========================================= */
-
-  let savedTheme = null;
-
-
-  try {
-
-    savedTheme =
-      localStorage.getItem(
-        "emtiaz-theme"
-      );
-
-  } catch (error) {
-
-    savedTheme = null;
-
-  }
-
-
-  if (
-    savedTheme === "light"
-  ) {
-
-    document.body.classList.add(
-      "light-theme"
-    );
-
-  }
-
-
-  updateThemeIcon();
-
-
-  /* =========================================
-     THEME TOGGLE
-  ========================================= */
-
-  if (themeToggle) {
-
-    themeToggle.addEventListener(
-      "click",
-      () => {
-
-        document.body.classList.toggle(
-          "light-theme"
-        );
-
-
-        const currentTheme =
-          document.body.classList.contains(
-            "light-theme"
-          )
-            ? "light"
-            : "dark";
-
-
-        try {
-
-          localStorage.setItem(
-            "emtiaz-theme",
-            currentTheme
-          );
-
-        } catch (error) {
-
-          /* Storage may be unavailable */
-
-        }
-
-
-        updateThemeIcon();
-
-      }
-    );
-
-  }
-
-
-  /* =========================================
-     INITIAL UI UPDATE
-  ========================================= */
-
-  updateActiveNav();
-
-  updateBackToTop();
-
-
-  /* =========================================
-     PAGE VISIBILITY OPTIMIZATION
-  ========================================= */
-
-  document.addEventListener(
-    "visibilitychange",
-    () => {
-
-      /*
-       * Browser নিজে background tab-এর
-       * animation throttle করবে।
-       * এখানে কোনো unnecessary কাজ চালানো হচ্ছে না।
-       */
-
-      if (
-        document.hidden
-      ) {
 
         return;
 
       }
 
-      /*
-       * User আবার tab-এ ফিরে এলে
-       * navigation state একবার refresh করা হয়।
-       */
 
-      updateActiveNav();
+      if (formMessage) {
 
-      updateBackToTop();
+        formMessage.textContent =
+          `Thanks ${name}! Your message has been received.`;
+
+      }
+
+
+      contactForm.reset();
 
     }
   );
 
+}
 
-  /* =========================================
-     PERFORMANCE SAFETY
-  ========================================= */
 
-  window.addEventListener(
-    "resize",
+/* =========================================
+   BACK TO TOP
+========================================= */
+
+const backToTop =
+  document.getElementById(
+    "backToTop"
+  );
+
+
+function updateBackToTop() {
+
+  if (!backToTop) {
+    return;
+  }
+
+
+  if (
+    window.scrollY >
+    450
+  ) {
+
+    backToTop.classList.add(
+      "show"
+    );
+
+  } else {
+
+    backToTop.classList.remove(
+      "show"
+    );
+
+  }
+
+}
+
+
+window.addEventListener(
+  "scroll",
+  updateBackToTop,
+  {
+    passive: true
+  }
+);
+
+
+if (backToTop) {
+
+  backToTop.addEventListener(
+    "click",
     () => {
 
-      /*
-       * Resize event-এ কোনো heavy calculation
-       * করা হচ্ছে না।
-       *
-       * Browser layout নিজেই handle করবে।
-       */
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
 
-    },
-    {
-      passive: true
+    }
+  );
+
+}
+
+
+/* =========================================
+   ACTIVE NAVIGATION
+========================================= */
+
+const sections =
+  document.querySelectorAll(
+    "main section[id]"
+  );
+
+const navigationLinks =
+  document.querySelectorAll(
+    ".nav-menu a"
+  );
+
+
+if (
+  sections.length &&
+  navigationLinks.length &&
+  "IntersectionObserver" in window
+) {
+
+  const sectionObserver =
+    new IntersectionObserver(
+      (entries) => {
+
+        entries.forEach(
+          (entry) => {
+
+            if (
+              entry.isIntersecting
+            ) {
+
+              const sectionId =
+                entry.target.id;
+
+
+              navigationLinks.forEach(
+                (link) => {
+
+                  const href =
+                    link.getAttribute(
+                      "href"
+                    );
+
+
+                  link.classList.toggle(
+                    "active",
+                    href ===
+                    `#${sectionId}`
+                  );
+
+                }
+              );
+
+            }
+
+          }
+        );
+
+      },
+      {
+        rootMargin:
+          "-30% 0px -60% 0px",
+
+        threshold: 0
+      }
+    );
+
+
+  sections.forEach(
+    (section) => {
+
+      sectionObserver.observe(
+        section
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================
+   SMOOTH ANCHOR HANDLING
+========================================= */
+
+document
+  .querySelectorAll(
+    'a[href^="#"]'
+  )
+  .forEach(
+    (link) => {
+
+      link.addEventListener(
+        "click",
+        (event) => {
+
+          const targetId =
+            link.getAttribute(
+              "href"
+            );
+
+
+          if (
+            !targetId ||
+            targetId === "#"
+          ) {
+
+            return;
+
+          }
+
+
+          const target =
+            document.querySelector(
+              targetId
+            );
+
+
+          if (!target) {
+
+            return;
+
+          }
+
+
+          event.preventDefault();
+
+
+          target.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+
+        }
+      );
+
     }
   );
 
 
+/* =========================================
+   EXTERNAL LINKS
+========================================= */
+
+document
+  .querySelectorAll(
+    'a[target="_blank"]'
+  )
+  .forEach(
+    (link) => {
+
+      link.setAttribute(
+        "rel",
+        "noopener noreferrer"
+      );
+
+    }
+  );
+
+
+/* =========================================
+   CONSOLE MESSAGE
+========================================= */
+
+console.log(
+  "%cEmtiaz Official",
+  "font-size: 22px; font-weight: 800;"
+);
+
+console.log(
+  "%cWelcome to Emtiaz Official 🚀",
+  "font-size: 14px;"
+);
+/* =========================================================
+   EMTIAZ OFFICIAL — SCRIPT.JS
+   STEP 3 / 3
+========================================================= */
+
+/* IMAGE FALLBACK */
+const profileImage = document.querySelector(".hero-card img");
+
+if (profileImage) {
+  profileImage.addEventListener("error", () => {
+    profileImage.style.display = "none";
+
+    const imageContainer = profileImage.parentElement;
+
+    if (imageContainer && !imageContainer.querySelector(".image-fallback")) {
+      const fallback = document.createElement("div");
+
+      fallback.className = "image-fallback";
+      fallback.textContent = "E";
+
+      imageContainer.appendChild(fallback);
+    }
+  });
+}
+
+
+/* PAGE LOADED STATE */
+window.addEventListener("load", () => {
+  document.body.classList.add("page-loaded");
 });
+
+
+/* SCROLL PROGRESS */
+const scrollProgress = document.createElement("div");
+
+scrollProgress.className = "scroll-progress";
+
+scrollProgress.style.position = "fixed";
+scrollProgress.style.top = "0";
+scrollProgress.style.left = "0";
+scrollProgress.style.width = "0%";
+scrollProgress.style.height = "3px";
+scrollProgress.style.zIndex = "9999";
+scrollProgress.style.pointerEvents = "none";
+scrollProgress.style.background =
+  "linear-gradient(90deg, #4da3ff, #7c5cff, #00d4ff)";
+
+document.body.appendChild(scrollProgress);
+
+function updateScrollProgress() {
+  const scrollTop = window.scrollY;
+  const documentHeight =
+    document.documentElement.scrollHeight -
+    document.documentElement.clientHeight;
+
+  if (documentHeight <= 0) {
+    scrollProgress.style.width = "0%";
+    return;
+  }
+
+  const progress =
+    (scrollTop / documentHeight) * 100;
+
+  scrollProgress.style.width =
+    `${Math.min(progress, 100)}%`;
+}
+
+window.addEventListener(
+  "scroll",
+  updateScrollProgress,
+  { passive: true }
+);
+
+updateScrollProgress();
+
+
+/* CURRENT YEAR SAFETY UPDATE */
+const footerYear = document.getElementById("currentYear");
+
+if (footerYear) {
+  footerYear.textContent =
+    new Date().getFullYear();
+}
+
+
+/* EXTERNAL SOCIAL LINKS */
+const socialLinks = document.querySelectorAll(
+  'a[href*="youtube.com"], a[href*="github.com"]'
+);
+
+socialLinks.forEach((link) => {
+  if (link.getAttribute("target") === "_blank") {
+    link.setAttribute(
+      "rel",
+      "noopener noreferrer"
+    );
+  }
+});
+
+
+/* EMAIL LINK SAFETY */
+const emailLinks =
+  document.querySelectorAll('a[href^="mailto:"]');
+
+emailLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    console.log(
+      "Email contact link opened."
+    );
+  });
+});
+
+
+/* PHONE LINK SAFETY */
+const phoneLinks =
+  document.querySelectorAll('a[href^="tel:"]');
+
+phoneLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    console.log(
+      "Phone contact link opened."
+    );
+  });
+});
+
+
+/* CARD HOVER ACCESSIBILITY */
+const interactiveCards =
+  document.querySelectorAll(
+    ".service-card, .project-card, .skill-card, .age-counter-box"
+  );
+
+interactiveCards.forEach((card) => {
+  card.addEventListener("mouseenter", () => {
+    card.classList.add("is-hovered");
+  });
+
+  card.addEventListener("mouseleave", () => {
+    card.classList.remove("is-hovered");
+  });
+});
+
+
+/* PREVENT DOUBLE SUBMISSION */
+if (contactForm) {
+  contactForm.addEventListener("submit", () => {
+    const submitButton =
+      contactForm.querySelector(
+        'button[type="submit"]'
+      );
+
+    if (submitButton) {
+      setTimeout(() => {
+        submitButton.blur();
+      }, 100);
+    }
+  });
+}
+
+
+/* KEYBOARD ACCESS FOR MODAL */
+document.addEventListener("keydown", (event) => {
+  if (
+    event.key === "Enter" &&
+    document.activeElement &&
+    document.activeElement.classList.contains(
+      "project-details-btn"
+    )
+  ) {
+    document.activeElement.click();
+  }
+});
+
+
+/* VISIBILITY CHECK */
+document.addEventListener(
+  "visibilitychange",
+  () => {
+    if (document.hidden) {
+      console.log(
+        "Emtiaz Official: page is currently hidden."
+      );
+    } else {
+      console.log(
+        "Emtiaz Official: welcome back."
+      );
+    }
+  }
+);
+
+
+/* SAFE AGE COUNTER REFRESH */
+let ageRefreshTimer = null;
+
+function keepAgeCounterAccurate() {
+  const ageElements = [
+    ageYears,
+    ageDays,
+    ageHours,
+    ageMinutes,
+    ageSeconds
+  ];
+
+  const hasAgeCounter =
+    ageElements.some(
+      (element) => element !== null
+    );
+
+  if (!hasAgeCounter) {
+    return;
+  }
+
+  if (typeof updateAgeCounter === "function") {
+    updateAgeCounter();
+  }
+}
+
+document.addEventListener(
+  "visibilitychange",
+  () => {
+    if (!document.hidden) {
+      keepAgeCounterAccurate();
+    }
+  }
+);
+
+
+/* CLEANUP OLD TIMER BEFORE STARTING A NEW ONE */
+if (ageRefreshTimer) {
+  clearInterval(ageRefreshTimer);
+}
+
+ageRefreshTimer = setInterval(
+  keepAgeCounterAccurate,
+  1000
+);
+
+
+/* REDUCED MOTION SUPPORT */
+const prefersReducedMotion =
+  window.matchMedia &&
+  window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+if (prefersReducedMotion) {
+  document.documentElement.classList.add(
+    "reduce-motion"
+  );
+}
+
+
+/* SAFE RESIZE HANDLER */
+let resizeTimer = null;
+
+window.addEventListener(
+  "resize",
+  () => {
+    clearTimeout(resizeTimer);
+
+    resizeTimer = setTimeout(() => {
+      updateScrollProgress();
+    }, 150);
+  },
+  { passive: true }
+);
+
+
+/* FINAL READY MESSAGE */
+console.log(
+  "%cWebsite systems loaded successfully.",
+  "font-size: 13px; font-weight: 700;"
+);
+
+console.log(
+  "%cLive Age Counter: Active",
+  "font-size: 13px; font-weight: 700;"
+);
+
+console.log(
+  "%cEmtiaz Official — All systems ready 🚀",
+  "font-size: 13px; font-weight: 700;"
+);
+
+
+/* =========================================================
+   END OF SCRIPT.JS
+========================================================= */
