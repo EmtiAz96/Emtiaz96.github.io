@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* =========================================
      MOBILE MENU
-  ========================================== */
+  ========================================= */
 
   const menuToggle = document.getElementById("menuToggle");
   const navMenu = document.getElementById("navMenu");
@@ -13,17 +13,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
       navMenu.classList.toggle("active");
 
-      const isOpen = navMenu.classList.contains("active");
+      const isOpen =
+        navMenu.classList.contains("active");
 
-      menuToggle.textContent = isOpen ? "✕" : "☰";
+      menuToggle.textContent =
+        isOpen ? "✕" : "☰";
 
       menuToggle.setAttribute(
         "aria-label",
         isOpen ? "Close Menu" : "Open Menu"
       );
-
     });
-
 
     navMenu.querySelectorAll("a").forEach(link => {
 
@@ -37,30 +37,31 @@ document.addEventListener("DOMContentLoaded", () => {
           "aria-label",
           "Open Menu"
         );
-
       });
 
     });
-
   }
 
 
   /* =========================================
      CURRENT YEAR
-  ========================================== */
+  ========================================= */
 
-  const currentYear = document.getElementById("currentYear");
+  const currentYear =
+    document.getElementById("currentYear");
 
   if (currentYear) {
-    currentYear.textContent = new Date().getFullYear();
+    currentYear.textContent =
+      new Date().getFullYear();
   }
 
 
   /* =========================================
-     TYPING ANIMATION
-  ========================================== */
+     TYPING EFFECT
+  ========================================= */
 
-  const typingText = document.getElementById("typingText");
+  const typingText =
+    document.getElementById("typingText");
 
   if (typingText) {
 
@@ -77,20 +78,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function typeEffect() {
 
-      const currentWord = words[wordIndex];
+      const currentWord =
+        words[wordIndex];
 
       if (!deleting) {
 
         typingText.textContent =
-          currentWord.substring(0, charIndex + 1);
+          currentWord.substring(
+            0,
+            charIndex + 1
+          );
 
         charIndex++;
 
-        if (charIndex === currentWord.length) {
+        if (
+          charIndex ===
+          currentWord.length
+        ) {
 
           deleting = true;
 
-          setTimeout(typeEffect, 1700);
+          setTimeout(
+            typeEffect,
+            1700
+          );
 
           return;
         }
@@ -98,7 +109,10 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
 
         typingText.textContent =
-          currentWord.substring(0, charIndex - 1);
+          currentWord.substring(
+            0,
+            charIndex - 1
+          );
 
         charIndex--;
 
@@ -107,75 +121,84 @@ document.addEventListener("DOMContentLoaded", () => {
           deleting = false;
 
           wordIndex =
-            (wordIndex + 1) % words.length;
-
+            (wordIndex + 1) %
+            words.length;
         }
-
       }
 
       setTimeout(
         typeEffect,
         deleting ? 45 : 75
       );
-
     }
 
     typeEffect();
-
   }
 
 
   /* =========================================
      SKILL BAR ANIMATION
-  ========================================== */
+  ========================================= */
 
-  function animateSkills() {
+  const skillBars =
+    document.querySelectorAll(
+      ".skill-progress"
+    );
 
-    document
-      .querySelectorAll(".skill-progress")
-      .forEach(bar => {
+  skillBars.forEach(bar => {
 
-        const targetWidth = bar.style.width;
+    const targetWidth =
+      bar.style.width;
 
-        if (!targetWidth) return;
+    if (!targetWidth) return;
 
-        bar.style.width = "0";
+    bar.style.width = "0";
 
-        setTimeout(() => {
+    requestAnimationFrame(() => {
 
-          bar.style.width = targetWidth;
+      requestAnimationFrame(() => {
 
-        }, 250);
+        bar.style.width =
+          targetWidth;
 
       });
 
-  }
+    });
 
-  animateSkills();
+  });
 
 
   /* =========================================
      SCROLL REVEAL
-  ========================================== */
+  ========================================= */
 
   const revealElements =
-    document.querySelectorAll(".scroll-reveal");
+    document.querySelectorAll(
+      ".scroll-reveal"
+    );
 
-  if ("IntersectionObserver" in window) {
+  if (
+    "IntersectionObserver" in window &&
+    revealElements.length
+  ) {
 
-    const observer =
+    const revealObserver =
       new IntersectionObserver(
-        (entries, obs) => {
+        (entries, observer) => {
 
           entries.forEach(entry => {
 
-            if (entry.isIntersecting) {
-
-              entry.target.classList.add("show");
-
-              obs.unobserve(entry.target);
-
+            if (!entry.isIntersecting) {
+              return;
             }
+
+            entry.target.classList.add(
+              "show"
+            );
+
+            observer.unobserve(
+              entry.target
+            );
 
           });
 
@@ -187,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     revealElements.forEach(element => {
 
-      observer.observe(element);
+      revealObserver.observe(element);
 
     });
 
@@ -203,11 +226,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =========================================
-     ACTIVE NAVIGATION
-  ========================================== */
+     SECTION + NAVIGATION REFERENCES
+  ========================================= */
 
   const sections =
-    document.querySelectorAll("main section[id]");
+    document.querySelectorAll(
+      "main section[id]"
+    );
 
   const navLinks =
     document.querySelectorAll(
@@ -215,145 +240,285 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
+  /* =========================================
+     ACTIVE NAVIGATION
+  ========================================= */
+
   function updateActiveNav() {
+
+    if (!sections.length) {
+      return;
+    }
+
+    const scrollPosition =
+      window.scrollY + 150;
 
     let currentSection = "";
 
     sections.forEach(section => {
 
-      const sectionTop =
-        section.offsetTop - 150;
+      if (
+        scrollPosition >=
+        section.offsetTop
+      ) {
 
-      if (window.scrollY >= sectionTop) {
-
-        currentSection = section.id;
+        currentSection =
+          section.id;
 
       }
 
     });
 
-
     navLinks.forEach(link => {
 
-      link.classList.remove("active");
-
-      if (
+      const isActive =
         link.getAttribute("href") ===
-        `#${currentSection}`
-      ) {
+        `#${currentSection}`;
 
-        link.classList.add("active");
-
-      }
+      link.classList.toggle(
+        "active",
+        isActive
+      );
 
     });
 
   }
 
 
-  window.addEventListener(
-    "scroll",
-    updateActiveNav,
-    { passive: true }
-  );
+  /* =========================================
+     PERFORMANCE SCROLL SYSTEM
+  ========================================= */
 
-  updateActiveNav();
+  let scrollTicking = false;
+
+  function handleScroll() {
+
+    if (scrollTicking) {
+      return;
+    }
+
+    scrollTicking = true;
+
+    requestAnimationFrame(() => {
+
+      updateActiveNav();
+
+      updateBackToTop();
+
+      scrollTicking = false;
+
+    });
+
+  }
 
 
   /* =========================================
-     STAT COUNTERS
-  ========================================== */
+     BACK TO TOP
+  ========================================= */
+
+  const backToTop =
+    document.getElementById(
+      "backToTop"
+    );
+
+  function updateBackToTop() {
+
+    if (!backToTop) {
+      return;
+    }
+
+    backToTop.classList.toggle(
+      "show",
+      window.scrollY > 500
+    );
+
+  }
+
+
+  if (backToTop) {
+
+    backToTop.addEventListener(
+      "click",
+      () => {
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+
+      }
+    );
+
+  }
+
+
+  window.addEventListener(
+    "scroll",
+    handleScroll,
+    {
+      passive: true
+    }
+  );
+
+
+  updateActiveNav();
+
+  updateBackToTop();
+
+
+  /* =========================================
+     STATS COUNTER
+  ========================================= */
 
   const counters =
-    document.querySelectorAll(".counter");
+    document.querySelectorAll(
+      ".counter"
+    );
+
+  const statsSection =
+    document.querySelector(
+      ".stats-section"
+    );
 
   let countersStarted = false;
+
+  function animateCounter(counter) {
+
+    const target =
+      Number(
+        counter.dataset.target
+      );
+
+    if (
+      !Number.isFinite(target) ||
+      target < 0
+    ) {
+      return;
+    }
+
+    const duration = 1200;
+
+    const startTime =
+      performance.now();
+
+    function updateCounter(
+      currentTime
+    ) {
+
+      const elapsed =
+        currentTime -
+        startTime;
+
+      const progress =
+        Math.min(
+          elapsed / duration,
+          1
+        );
+
+      const easedProgress =
+        1 -
+        Math.pow(
+          1 - progress,
+          3
+        );
+
+      const currentValue =
+        Math.floor(
+          target *
+          easedProgress
+        );
+
+      counter.textContent =
+        currentValue + "+";
+
+      if (progress < 1) {
+
+        requestAnimationFrame(
+          updateCounter
+        );
+
+      } else {
+
+        counter.textContent =
+          target + "+";
+      }
+
+    }
+
+    requestAnimationFrame(
+      updateCounter
+    );
+  }
 
 
   function startCounters() {
 
-    if (countersStarted) return;
-
-    const statsSection =
-      document.querySelector(".stats-section");
-
-    if (!statsSection) return;
-
-    const rect =
-      statsSection.getBoundingClientRect();
-
-
     if (
-      rect.top <
-      window.innerHeight * 0.85
+      countersStarted ||
+      !statsSection ||
+      !counters.length
     ) {
-
-      countersStarted = true;
-
-
-      counters.forEach(counter => {
-
-        const target =
-          Number(counter.dataset.target);
-
-        if (
-          !Number.isFinite(target) ||
-          target < 0
-        ) {
-          return;
-        }
-
-        let current = 0;
-
-        const increment =
-          Math.max(
-            1,
-            Math.ceil(target / 50)
-          );
-
-
-        const timer =
-          setInterval(() => {
-
-            current += increment;
-
-            if (current >= target) {
-
-              current = target;
-
-              clearInterval(timer);
-
-            }
-
-            counter.textContent =
-              current + "+";
-
-          }, 30);
-
-      });
-
+      return;
     }
+
+    countersStarted = true;
+
+    counters.forEach(counter => {
+
+      animateCounter(counter);
+
+    });
 
   }
 
 
-  window.addEventListener(
-    "scroll",
-    startCounters,
-    { passive: true }
-  );
+  if (
+    statsSection &&
+    "IntersectionObserver" in window
+  ) {
 
-  startCounters();
+    const statsObserver =
+      new IntersectionObserver(
+        (entries, observer) => {
 
+          entries.forEach(entry => {
 
+            if (
+              entry.isIntersecting
+            ) {
+
+              startCounters();
+
+              observer.unobserve(
+                entry.target
+              );
+
+            }
+
+          });
+
+        },
+        {
+          threshold: 0.25
+        }
+      );
+
+    statsObserver.observe(
+      statsSection
+    );
+
+  } else {
+
+    startCounters();
+
+  }
   /* =========================================
      PROJECT DATA
-  ========================================== */
+  ========================================= */
 
   const projectData = {
 
     portfolio: {
-
       title: "Personal Portfolio",
 
       description:
@@ -377,24 +542,19 @@ document.addEventListener("DOMContentLoaded", () => {
       ],
 
       links: [
-
         {
           text: "Live Website",
           url: "https://emtiaz96.github.io/"
         },
-
         {
           text: "GitHub",
           url: "https://github.com/EmtiAz96"
         }
-
       ]
-
     },
 
 
     friendship: {
-
       title: "Friendship Page",
 
       description:
@@ -416,24 +576,19 @@ document.addEventListener("DOMContentLoaded", () => {
       ],
 
       links: [
-
         {
           text: "Open Friendship Page",
           url: "friendship.html"
         },
-
         {
           text: "GitHub",
           url: "https://github.com/EmtiAz96"
         }
-
       ]
-
     },
 
 
     future: {
-
       title: "Future Project",
 
       description:
@@ -453,7 +608,6 @@ document.addEventListener("DOMContentLoaded", () => {
       ],
 
       links: []
-
     }
 
   };
@@ -461,13 +615,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* =========================================
      PROJECT MODAL ELEMENTS
-  ========================================== */
+  ========================================= */
 
   const projectModal =
-    document.getElementById("projectModal");
+    document.getElementById(
+      "projectModal"
+    );
 
   const projectModalTitle =
-    document.getElementById("projectModalTitle");
+    document.getElementById(
+      "projectModalTitle"
+    );
 
   const projectModalDescription =
     document.getElementById(
@@ -497,9 +655,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* =========================================
      OPEN PROJECT MODAL
-  ========================================== */
+  ========================================= */
 
-  function openProjectModal(projectName) {
+  function openProjectModal(
+    projectName
+  ) {
 
     const project =
       projectData[projectName];
@@ -525,77 +685,107 @@ document.addEventListener("DOMContentLoaded", () => {
       project.description;
 
 
+    /* ---------- FEATURES ---------- */
+
     projectModalFeatures.replaceChildren();
 
+    project.features.forEach(
+      feature => {
 
-    project.features.forEach(feature => {
+        const li =
+          document.createElement("li");
 
-      const li =
-        document.createElement("li");
+        li.textContent =
+          feature;
 
-      li.textContent = feature;
+        projectModalFeatures.appendChild(
+          li
+        );
 
-      projectModalFeatures.appendChild(li);
+      }
+    );
 
-    });
 
+    /* ---------- TECHNOLOGIES ---------- */
 
     projectModalTech.replaceChildren();
 
+    project.tech.forEach(
+      tech => {
 
-    project.tech.forEach(tech => {
+        const span =
+          document.createElement("span");
 
-      const span =
-        document.createElement("span");
+        span.textContent =
+          tech;
 
-      span.textContent = tech;
+        projectModalTech.appendChild(
+          span
+        );
 
-      projectModalTech.appendChild(span);
+      }
+    );
 
-    });
 
+    /* ---------- PROJECT LINKS ---------- */
 
     projectModalButtons.replaceChildren();
 
+    project.links.forEach(
+      link => {
 
-    project.links.forEach(link => {
+        const anchor =
+          document.createElement("a");
 
-      const a =
-        document.createElement("a");
+        anchor.href =
+          link.url;
 
-      a.href = link.url;
+        anchor.textContent =
+          link.text;
 
-      a.textContent = link.text;
+        anchor.target =
+          "_blank";
 
-      a.target = "_blank";
+        anchor.rel =
+          "noopener noreferrer";
 
-      a.rel =
-        "noopener noreferrer";
+        anchor.className =
+          "btn primary-btn";
 
-      a.className =
-        "btn primary-btn";
+        projectModalButtons.appendChild(
+          anchor
+        );
 
-      projectModalButtons.appendChild(a);
+      }
+    );
 
-    });
 
+    /* ---------- SHOW MODAL ---------- */
 
-    projectModal.classList.add("active");
+    projectModal.classList.add(
+      "active"
+    );
 
     document.body.classList.add(
       "modal-open"
     );
 
-  } 
-   /* =========================================
+  }
+
+
+  /* =========================================
      CLOSE PROJECT MODAL
-  ========================================== */
+  ========================================= */
 
   function closeProjectModal() {
 
-    if (!projectModal) return;
+    if (!projectModal) {
+      return;
+    }
 
-    projectModal.classList.remove("active");
+    projectModal.classList.remove(
+      "active"
+    );
 
     document.body.classList.remove(
       "modal-open"
@@ -606,10 +796,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* =========================================
      PROJECT DETAILS BUTTONS
-  ========================================== */
+  ========================================= */
 
   document
-    .querySelectorAll(".project-details")
+    .querySelectorAll(
+      ".project-details"
+    )
     .forEach(button => {
 
       button.addEventListener(
@@ -619,7 +811,9 @@ document.addEventListener("DOMContentLoaded", () => {
           const projectName =
             button.dataset.project;
 
-          openProjectModal(projectName);
+          openProjectModal(
+            projectName
+          );
 
         }
       );
@@ -629,7 +823,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* =========================================
      MODAL CLOSE BUTTON
-  ========================================== */
+  ========================================= */
 
   if (projectModalClose) {
 
@@ -643,7 +837,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* =========================================
      MODAL OVERLAY
-  ========================================== */
+  ========================================= */
 
   const modalOverlay =
     document.querySelector(
@@ -662,7 +856,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* =========================================
      ESCAPE KEY
-  ========================================== */
+  ========================================= */
 
   document.addEventListener(
     "keydown",
@@ -671,7 +865,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (
         event.key === "Escape" &&
         projectModal &&
-        projectModal.classList.contains("active")
+        projectModal.classList.contains(
+          "active"
+        )
       ) {
 
         closeProjectModal();
@@ -684,7 +880,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* =========================================
      CONTACT FORM
-  ========================================== */
+  ========================================= */
 
   const contactForm =
     document.getElementById(
@@ -699,27 +895,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (contactForm) {
 
+    const nameInput =
+      document.getElementById(
+        "contactName"
+      );
+
+    const emailInput =
+      document.getElementById(
+        "contactEmail"
+      );
+
+    const messageInput =
+      document.getElementById(
+        "contactMessage"
+      );
+
+
     contactForm.addEventListener(
       "submit",
       event => {
 
         event.preventDefault();
-
-
-        const nameInput =
-          document.getElementById(
-            "contactName"
-          );
-
-        const emailInput =
-          document.getElementById(
-            "contactEmail"
-          );
-
-        const messageInput =
-          document.getElementById(
-            "contactMessage"
-          );
 
 
         if (
@@ -741,7 +937,7 @@ document.addEventListener("DOMContentLoaded", () => {
           messageInput.value.trim();
 
 
-        /* Basic length protection */
+        /* ---------- NAME VALIDATION ---------- */
 
         if (
           name.length < 2 ||
@@ -756,9 +952,10 @@ document.addEventListener("DOMContentLoaded", () => {
           }
 
           return;
-
         }
 
+
+        /* ---------- EMAIL VALIDATION ---------- */
 
         if (
           email.length > 150 ||
@@ -773,9 +970,10 @@ document.addEventListener("DOMContentLoaded", () => {
           }
 
           return;
-
         }
 
+
+        /* ---------- MESSAGE VALIDATION ---------- */
 
         if (
           message.length < 3 ||
@@ -790,16 +988,16 @@ document.addEventListener("DOMContentLoaded", () => {
           }
 
           return;
-
         }
 
 
-        /* Safe URL encoding */
+        /* ---------- MAILTO DATA ---------- */
 
         const subject =
           encodeURIComponent(
             `Message from ${name}`
           );
+
 
         const body =
           encodeURIComponent(
@@ -825,54 +1023,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =========================================
-     BACK TO TOP
-  ========================================== */
-
-  const backToTop =
-    document.getElementById(
-      "backToTop"
-    );
-
-
-  if (backToTop) {
-
-    window.addEventListener(
-      "scroll",
-      () => {
-
-        if (window.scrollY > 500) {
-
-          backToTop.classList.add("show");
-
-        } else {
-
-          backToTop.classList.remove("show");
-
-        }
-
-      },
-      { passive: true }
-    );
-
-
-    backToTop.addEventListener(
-      "click",
-      () => {
-
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
-
-      }
-    );
-
-  }
-
-
-  /* =========================================
-     BUTTON CLICK ANIMATION
-  ========================================== */
+     BUTTON PRESS EFFECT
+  ========================================= */
 
   document
     .querySelectorAll(".btn")
@@ -888,7 +1040,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
           setTimeout(() => {
 
-            button.style.transform = "";
+            button.style.transform =
+              "";
 
           }, 120);
 
@@ -896,11 +1049,9 @@ document.addEventListener("DOMContentLoaded", () => {
       );
 
     });
-
-
   /* =========================================
      DARK / LIGHT MODE
-  ========================================== */
+  ========================================= */
 
   const themeToggle =
     document.getElementById(
@@ -910,7 +1061,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function updateThemeIcon() {
 
-    if (!themeToggle) return;
+    if (!themeToggle) {
+      return;
+    }
 
 
     const lightMode =
@@ -921,7 +1074,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (lightMode) {
 
-      themeToggle.textContent = "🌙";
+      themeToggle.textContent =
+        "🌙";
 
       themeToggle.setAttribute(
         "aria-label",
@@ -933,7 +1087,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     } else {
 
-      themeToggle.textContent = "☀️";
+      themeToggle.textContent =
+        "☀️";
 
       themeToggle.setAttribute(
         "aria-label",
@@ -950,9 +1105,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* =========================================
      LOAD SAVED THEME
-  ========================================== */
+  ========================================= */
 
   let savedTheme = null;
+
 
   try {
 
@@ -968,7 +1124,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  if (savedTheme === "light") {
+  if (
+    savedTheme === "light"
+  ) {
 
     document.body.classList.add(
       "light-theme"
@@ -982,7 +1140,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* =========================================
      THEME TOGGLE
-  ========================================== */
+  ========================================= */
 
   if (themeToggle) {
 
@@ -1012,7 +1170,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         } catch (error) {
 
-          /* Ignore storage errors */
+          /* Storage may be unavailable */
 
         }
 
@@ -1024,5 +1182,71 @@ document.addEventListener("DOMContentLoaded", () => {
 
   }
 
+
+  /* =========================================
+     INITIAL UI UPDATE
+  ========================================= */
+
+  updateActiveNav();
+
+  updateBackToTop();
+
+
+  /* =========================================
+     PAGE VISIBILITY OPTIMIZATION
+  ========================================= */
+
+  document.addEventListener(
+    "visibilitychange",
+    () => {
+
+      /*
+       * Browser নিজে background tab-এর
+       * animation throttle করবে।
+       * এখানে কোনো unnecessary কাজ চালানো হচ্ছে না।
+       */
+
+      if (
+        document.hidden
+      ) {
+
+        return;
+
+      }
+
+      /*
+       * User আবার tab-এ ফিরে এলে
+       * navigation state একবার refresh করা হয়।
+       */
+
+      updateActiveNav();
+
+      updateBackToTop();
+
+    }
+  );
+
+
+  /* =========================================
+     PERFORMANCE SAFETY
+  ========================================= */
+
+  window.addEventListener(
+    "resize",
+    () => {
+
+      /*
+       * Resize event-এ কোনো heavy calculation
+       * করা হচ্ছে না।
+       *
+       * Browser layout নিজেই handle করবে।
+       */
+
+    },
+    {
+      passive: true
+    }
+  );
+
+
 });
-   
