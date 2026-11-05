@@ -1,104 +1,94 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#080b18">
-    <title>Emtiaz Partner</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#12051f">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<title>Emtiaz Partner ❤️</title>
 
-        body {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #080b18;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .container {
-            padding: 30px;
-        }
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #12051f, #251044, #080817);
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+}
 
-        h1 {
-            font-size: 32px;
-            margin-bottom: 35px;
-            color: #ffffff;
-        }
+.card {
+    width: 90%;
+    max-width: 420px;
+    padding: 45px 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 25px;
+    background: rgba(255,255,255,0.08);
+    box-shadow: 0 0 35px rgba(255,0,150,0.2);
+    backdrop-filter: blur(12px);
+}
 
-        .name {
-            font-size: 28px;
-            font-weight: bold;
-            background: linear-gradient(
-                90deg,
-                red,
-                orange,
-                yellow,
-                lime,
-                cyan,
-                blue,
-                violet,
-                red
-            );
-            background-size: 300%;
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: rgb 5s linear infinite;
-        }
+h1 {
+    font-size: 30px;
+    margin-bottom: 25px;
+    animation: rgb 4s linear infinite;
+}
 
-        .heart {
-            font-size: 30px;
-            margin-left: 8px;
-            display: inline-block;
-            animation: beat 1s infinite;
-        }
+.love {
+    font-size: 55px;
+    margin: 15px 0;
+    animation: heartbeat 1.4s infinite;
+}
 
-        @keyframes rgb {
-            from {
-                background-position: 0%;
-            }
-            to {
-                background-position: 300%;
-            }
-        }
+.signature {
+    font-size: 35px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    animation: rgb 4s linear infinite;
+}
 
-        @keyframes beat {
-            50% {
-                transform: scale(1.3);
-            }
-        }
+.subtitle {
+    margin-top: 25px;
+    font-size: 13px;
+    color: #d8c7ed;
+}
 
-        .back {
-            display: inline-block;
-            margin-top: 40px;
-            color: #00d4ff;
-            text-decoration: none;
-            font-size: 16px;
-        }
-    </style>
+@keyframes rgb {
+    0% { color: #ff1744; }
+    25% { color: #ff00cc; }
+    50% { color: #00d4ff; }
+    75% { color: #a855f7; }
+    100% { color: #ff1744; }
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+</style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Emtiaz Partner</h1>
 
-        <div class="name">
-            Samiya Islam Sumu
-            <span class="heart">❤️</span>
-        </div>
+<main class="card">
+    <h1>Samiya Islam Sumu ❤️</h1>
 
-        <a class="back" href="index.html">
-            ← Back to Home
-        </a>
-    </div>
+    <div class="love">❤️</div>
+
+    <div class="signature">E❤️S</div>
+
+    <p class="subtitle">Made with love ❤️</p>
+</main>
+
 </body>
 </html>
