@@ -21,8 +21,6 @@ content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'
 <link rel="stylesheet" href="style.css">
 
 <style>
-/* SISTERS SECTION */
-
 .sisters-section {
   width: min(1100px, 92%);
   margin: 70px auto;
@@ -104,6 +102,54 @@ content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'
   font-size: 0.9rem;
 }
 
+/* EMTIAZ PARTNER CARD */
+
+.partner-card {
+  position: relative;
+  padding: 30px 20px;
+  text-align: center;
+  background: #101010;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: 0.35s ease;
+}
+
+.partner-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(255,0,100,0.2);
+}
+
+.partner-name {
+  display: inline-block;
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(90deg,red,orange,yellow,lime,cyan,blue,violet,red);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: sisterNameRGB 4s linear infinite;
+}
+
+.partner-heart {
+  font-size: 1.6rem;
+  display: inline-block;
+  animation: partnerBeat 1s infinite;
+}
+
+@keyframes partnerBeat {
+  50% { transform: scale(1.3); }
+}
+
+.partner-link {
+  display: inline-block;
+  margin-top: 18px;
+  text-decoration: none;
+  color: #00d4ff;
+  font-weight: bold;
+}
+
 @media (max-width: 600px) {
   .sisters-grid {
     grid-template-columns: 1fr;
@@ -113,7 +159,9 @@ content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'
 @media (prefers-reduced-motion: reduce) {
   .sister-card,
   .sister-name,
-  .sister-card::before {
+  .sister-card::before,
+  .partner-name,
+  .partner-heart {
     animation: none;
     transition: none;
   }
@@ -142,6 +190,7 @@ content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'
       <a href="#sisters">Sisters</a>
       <a href="#contact">Contact</a>
       <a href="friendship.html">🤝 Friendship</a>
+      <a href="partner.html">💖 Emtiaz Partner</a>
     </nav>
 
     <div class="nav-actions">
@@ -426,8 +475,25 @@ content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'
       </div>
     </article>
 
-    <article class="project-card scroll-reveal" data-project="future">
+    <article class="project-card scroll-reveal" data-project="partner">
       <span class="project-number">03</span>
+      <h3>Emtiaz Partner 💖</h3>
+      <p>A special dedicated page featuring Samiya Islam Sumu with beautiful RGB text and a love heart.</p>
+
+      <div class="project-tech">
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>RGB Animation</span>
+      </div>
+
+      <div class="project-buttons">
+        <a href="partner.html" class="project-btn project-live">Open Page</a>
+        <button class="project-btn project-details" data-project="partner" type="button">Details</button>
+      </div>
+    </article>
+
+    <article class="project-card scroll-reveal" data-project="future">
+      <span class="project-number">04</span>
       <h3>Future Project</h3>
       <p>A future project where new ideas, technologies and experiments will be added.</p>
 
