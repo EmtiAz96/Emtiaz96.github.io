@@ -1,548 +1,577 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080b16">
-  <meta name="description" content="Emtiaz Official — Programmer, Web Developer and Digital Creator from Bangladesh.">
-  <title>Emtiaz Official | Programmer &amp; Web Developer</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 
-  <link rel="stylesheet" href="style.css">
+<meta http-equiv="Content-Security-Policy"
+content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; upgrade-insecure-requests;">
 
-  <style>
-    :root {
-      --partner-bg: #101522;
-      --partner-border: rgba(0, 212, 255, 0.35);
-      --partner-glow: rgba(124, 58, 237, 0.22);
-    }
+<title>Emtiaz Official | Programmer & Web Developer</title>
 
-    .partner-section {
-      padding: 80px 20px;
-      background: linear-gradient(135deg, var(--partner-bg), #17102a);
-    }
+<meta name="description" content="Official website of Emtiaz — programmer, web developer and digital creator from Bangladesh.">
+<meta name="keywords" content="Emtiaz, programmer, web developer, Bangladesh, GitHub, YouTube">
+<meta name="author" content="Emtiaz">
+<meta name="robots" content="index, follow">
 
-    .partner-card {
-      max-width: 620px;
-      margin: 30px auto 0;
-      padding: 30px;
-      text-align: center;
-      border: 1px solid var(--partner-border);
-      border-radius: 24px;
-      background: rgba(255, 255, 255, 0.04);
-      box-shadow: 0 16px 50px var(--partner-glow);
-    }
+<link rel="canonical" href="https://emtiaz96.github.io/">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="style.css">
 
-    .partner-card h3 {
-      margin: 0 0 10px;
-      color: #00d4ff;
-    }
+<style>
+/* SISTERS SECTION */
 
-    .partner-card p {
-      margin: 0;
-      line-height: 1.8;
-    }
+.sisters-section {
+  width: min(1100px, 92%);
+  margin: 70px auto;
+}
 
-    .partner-label {
-      display: inline-block;
-      margin-bottom: 14px;
-      padding: 7px 14px;
-      border: 1px solid var(--partner-border);
-      border-radius: 999px;
-      color: #00d4ff;
-      font-size: 0.85rem;
-      letter-spacing: 1px;
-    }
-  </style>
+.sisters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 22px;
+}
+
+.sister-card {
+  position: relative;
+  padding: 30px 20px;
+  text-align: center;
+  background: #101010;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.sister-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(120deg,#ff004c,#00ff88,#0088ff,#b000ff,#ff004c);
+  background-size: 300% 300%;
+  animation: sisterBorderRGB 5s linear infinite;
+  z-index: -2;
+}
+
+.sister-card::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: #101010;
+  border-radius: 18px;
+  z-index: -1;
+}
+
+@keyframes sisterBorderRGB {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.sister-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 45px rgba(0,0,0,0.45);
+}
+
+.sister-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.sister-name {
+  display: inline-block;
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(90deg,#ff0000,#00ff00,#0088ff,#b000ff,#ff0000);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: sisterNameRGB 4s linear infinite;
+}
+
+@keyframes sisterNameRGB {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.sister-role {
+  margin-top: 9px;
+  color: #b8b8b8;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+  .sisters-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sister-card,
+  .sister-name,
+  .sister-card::before {
+    animation: none;
+    transition: none;
+  }
+}
+</style>
+
 </head>
 
 <body>
-  <header class="site-header">
-    <div class="container header-container">
-      <a class="logo" href="#home" aria-label="Emtiaz Official home">
-        <span class="logo-mark">E</span>
-        <span>Emtiaz <strong>Official</strong></span>
-      </a>
 
-      <button
-        class="menu-toggle"
-        id="menuToggle"
-        type="button"
-        aria-label="Open navigation menu"
-        aria-expanded="false"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+<header class="navbar">
+  <div class="nav-container">
 
-      <nav class="site-nav" id="siteNav" aria-label="Main navigation">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#age">Age</a>
-        <a href="#skills">Skills</a>
-        <a href="#services">Services</a>
-        <a href="#projects">Projects</a>
-        <a href="#youtube">YouTube</a>
-        <a href="#sisters">Sisters</a>
-        <a href="#emtiaz-partner">Emtiaz Partner</a>
-        <a href="#contact">Contact</a>
-        <a href="#friendship">Friendship</a>
-      </nav>
+    <a href="#home" class="logo">
+      <span>Emtiaz</span> Official
+    </a>
+
+    <nav class="nav-menu" id="navMenu">
+      <a href="#home" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#age">Age</a>
+      <a href="#skills">Skills</a>
+      <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
+      <a href="#youtube">YouTube</a>
+      <a href="#sisters">Sisters</a>
+      <a href="#contact">Contact</a>
+      <a href="friendship.html">🤝 Friendship</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to Light Mode">☀️</button>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open Menu">☰</button>
     </div>
-  </header>
 
-  <main>
-    <!-- HOME / HERO SECTION -->
-    <section class="hero-section" id="home">
-      <div class="container hero-container">
-        <div class="hero-content">
-          <p class="hero-greeting">Hello, welcome to my website</p>
-          <h1>I'm <span>Emtiaz</span></h1>
-          <h2>Programmer &amp; Web Developer</h2>
-          <p>
-            আমি বাংলাদেশ থেকে একজন শিক্ষার্থী, প্রোগ্রামার ও ডিজিটাল ক্রিয়েটর।
-            নতুন কিছু শেখা এবং তৈরি করাই আমার ভালো লাগে।
-          </p>
+  </div>
+</header>
 
-          <div class="hero-buttons">
-            <a class="btn btn-primary" href="#projects">আমার কাজ দেখো</a>
-            <a class="btn btn-outline" href="#contact">যোগাযোগ করো</a>
-          </div>
-        </div>
+<main>
 
-        <div class="hero-visual" aria-hidden="true">
-          <div class="hero-orbit orbit-one"></div>
-          <div class="hero-orbit orbit-two"></div>
-          <div class="hero-code-card">
-            <span class="code-dot"></span>
-            <span class="code-dot"></span>
-            <span class="code-dot"></span>
-            <pre><code>&lt;developer&gt;
-  Hello, World!
-  Keep learning.
-&lt;/developer&gt;</code></pre>
-          </div>
-        </div>
+<section class="hero" id="home">
+  <div class="hero-grid">
+
+    <div class="hero-content scroll-reveal">
+      <span class="section-tag">Welcome to my website</span>
+
+      <h1>Hi, I'm <span class="gradient-text">Emtiaz</span></h1>
+
+      <h2 class="typing-wrapper">
+        <span id="typingText"></span>
+        <span class="typing-cursor">|</span>
+      </h2>
+
+      <p>
+        I am passionate about programming, web development,
+        technology and digital creativity. I am continuously
+        learning and building new projects.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#projects" class="btn primary-btn">Explore More</a>
+        <a href="#contact" class="btn secondary-btn">Contact Me</a>
+        <a href="#about" class="btn secondary-btn">About Me</a>
       </div>
-    </section>
-
-    <!-- QUICK STATS -->
-    <section class="stats-section" aria-label="Quick facts">
-      <div class="container stats-grid">
-        <div class="stat-card">
-          <strong>2026</strong>
-          <span>Learning &amp; Building</span>
-        </div>
-        <div class="stat-card">
-          <strong>Web</strong>
-          <span>Development</span>
-        </div>
-        <div class="stat-card">
-          <strong>Bangladesh</strong>
-          <span>My Home</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- AGE SECTION -->
-    <section class="section age-section" id="age">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-tag">ABOUT MYSELF</span>
-          <h2>My <span>Age</span></h2>
-          <p>আমার জন্মদিন ও বয়সের তথ্য।</p>
-        </div>
-
-        <div class="age-card">
-          <span class="age-icon" aria-hidden="true">🎂</span>
-          <h3>16 August 2006</h3>
-          <p>Birthday</p>
-          <p class="age-note">প্রতি বছর ১৬ আগস্ট আমার জন্মদিন।</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT SECTION -->
-    <section class="section about-section" id="about">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-tag">WHO I AM</span>
-          <h2>About <span>Me</span></h2>
-          <p>আমার সম্পর্কে কিছু কথা।</p>
-        </div>
-
-        <div class="about-content">
-          <div class="about-text">
-            <h3>আসসালামু আলাইকুম!</h3>
-            <p>
-              আমি এমতিয়াজ। প্রযুক্তি, প্রোগ্রামিং এবং ওয়েবসাইট তৈরি করতে
-              ভালোবাসি। প্রতিদিন নতুন কিছু শেখার চেষ্টা করি।
-            </p>
-            <p>
-              আমার লক্ষ্য হলো দক্ষ প্রোগ্রামার হওয়া, নিজের আইডিয়া বাস্তবায়ন
-              করা এবং মানুষের কাজে লাগে এমন ডিজিটাল প্রজেক্ট তৈরি করা।
-            </p>
-          </div>
-
-          <div class="about-highlights">
-            <div class="highlight-card">
-              <span aria-hidden="true">💻</span>
-              <h3>Programming</h3>
-              <p>নতুন প্রযুক্তি শেখা</p>
-            </div>
-            <div class="highlight-card">
-              <span aria-hidden="true">🌐</span>
-              <h3>Web Development</h3>
-              <p>ওয়েবসাইট তৈরি করা</p>
-            </div>
-            <div class="highlight-card">
-              <span aria-hidden="true">🎬</span>
-              <h3>Digital Creator</h3>
-              <p>সৃজনশীল কনটেন্ট তৈরি</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- SKILLS SECTION -->
-    <section class="section skills-section" id="skills">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-tag">WHAT I LEARN</span>
-          <h2>My <span>Skills</span></h2>
-          <p>যেসব প্রযুক্তি শিখছি এবং চর্চা করছি।</p>
-        </div>
-
-        <div class="skills-grid">
-          <article class="skill-card">
-            <span class="skill-icon" aria-hidden="true">🌐</span>
-            <h3>HTML</h3>
-            <p>ওয়েবপেজের কাঠামো তৈরি</p>
-          </article>
-          <article class="skill-card">
-            <span class="skill-icon" aria-hidden="true">🎨</span>
-            <h3>CSS</h3>
-            <p>ওয়েবসাইটের নকশা ও সাজসজ্জা</p>
-          </article>
-          <article class="skill-card">
-            <span class="skill-icon" aria-hidden="true">⚙️</span>
-            <h3>JavaScript</h3>
-            <p>ওয়েবসাইটে ইন্টার‌্যাকশন যোগ</p>
-          </article>
-          <article class="skill-card">
-            <span class="skill-icon" aria-hidden="true">🐍</span>
-            <h3>Python</h3>
-            <p>প্রোগ্রামিংয়ের ভিত্তি শেখা</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- SERVICES SECTION -->
-    <section class="section services-section" id="services">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-tag">WHAT I CAN DO</span>
-          <h2>My <span>Services</span></h2>
-          <p>ওয়েব ও ডিজিটাল কাজের কিছু ক্ষেত্র।</p>
-        </div>
-
-        <div class="services-grid">
-          <article class="service-card">
-            <span class="service-icon" aria-hidden="true">🖥️</span>
-            <h3>Website Design</h3>
-            <p>পরিষ্কার ও ব্যবহারবান্ধব ওয়েবপেজ তৈরি।</p>
-          </article>
-          <article class="service-card">
-            <span class="service-icon" aria-hidden="true">📱</span>
-            <h3>Responsive Website</h3>
-            <p>মোবাইল, ট্যাবলেট ও কম্পিউটারে মানানসই নকশা।</p>
-          </article>
-          <article class="service-card">
-            <span class="service-icon" aria-hidden="true">🛠️</span>
-            <h3>Website Updates</h3>
-            <p>ওয়েবসাইটের লেখা, নকশা ও সাধারণ সমস্যা ঠিক করা।</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROJECTS SECTION -->
-    <section class="section projects-section" id="projects">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-tag">MY WORK</span>
-          <h2>Featured <span>Projects</span></h2>
-          <p>আমার তৈরি করা ও শেখার পথে থাকা কিছু প্রজেক্ট।</p>
-        </div>
-
-        <div class="projects-grid">
-          <article class="project-card">
-            <div class="project-preview project-preview-one" aria-hidden="true">
-              <span>&lt;/&gt;</span>
-            </div>
-            <div class="project-card-content">
-              <span class="project-category">Website</span>
-              <h3>Emtiaz Official</h3>
-              <p>আমার ব্যক্তিগত পরিচিতি, কাজ ও যোগাযোগের ওয়েবসাইট।</p>
-              <button
-                class="btn btn-outline project-details-btn"
-                type="button"
-                data-project="portfolio"
-              >
-                Project Details
-              </button>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-preview project-preview-two" aria-hidden="true">
-              <span>💬</span>
-            </div>
-            <div class="project-card-content">
-              <span class="project-category">Web App</span>
-              <h3>Barta Bahok</h3>
-              <p>বার্তা আদান-প্রদানের জন্য তৈরি করা একটি শেখার প্রজেক্ট।</p>
-              <button
-                class="btn btn-outline project-details-btn"
-                type="button"
-                data-project="barta-bahok"
-              >
-                Project Details
-              </button>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-preview project-preview-three" aria-hidden="true">
-              <span>🚗</span>
-            </div>
-            <div class="project-card-content">
-              <span class="project-category">Game</span>
-              <h3>Car Game</h3>
-              <p>কম্পিউটারে চালানোর জন্য একটি গাড়ির গেম তৈরির পরিকল্পনা।</p>
-              <button
-                class="btn btn-outline project-details-btn"
-                type="button"
-                data-project="car-game"
-              >
-                Project Details
-              </button>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- SISTERS SECTION -->
-    <section class="section sisters-section" id="sisters">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-tag">SPECIAL PEOPLE</span>
-          <h2>My <span>Sisters</span></h2>
-          <p>আমার প্রিয় বোনদের জন্য ভালোবাসা ও শুভকামনা।</p>
-        </div>
-
-        <div class="sisters-grid">
-          <article class="sister-card">
-            <div class="sister-avatar" aria-hidden="true">M</div>
-            <h3>Meghla</h3>
-            <p>My Sister</p>
-          </article>
-          <article class="sister-card">
-            <div class="sister-avatar" aria-hidden="true">E</div>
-            <h3>Eva</h3>
-            <p>My Sister</p>
-          </article>
-          <article class="sister-card">
-            <div class="sister-avatar" aria-hidden="true">A</div>
-            <h3>Arshi</h3>
-            <p>My Sister</p>
-          </article>
-          <article class="sister-card">
-            <div class="sister-avatar" aria-hidden="true">S</div>
-            <h3>Sumaiya</h3>
-            <p>YouTuber</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- EMTIAZ PARTNER SECTION -->
-    <section class="section partner-section" id="emtiaz-partner">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-tag">A SPECIAL PLACE</span>
-          <h2>Emtiaz <span>Partner</span></h2>
-          <p>এই অংশটি আমার কাছে বিশেষ একজনের জন্য।</p>
-        </div>
-
-        <article class="partner-card">
-          <span class="partner-label">SPECIAL PERSON</span>
-          <h3>Samiya Islam Sumu</h3>
-          <p>তোমার জন্য রইল আন্তরিক শুভকামনা ও সম্মান।</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- YOUTUBE SECTION -->
-    <section class="section youtube-section" id="youtube">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-tag">WATCH MY VIDEOS</span>
-          <h2>My <span>YouTube</span></h2>
-          <p>ভিডিও ও নতুন কনটেন্ট দেখতে আমার চ্যানেলে ঘুরে আসো।</p>
-        </div>
-
-        <div class="youtube-card">
-          <div class="youtube-icon" aria-hidden="true">▶</div>
-          <div class="youtube-content">
-            <h3>Emtiaz Official</h3>
-            <p>ভিডিও, শর্টস এবং নতুন কনটেন্টের জন্য আমার YouTube চ্যানেল।</p>
-            <a
-              class="btn btn-primary"
-              href="https://www.youtube.com/@emtiaz-official01"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Visit YouTube Channel
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- CONTACT SECTION -->
-    <section id="contact" class="section contact-section">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-tag">CONTACT</span>
-          <h2>Let's <span>Connect</span></h2>
-          <p>কোনো কাজ বা পরামর্শের জন্য যোগাযোগ করতে পারো।</p>
-        </div>
-
-        <div class="contact-grid">
-          <div class="contact-info">
-            <a class="contact-card" href="mailto:mdemtiaz36900@gmail.com">
-              <span class="contact-icon">✉</span>
-              <div>
-                <h3>Email</h3>
-                <p>mdemtiaz36900@gmail.com</p>
-              </div>
-            </a>
-
-            <a class="contact-card" href="tel:+8801798665955">
-              <span class="contact-icon">☎</span>
-              <div>
-                <h3>Phone</h3>
-                <p>+8801798665955</p>
-              </div>
-            </a>
-
-            <a
-              class="contact-card"
-              href="https://www.youtube.com/@emtiaz-official01"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span class="contact-icon">▶</span>
-              <div>
-                <h3>YouTube</h3>
-                <p>Emtiaz Official</p>
-              </div>
-            </a>
-          </div>
-
-          <form class="contact-form" id="contactForm">
-            <label for="contactName">Your Name</label>
-            <input
-              type="text"
-              id="contactName"
-              name="name"
-              placeholder="তোমার নাম"
-              required
-            >
-
-            <label for="contactEmail">Your Email</label>
-            <input
-              type="email"
-              id="contactEmail"
-              name="email"
-              placeholder="তোমার ইমেইল"
-              required
-            >
-
-            <label for="contactMessage">Your Message</label>
-            <textarea
-              id="contactMessage"
-              name="message"
-              rows="5"
-              placeholder="তোমার বার্তা লিখো..."
-              required
-            ></textarea>
-
-            <button type="submit" class="btn btn-primary">Send Message</button>
-            <p id="formMessage" class="form-message" aria-live="polite"></p>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <!-- FRIENDSHIP SECTION -->
-    <section class="section friendship-section" id="friendship">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-tag">GOOD PEOPLE</span>
-          <h2>Friendship <span>Corner</span></h2>
-          <p>বন্ধুত্ব মানে সম্মান, বিশ্বাস ও একে অপরের পাশে থাকা।</p>
-        </div>
-
-        <div class="friendship-card">
-          <span class="friendship-icon" aria-hidden="true">🤝</span>
-          <h3>ভালো বন্ধুত্বের জন্য</h3>
-          <p>সবসময় একে অপরের প্রতি সদয়, সৎ ও শ্রদ্ধাশীল থাকি।</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- PROJECT DETAILS POPUP -->
-  <div class="project-modal" id="projectModal" aria-hidden="true">
-    <div class="project-modal-overlay" data-modal-close></div>
-
-    <div
-      class="project-modal-content"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="projectModalTitle"
-    >
-      <button
-        class="project-modal-close"
-        id="projectModalClose"
-        type="button"
-        aria-label="Close project details"
-      >×</button>
-
-      <h2 id="projectModalTitle">Project Details</h2>
-      <p id="projectModalDescription"></p>
-      <ul id="projectModalFeatures"></ul>
-      <div id="projectModalTech"></div>
-      <div id="projectModalButtons"></div>
     </div>
+
+    <div class="hero-profile scroll-reveal">
+      <div class="profile-glow"></div>
+
+      <div class="profile-card">
+        <div class="profile-image-wrapper">
+          <img src="profile.jpg" alt="Emtiaz Profile" class="profile-image"
+          width="400" height="400" loading="eager" decoding="async">
+        </div>
+
+        <div class="profile-status">
+          <span></span>
+          Available for learning & projects
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="stats-section">
+  <div class="stats-grid">
+
+    <div class="stat-card scroll-reveal">
+      <div class="counter" data-target="10">0</div>
+      <p>Projects & Experiments</p>
+    </div>
+
+    <div class="stat-card scroll-reveal">
+      <div class="counter" data-target="6">0</div>
+      <p>Technologies Learning</p>
+    </div>
+
+    <div class="stat-card scroll-reveal">
+      <div class="counter" data-target="1">0</div>
+      <p>Live Portfolio Website</p>
+    </div>
+
+    <div class="stat-card scroll-reveal">
+      <div class="counter" data-target="100">0</div>
+      <p>Passion for Learning</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="section age-section" id="age">
+  <div class="section-heading scroll-reveal">
+    <span class="section-tag">Live Life Counter</span>
+
+    <h2 class="section-title">
+      My <span class="gradient-text">Age & Journey</span>
+    </h2>
+
+    <p class="age-intro">Every second of life is moving forward.</p>
   </div>
 
-  <!-- BACK TO TOP -->
-  <button id="backToTop" class="back-to-top" type="button" aria-label="Back to top">
-    ↑
-  </button>
+  <div class="age-card scroll-reveal">
 
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="container">
-      <p>© <span id="currentYear"></span> Emtiaz Official. All Rights Reserved.</p>
+    <div class="age-main">
+      <div class="age-main-icon">🎂</div>
+
+      <div class="age-main-content">
+        <span class="age-label">Current Age</span>
+
+        <div class="age-years-row">
+          <strong id="ageYears">0</strong>
+          <span>Years</span>
+        </div>
+      </div>
     </div>
-  </footer>
 
-  <script src="script.js"></script>
+    <div class="age-counter-grid">
+      <div class="age-counter-box">
+        <span class="age-counter-icon">📅</span>
+        <strong id="ageDays">0</strong>
+        <span>Total Days</span>
+      </div>
+
+      <div class="age-counter-box">
+        <span class="age-counter-icon">🕐</span>
+        <strong id="ageHours">0</strong>
+        <span>Total Hours</span>
+      </div>
+
+      <div class="age-counter-box">
+        <span class="age-counter-icon">⏱️</span>
+        <strong id="ageMinutes">0</strong>
+        <span>Total Minutes</span>
+      </div>
+
+      <div class="age-counter-box">
+        <span class="age-counter-icon">⚡</span>
+        <strong id="ageSeconds">0</strong>
+        <span>Total Seconds</span>
+      </div>
+    </div>
+
+    <div class="age-birth-info">
+      <span>🎂 Born: 16 August 2006</span>
+      <span>🕛 Birth Time: 12:00 AM</span>
+      <span>🇧🇩 Bangladesh Time</span>
+    </div>
+
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="section-heading scroll-reveal">
+    <span class="section-tag">About Me</span>
+    <h2 class="section-title">Who <span class="gradient-text">I Am</span></h2>
+  </div>
+
+  <div class="about-grid">
+
+    <div class="about-card scroll-reveal">
+      <div class="about-icon">💻</div>
+      <h3>Programmer</h3>
+      <p>I am learning programming step by step and building practical projects to improve my skills.</p>
+    </div>
+
+    <div class="about-card scroll-reveal">
+      <div class="about-icon">🌐</div>
+      <h3>Web Developer</h3>
+      <p>I enjoy creating modern, responsive and interactive websites using web technologies.</p>
+    </div>
+
+    <div class="about-card scroll-reveal">
+      <div class="about-icon">🚀</div>
+      <h3>Digital Creator</h3>
+      <p>I am also interested in content creation, technology and digital projects.</p>
+    </div>
+
+  </div>
+</section>
+<section class="section" id="skills">
+  <div class="section-heading scroll-reveal">
+    <span class="section-tag">My Skills</span>
+    <h2 class="section-title">Technologies I'm <span class="gradient-text">Learning</span></h2>
+  </div>
+
+  <div class="skills-grid">
+    <div class="skill-card scroll-reveal">
+      <div class="skill-top"><h3>HTML</h3><span>90%</span></div>
+      <div class="skill-bar"><div class="skill-progress" style="width:90%;"></div></div>
+    </div>
+
+    <div class="skill-card scroll-reveal">
+      <div class="skill-top"><h3>CSS</h3><span>85%</span></div>
+      <div class="skill-bar"><div class="skill-progress" style="width:85%;"></div></div>
+    </div>
+
+    <div class="skill-card scroll-reveal">
+      <div class="skill-top"><h3>JavaScript</h3><span>70%</span></div>
+      <div class="skill-bar"><div class="skill-progress" style="width:70%;"></div></div>
+    </div>
+
+    <div class="skill-card scroll-reveal">
+      <div class="skill-top"><h3>Python</h3><span>65%</span></div>
+      <div class="skill-bar"><div class="skill-progress" style="width:65%;"></div></div>
+    </div>
+
+    <div class="skill-card scroll-reveal">
+      <div class="skill-top"><h3>Git & GitHub</h3><span>60%</span></div>
+      <div class="skill-bar"><div class="skill-progress" style="width:60%;"></div></div>
+    </div>
+
+    <div class="skill-card scroll-reveal">
+      <div class="skill-top"><h3>Linux</h3><span>75%</span></div>
+      <div class="skill-bar"><div class="skill-progress" style="width:75%;"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="services">
+  <div class="section-heading scroll-reveal">
+    <span class="section-tag">What I Do</span>
+    <h2 class="section-title">My <span class="gradient-text">Services</span></h2>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card scroll-reveal">
+      <div class="service-icon">🌐</div>
+      <h3>Web Development</h3>
+      <p>Modern and responsive websites using HTML, CSS and JavaScript.</p>
+    </div>
+
+    <div class="service-card scroll-reveal">
+      <div class="service-icon">💻</div>
+      <h3>Programming</h3>
+      <p>Learning and developing practical programming projects.</p>
+    </div>
+
+    <div class="service-card scroll-reveal">
+      <div class="service-icon">🎨</div>
+      <h3>Digital Design</h3>
+      <p>Creative digital content, visuals and design experiments.</p>
+    </div>
+
+    <div class="service-card scroll-reveal">
+      <div class="service-icon">📱</div>
+      <h3>Digital Projects</h3>
+      <p>Exploring new ideas and turning them into useful digital projects.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="projects">
+  <div class="section-heading scroll-reveal">
+    <span class="section-tag">My Work</span>
+    <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
+  </div>
+
+  <div class="projects-grid">
+
+    <article class="project-card scroll-reveal" data-project="portfolio">
+      <span class="project-number">01</span>
+      <h3>Personal Portfolio</h3>
+      <p>A modern personal portfolio website created to showcase my skills, projects and online presence.</p>
+
+      <div class="project-tech">
+        <span>HTML</span><span>CSS</span><span>JavaScript</span>
+      </div>
+
+      <div class="project-buttons">
+        <a href="https://emtiaz96.github.io/" target="_blank" rel="noopener noreferrer" class="project-btn project-live">Live</a>
+        <a href="https://github.com/EmtiAz96" target="_blank" rel="noopener noreferrer" class="project-btn project-github">GitHub</a>
+        <button class="project-btn project-details" data-project="portfolio" type="button">Details</button>
+      </div>
+    </article>
+
+    <article class="project-card scroll-reveal" data-project="friendship">
+      <span class="project-number">02</span>
+      <h3>Friendship Page</h3>
+      <p>A dedicated friendship page featuring close friends, best friend information and animated names.</p>
+
+      <div class="project-tech">
+        <span>HTML</span><span>CSS</span><span>Animation</span>
+      </div>
+
+      <div class="project-buttons">
+        <a href="friendship.html" target="_blank" rel="noopener noreferrer" class="project-btn project-live">Live</a>
+        <a href="https://github.com/EmtiAz96" target="_blank" rel="noopener noreferrer" class="project-btn project-github">GitHub</a>
+        <button class="project-btn project-details" data-project="friendship" type="button">Details</button>
+      </div>
+    </article>
+
+    <article class="project-card scroll-reveal" data-project="future">
+      <span class="project-number">03</span>
+      <h3>Future Project</h3>
+      <p>A future project where new ideas, technologies and experiments will be added.</p>
+
+      <div class="project-tech">
+        <span>Future</span><span>Technology</span><span>Innovation</span>
+      </div>
+
+      <div class="project-buttons">
+        <button class="project-btn project-details" data-project="future" type="button">Details</button>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- MY SISTERS -->
+<section class="sisters-section" id="sisters">
+  <div class="section-heading scroll-reveal">
+    <span class="section-tag">My Family</span>
+    <h2 class="section-title">My <span class="gradient-text">Sisters</span></h2>
+  </div>
+
+  <div class="sisters-grid">
+
+    <div class="sister-card scroll-reveal">
+      <div class="sister-icon">👩</div>
+      <h3 class="sister-name">Meghla</h3>
+    </div>
+
+    <div class="sister-card scroll-reveal">
+      <div class="sister-icon">👩</div>
+      <h3 class="sister-name">Eva</h3>
+    </div>
+
+    <div class="sister-card scroll-reveal">
+      <div class="sister-icon">👩</div>
+      <h3 class="sister-name">Arshi</h3>
+    </div>
+
+    <div class="sister-card scroll-reveal">
+      <div class="sister-icon">👩</div>
+      <h3 class="sister-name">Sumaiya</h3>
+      <p class="sister-role">YouTuber</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="section" id="youtube">
+  <div class="section-heading scroll-reveal">
+    <span class="section-tag">My Channel</span>
+    <h2 class="section-title">YouTube <span class="gradient-text">Creator</span></h2>
+  </div>
+
+  <div class="youtube-card scroll-reveal">
+    <div class="youtube-icon">▶</div>
+
+    <div>
+      <h3>Emtiaz Official</h3>
+      <p>Follow my YouTube channel for digital content, technology and creative videos.</p>
+
+      <a href="https://www.youtube.com/@emtiaz-official01" target="_blank" rel="noopener noreferrer" class="btn primary-btn">Visit YouTube</a>
+    </div>
+  </div>
+</section>
+<!-- CONTACT SECTION -->
+<section id="contact" class="section contact-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-tag">CONTACT</span>
+      <h2>Let's <span>Connect</span></h2>
+      <p>কোনো কাজ বা পরামর্শের জন্য যোগাযোগ করতে পারো।</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <a class="contact-card" href="mailto:mdemtiaz36900@gmail.com">
+          <span class="contact-icon">✉</span>
+          <div>
+            <h3>Email</h3>
+            <p>mdemtiaz36900@gmail.com</p>
+          </div>
+        </a>
+
+        <a class="contact-card" href="tel:+8801798665955">
+          <span class="contact-icon">☎</span>
+          <div>
+            <h3>Phone</h3>
+            <p>+8801798665955</p>
+          </div>
+        </a>
+
+        <a class="contact-card" href="https://www.youtube.com/@emtiaz-official01" target="_blank" rel="noopener noreferrer">
+          <span class="contact-icon">▶</span>
+          <div>
+            <h3>YouTube</h3>
+            <p>Emtiaz Official</p>
+          </div>
+        </a>
+      </div>
+
+      <form class="contact-form" id="contactForm">
+        <label for="contactName">Your Name</label>
+        <input type="text" id="contactName" name="name" placeholder="তোমার নাম" required>
+
+        <label for="contactEmail">Your Email</label>
+        <input type="email" id="contactEmail" name="email" placeholder="তোমার ইমেইল" required>
+
+        <label for="contactMessage">Your Message</label>
+        <textarea id="contactMessage" name="message" rows="5" placeholder="তোমার বার্তা লিখো..." required></textarea>
+
+        <button type="submit" class="btn btn-primary">Send Message</button>
+        <p id="formMessage" class="form-message" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- PROJECT DETAILS POPUP -->
+<div class="project-modal" id="projectModal" aria-hidden="true">
+  <div class="project-modal-overlay" data-modal-close></div>
+
+  <div class="project-modal-content" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
+    <button class="project-modal-close" id="projectModalClose" type="button" aria-label="Close project details">×</button>
+
+    <h2 id="projectModalTitle">Project Details</h2>
+    <p id="projectModalDescription"></p>
+    <ul id="projectModalFeatures"></ul>
+    <div id="projectModalTech"></div>
+    <div id="projectModalButtons"></div>
+  </div>
+</div>
+
+<!-- BACK TO TOP -->
+<button id="backToTop" class="back-to-top" type="button" aria-label="Back to top">↑</button>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <p>© <span id="currentYear"></span> Emtiaz Official. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
-    
