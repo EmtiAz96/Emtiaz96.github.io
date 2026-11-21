@@ -1,165 +1,176 @@
-/* =========================================================
-   EMTIAZ OFFICIAL — SCRIPT.JS
-   STEP 1 / 3
-========================================================= */
+/* =====================================================
+   EMTIAZ OFFICIAL — COMPLETE SCRIPT.JS
+===================================================== */
 
-
-/* =========================================
-   DOM READY
-========================================= */
+"use strict";
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* =========================================
-     CURRENT YEAR
-  ========================================= */
+  const $ = (selector, root = document) =>
+    root.querySelector(selector);
 
-  const currentYear = document.getElementById("currentYear");
+  const $$ = (selector, root = document) =>
+    [...root.querySelectorAll(selector)];
+
+  /* FOOTER YEAR */
+
+  const currentYear = $("#currentYear");
 
   if (currentYear) {
-    currentYear.textContent = new Date().getFullYear();
+    currentYear.textContent = String(new Date().getFullYear());
   }
 
+  /* PROFILE IMAGE FALLBACK */
 
-  /* =========================================
-     MOBILE MENU
-  ========================================= */
+  const profileImage = $(".profile-image");
+  const imageFallback = $(".image-fallback");
 
-  const menuToggle = document.getElementById("menuToggle");
-  const navMenu = document.getElementById("navMenu");
+  if (profileImage && imageFallback) {
+    profileImage.addEventListener("error", () => {
+      profileImage.hidden = true;
+      imageFallback.hidden = false;
+    });
+
+    if (profileImage.complete && profileImage.naturalWidth === 0) {
+      profileImage.hidden = true;
+      imageFallback.hidden = false;
+    }
+  }
+
+  /* MOBILE NAVIGATION */
+
+  const menuToggle = $("#menuToggle");
+  const navMenu = $("#navMenu");
+
+  const closeMenu = () => {
+    if (!menuToggle || !navMenu) return;
+
+    navMenu.classList.remove("active");
+
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute(
+      "aria-label",
+      "Open navigation menu"
+    );
+  };
 
   if (menuToggle && navMenu) {
 
     menuToggle.addEventListener("click", () => {
-      navMenu.classList.toggle("active");
 
-      const isOpen = navMenu.classList.contains("active");
+      const opened = navMenu.classList.toggle("active");
 
       menuToggle.setAttribute(
         "aria-expanded",
-        String(isOpen)
+        String(opened)
       );
-    });
 
-
-    /* Close menu after clicking a navigation link */
-
-    const navLinks = navMenu.querySelectorAll("a");
-
-    navLinks.forEach((link) => {
-
-      link.addEventListener("click", () => {
-
-        navMenu.classList.remove("active");
-
-        menuToggle.setAttribute(
-          "aria-expanded",
-          "false"
-        );
-
-      });
+      menuToggle.setAttribute(
+        "aria-label",
+        opened
+          ? "Close navigation menu"
+          : "Open navigation menu"
+      );
 
     });
 
+    $$("a", navMenu).forEach(link => {
+      link.addEventListener("click", closeMenu);
+    });
 
-    /* Close menu when clicking outside */
-
-    document.addEventListener("click", (event) => {
+    document.addEventListener("click", event => {
 
       if (
         !navMenu.contains(event.target) &&
         !menuToggle.contains(event.target)
       ) {
+        closeMenu();
+      }
 
-        navMenu.classList.remove("active");
+    });
 
-        menuToggle.setAttribute(
-          "aria-expanded",
-          "false"
-        );
+    document.addEventListener("keydown", event => {
 
+      if (event.key === "Escape") {
+        closeMenu();
       }
 
     });
 
   }
 
+  /* DARK AND LIGHT THEME */
 
-  /* =========================================
-     THEME TOGGLE
-  ========================================= */
+  const themeToggle = $("#themeToggle");
 
-  const themeToggle = document.getElementById("themeToggle");
+  const applyTheme = theme => {
+
+    const light = theme === "light";
+
+    document.body.classList.toggle(
+      "light-theme",
+      light
+    );
+
+    if (themeToggle) {
+
+      themeToggle.textContent = light ? "🌙" : "☀️";
+
+      themeToggle.setAttribute(
+        "aria-label",
+        light
+          ? "Switch to dark mode"
+          : "Switch to light mode"
+      );
+
+      themeToggle.title = light
+        ? "Dark mode"
+        : "Light mode";
+
+    }
+
+  };
+
+  let savedTheme = "dark";
+
+  try {
+    savedTheme =
+      localStorage.getItem("emtiaz-theme") || "dark";
+  } catch (_) {}
+
+  applyTheme(savedTheme);
 
   if (themeToggle) {
 
-    const savedTheme =
-      localStorage.getItem("emtiaz-theme");
-
-    if (savedTheme === "light") {
-      document.body.classList.add("light-theme");
-    }
-
-
-    updateThemeIcon();
-
-
     themeToggle.addEventListener("click", () => {
 
-      document.body.classList.toggle("light-theme");
+      const next =
+        document.body.classList.contains("light-theme")
+          ? "dark"
+          : "light";
 
-      const isLight =
-        document.body.classList.contains("light-theme");
+      applyTheme(next);
 
-      localStorage.setItem(
-        "emtiaz-theme",
-        isLight ? "light" : "dark"
-      );
-
-      updateThemeIcon();
+      try {
+        localStorage.setItem("emtiaz-theme", next);
+      } catch (_) {}
 
     });
 
   }
 
+  /* TYPING ANIMATION */
 
-  function updateThemeIcon() {
+  const typingElement = $("#typingText");
 
-    if (!themeToggle) return;
-
-    const isLight =
-      document.body.classList.contains("light-theme");
-
-    themeToggle.textContent =
-      isLight ? "🌙" : "☀️";
-
-    themeToggle.setAttribute(
-      "aria-label",
-      isLight
-        ? "Switch to dark mode"
-        : "Switch to light mode"
-    );
-
-    themeToggle.setAttribute(
-      "title",
-      isLight
-        ? "Dark Mode"
-        : "Light Mode"
-    );
-
-  }
-
-
-  /* =========================================
-     TYPING EFFECT
-  ========================================= */
-
-  const typingElement =
-    document.getElementById("typingText");
+  const reducedMotion =
+    window.matchMedia?.(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
 
   if (typingElement) {
 
-    const typingWords = [
+    const words = [
       "Programmer",
       "Web Developer",
       "Digital Creator",
@@ -167,123 +178,79 @@ document.addEventListener("DOMContentLoaded", () => {
       "Technology Learner"
     ];
 
-    let wordIndex = 0;
-    let characterIndex = 0;
+    if (reducedMotion) {
 
-    let isDeleting = false;
+      typingElement.textContent = words[0];
 
+    } else {
 
-    function typeEffect() {
+      let wordIndex = 0;
+      let charIndex = 0;
+      let deleting = false;
 
-      const currentWord =
-        typingWords[wordIndex];
+      const type = () => {
 
+        const word = words[wordIndex];
 
-      if (!isDeleting) {
-
-        characterIndex++;
+        charIndex += deleting ? -1 : 1;
 
         typingElement.textContent =
-          currentWord.substring(
-            0,
-            characterIndex
-          );
+          word.slice(0, charIndex);
 
+        let delay = deleting ? 48 : 85;
 
         if (
-          characterIndex >=
-          currentWord.length
+          !deleting &&
+          charIndex >= word.length
         ) {
 
-          isDeleting = true;
+          deleting = true;
+          delay = 1250;
 
-          setTimeout(
-            typeEffect,
-            1300
-          );
+        } else if (
+          deleting &&
+          charIndex <= 0
+        ) {
 
-          return;
-        }
-
-
-        setTimeout(
-          typeEffect,
-          90
-        );
-
-      } else {
-
-        characterIndex--;
-
-        typingElement.textContent =
-          currentWord.substring(
-            0,
-            characterIndex
-          );
-
-
-        if (characterIndex <= 0) {
-
-          isDeleting = false;
+          deleting = false;
 
           wordIndex =
-            (wordIndex + 1) %
-            typingWords.length;
+            (wordIndex + 1) % words.length;
 
-          setTimeout(
-            typeEffect,
-            350
-          );
+          delay = 320;
 
-          return;
         }
 
+        window.setTimeout(type, delay);
 
-        setTimeout(
-          typeEffect,
-          55
-        );
+      };
 
-      }
+      type();
 
     }
 
-
-    typeEffect();
-
   }
 
+  /* SCROLL REVEAL ANIMATION */
 
-  /* =========================================
-     SCROLL REVEAL
-  ========================================= */
-
-  const revealElements =
-    document.querySelectorAll(
-      ".scroll-reveal"
-    );
-
+  const revealElements = $$(".scroll-reveal");
 
   if (
-    revealElements.length &&
-    "IntersectionObserver" in window
+    "IntersectionObserver" in window &&
+    !reducedMotion
   ) {
 
     const revealObserver =
       new IntersectionObserver(
         (entries, observer) => {
 
-          entries.forEach((entry) => {
+          entries.forEach(entry => {
 
             if (entry.isIntersecting) {
 
-              entry.target.classList.add(
-                "visible"
-              );
+              entry.target.classList.add("visible");
 
-              observer.unobserve(
-                entry.target
-              );
+              observer.unobserve(entry.target);
 
             }
 
@@ -295,132 +262,82 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       );
 
-
-    revealElements.forEach((element) => {
-
+    revealElements.forEach(element => {
       revealObserver.observe(element);
-
     });
 
   } else {
 
-    revealElements.forEach((element) => {
-
+    revealElements.forEach(element => {
       element.classList.add("visible");
-
     });
 
   }
 
+  /* STATISTICS COUNTER */
 
-  /* =========================================
-     STAT COUNTER
-  ========================================= */
+  const statNumbers = $$(".stat-number");
 
-  const statNumbers =
-    document.querySelectorAll(
-      ".stat-number"
-    );
+  const animateCounter = element => {
 
-
-  function animateCounter(element) {
-
-    const target =
-      Number(
-        element.getAttribute(
-          "data-target"
-        )
-      );
-
-
-    if (
-      !Number.isFinite(target)
-    ) {
+    if (element.dataset.animated === "true") {
       return;
     }
 
+    element.dataset.animated = "true";
 
-    const duration = 1600;
+    const target = Number(element.dataset.target);
 
-    const startTime =
-      performance.now();
+    if (!Number.isFinite(target)) return;
 
-
-    function updateCounter(currentTime) {
-
-      const elapsed =
-        currentTime - startTime;
-
-      const progress =
-        Math.min(
-          elapsed / duration,
-          1
-        );
-
-
-      const easedProgress =
-        1 -
-        Math.pow(
-          1 - progress,
-          3
-        );
-
-
-      const currentValue =
-        Math.floor(
-          target * easedProgress
-        );
-
+    if (reducedMotion) {
 
       element.textContent =
-        currentValue.toLocaleString();
+        target.toLocaleString();
 
-
-      if (progress < 1) {
-
-        requestAnimationFrame(
-          updateCounter
-        );
-
-      } else {
-
-        element.textContent =
-          target.toLocaleString();
-
-      }
+      return;
 
     }
 
+    const start = performance.now();
+    const duration = 1400;
 
-    requestAnimationFrame(
-      updateCounter
-    );
+    const tick = now => {
 
-  }
+      const progress = Math.min(
+        (now - start) / duration,
+        1
+      );
 
+      const eased =
+        1 - Math.pow(1 - progress, 3);
 
-  if (
-    statNumbers.length &&
-    "IntersectionObserver" in window
-  ) {
+      element.textContent =
+        Math.floor(target * eased).toLocaleString();
 
-    const statObserver =
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      }
+
+    };
+
+    requestAnimationFrame(tick);
+
+  };
+
+  if ("IntersectionObserver" in window) {
+
+    const statsObserver =
       new IntersectionObserver(
         (entries, observer) => {
 
-          entries.forEach((entry) => {
+          entries.forEach(entry => {
 
-            if (
-              entry.isIntersecting
-            ) {
+            if (entry.isIntersecting) {
 
-              animateCounter(
-                entry.target
-              );
+              animateCounter(entry.target);
 
-              observer.unobserve(
-                entry.target
-              );
+              observer.unobserve(entry.target);
 
             }
 
@@ -428,1041 +345,672 @@ document.addEventListener("DOMContentLoaded", () => {
 
         },
         {
-          threshold: 0.5
+          threshold: 0.4
         }
       );
 
-
-    statNumbers.forEach((element) => {
-
-      statObserver.observe(element);
-
+    statNumbers.forEach(element => {
+      statsObserver.observe(element);
     });
 
   } else {
 
-    statNumbers.forEach((element) => {
-
-      animateCounter(element);
-
-    });
+    statNumbers.forEach(animateCounter);
 
   }
 
+  /* LIVE AGE COUNTER — BANGLADESH TIME */
 
-  /* =========================================
-     LIVE AGE COUNTER
-     Born: 16 August 2006
-     Time: 12:00 AM
-     Bangladesh Time: UTC+06:00
-  ========================================= */
+  const ageNodes = {
 
-  const ageYears =
-    document.getElementById("ageYears");
+    years: $("#ageYears"),
+    days: $("#ageDays"),
+    hours: $("#ageHours"),
+    minutes: $("#ageMinutes"),
+    seconds: $("#ageSeconds")
 
-  const ageDays =
-    document.getElementById("ageDays");
+  };
 
-  const ageHours =
-    document.getElementById("ageHours");
+  /*
+    Birthday:
+    16 August 2006
+    12:00 AM
+    Bangladesh Time (UTC+6)
+  */
 
-  const ageMinutes =
-    document.getElementById("ageMinutes");
-
-  const ageSeconds =
-    document.getElementById("ageSeconds");
-
-
-  const birthDate =
+  const birthTimestamp =
     new Date(
       "2006-08-16T00:00:00+06:00"
-    );
+    ).getTime();
 
+  const dhakaFormatter =
+    new Intl.DateTimeFormat("en-US", {
 
-  function getDhakaDateParts(date) {
+      timeZone: "Asia/Dhaka",
+      year: "numeric",
+      month: "numeric",
+      day: "numeric"
 
-    const formatter =
-      new Intl.DateTimeFormat(
-        "en-US",
-        {
-          timeZone: "Asia/Dhaka",
+    });
 
-          year: "numeric",
-          month: "numeric",
-          day: "numeric"
-        }
-      );
-
-
-    const parts =
-      formatter.formatToParts(date);
-
+  const dhakaParts = date => {
 
     const result = {};
 
+    dhakaFormatter
+      .formatToParts(date)
+      .forEach(part => {
 
-    parts.forEach((part) => {
+        if (part.type !== "literal") {
 
-      if (
-        part.type !== "literal"
-      ) {
+          result[part.type] =
+            Number(part.value);
 
-        result[part.type] =
-          Number(part.value);
+        }
 
-      }
-
-    });
-
+      });
 
     return result;
 
-  }
+  };
 
+  const updateAgeCounter = () => {
 
-  function calculateAgeYears(now) {
+    const now = new Date();
 
-    const dhakaDate =
-      getDhakaDateParts(now);
-
-
-    let years =
-      dhakaDate.year - 2006;
-
-
-    const birthdayPassed =
-      (
-        dhakaDate.month > 8
-      ) ||
-      (
-        dhakaDate.month === 8 &&
-        dhakaDate.day >= 16
-      );
-
-
-    if (!birthdayPassed) {
-
-      years--;
-
-    }
-
-
-    return Math.max(
+    const elapsed = Math.max(
       0,
-      years
+      now.getTime() - birthTimestamp
     );
 
-  }
-
-
-  function updateAgeCounter() {
-
-    const now =
-      new Date();
-
-
-    const elapsedMilliseconds =
-      Math.max(
-        0,
-        now.getTime() -
-        birthDate.getTime()
-      );
-
-
     const totalSeconds =
-      Math.floor(
-        elapsedMilliseconds / 1000
-      );
+      Math.floor(elapsed / 1000);
 
+    const parts = dhakaParts(now);
 
-    const totalMinutes =
-      Math.floor(
+    let years = parts.year - 2006;
+
+    if (
+      parts.month < 8 ||
+      (
+        parts.month === 8 &&
+        parts.day < 16
+      )
+    ) {
+      years--;
+    }
+
+    const values = {
+
+      years: Math.max(0, years),
+
+      days: Math.floor(
+        totalSeconds / 86400
+      ),
+
+      hours: Math.floor(
+        totalSeconds / 3600
+      ),
+
+      minutes: Math.floor(
         totalSeconds / 60
-      );
+      ),
 
+      seconds: totalSeconds
 
-    const totalHours =
-      Math.floor(
-        totalMinutes / 60
-      );
+    };
 
+    Object.entries(ageNodes).forEach(
+      ([key, node]) => {
 
-    const totalDays =
-      Math.floor(
-        totalHours / 24
-      );
+        if (node) {
 
+          node.textContent =
+            values[key].toLocaleString();
 
-    const years =
-      calculateAgeYears(now);
+        }
 
+      }
+    );
 
-    if (ageYears) {
+  };
 
-      ageYears.textContent =
-        years.toLocaleString();
+  const hasAgeCounter =
+    Object.values(ageNodes).some(Boolean);
 
-    }
-
-
-    if (ageDays) {
-
-      ageDays.textContent =
-        totalDays.toLocaleString();
-
-    }
-
-
-    if (ageHours) {
-
-      ageHours.textContent =
-        totalHours.toLocaleString();
-
-    }
-
-
-    if (ageMinutes) {
-
-      ageMinutes.textContent =
-        totalMinutes.toLocaleString();
-
-    }
-
-
-    if (ageSeconds) {
-
-      ageSeconds.textContent =
-        totalSeconds.toLocaleString();
-
-    }
-
-  }
-
-
-  if (
-    ageYears ||
-    ageDays ||
-    ageHours ||
-    ageMinutes ||
-    ageSeconds
-  ) {
+  if (hasAgeCounter) {
 
     updateAgeCounter();
 
-    setInterval(
+    window.setInterval(
       updateAgeCounter,
       1000
     );
 
-  }
-
-
-});
-/* =========================================================
-   EMTIAZ OFFICIAL — SCRIPT.JS
-   STEP 2 / 3
-========================================================= */
-
-
-/* =========================================
-   PROJECT MODAL
-========================================= */
-
-const projectModal =
-  document.getElementById("projectModal");
-
-const modalTitle =
-  document.getElementById("modalTitle");
-
-const modalDescription =
-  document.getElementById("modalDescription");
-
-const modalClose =
-  document.getElementById("modalClose");
-
-
-/* =========================================
-   OPEN PROJECT MODAL
-========================================= */
-
-function openProjectModal(
-  title,
-  description
-) {
-
-  if (!projectModal) {
-    return;
-  }
-
-
-  if (modalTitle) {
-
-    modalTitle.textContent =
-      title || "Project Details";
-
-  }
-
-
-  if (modalDescription) {
-
-    modalDescription.textContent =
-      description ||
-      "More information about this project will be available soon.";
-
-  }
-
-
-  projectModal.classList.add(
-    "active"
-  );
-
-
-  document.body.style.overflow =
-    "hidden";
-
-}
-
-
-/* =========================================
-   CLOSE PROJECT MODAL
-========================================= */
-
-function closeProjectModal() {
-
-  if (!projectModal) {
-    return;
-  }
-
-
-  projectModal.classList.remove(
-    "active"
-  );
-
-
-  document.body.style.overflow =
-    "";
-
-}
-
-
-/* =========================================
-   PROJECT DETAIL BUTTONS
-========================================= */
-
-const projectDetailButtons =
-  document.querySelectorAll(
-    ".project-details-btn"
-  );
-
-
-projectDetailButtons.forEach(
-  (button) => {
-
-    button.addEventListener(
-      "click",
+    document.addEventListener(
+      "visibilitychange",
       () => {
 
-        const title =
-          button.getAttribute(
-            "data-title"
-          );
-
-
-        const description =
-          button.getAttribute(
-            "data-description"
-          );
-
-
-        openProjectModal(
-          title,
-          description
-        );
+        if (!document.hidden) {
+          updateAgeCounter();
+        }
 
       }
     );
 
   }
-);
 
+  /* PROJECT DETAILS MODAL */
 
-/* =========================================
-   MODAL CLOSE BUTTON
-========================================= */
+  const projectModal = $("#projectModal");
 
-if (modalClose) {
+  const modalTitle =
+    $("#projectModalTitle");
 
-  modalClose.addEventListener(
+  const modalDescription =
+    $("#projectModalDescription");
+
+  const modalClose =
+    $("#projectModalClose");
+
+  const modalDone =
+    $("#modalDone");
+
+  let previousFocus = null;
+
+  const closeProjectModal = () => {
+
+    if (!projectModal) return;
+
+    projectModal.classList.remove("active");
+
+    projectModal.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    document.body.style.overflow = "";
+
+    if (previousFocus) {
+      previousFocus.focus();
+    }
+
+  };
+
+  $$(".project-details-btn").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      if (!projectModal) return;
+
+      previousFocus = button;
+
+      if (modalTitle) {
+
+        modalTitle.textContent =
+          button.dataset.title ||
+          "Project Details";
+
+      }
+
+      if (modalDescription) {
+
+        modalDescription.textContent =
+          button.dataset.description ||
+          "More information will be available soon.";
+
+      }
+
+      projectModal.classList.add("active");
+
+      projectModal.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
+      document.body.style.overflow = "hidden";
+
+      modalClose?.focus();
+
+    });
+
+  });
+
+  modalClose?.addEventListener(
     "click",
     closeProjectModal
   );
 
-}
-
-
-/* =========================================
-   CLOSE MODAL BY CLICKING BACKDROP
-========================================= */
-
-if (projectModal) {
-
-  projectModal.addEventListener(
+  modalDone?.addEventListener(
     "click",
-    (event) => {
+    closeProjectModal
+  );
 
-      if (
-        event.target ===
-        projectModal
-      ) {
+  projectModal?.addEventListener(
+    "click",
+    event => {
 
+      if (event.target === projectModal) {
         closeProjectModal();
-
       }
 
     }
   );
 
-}
-
-
-/* =========================================
-   CLOSE MODAL WITH ESCAPE
-========================================= */
-
-document.addEventListener(
-  "keydown",
-  (event) => {
+  document.addEventListener("keydown", event => {
 
     if (
       event.key === "Escape" &&
-      projectModal &&
-      projectModal.classList.contains(
-        "active"
-      )
+      projectModal?.classList.contains("active")
     ) {
-
       closeProjectModal();
-
     }
 
-  }
-);
+  });
 
+  /* CONTACT FORM */
 
-/* =========================================
-   CONTACT FORM
-========================================= */
+  /*
+    GitHub Pages does not provide a built-in
+    form backend. This prepares an email for
+    the visitor to review and send.
+  */
 
-const contactForm =
-  document.getElementById(
-    "contactForm"
-  );
+  const contactForm = $("#contactForm");
+  const formMessage = $("#formMessage");
 
-const formMessage =
-  document.getElementById(
-    "formMessage"
-  );
+  if (contactForm) {
 
+    contactForm.addEventListener(
+      "submit",
+      event => {
 
-if (contactForm) {
+        event.preventDefault();
 
-  contactForm.addEventListener(
-    "submit",
-    (event) => {
+        const name =
+          $("#contactName")?.value.trim() || "";
 
-      event.preventDefault();
+        const email =
+          $("#contactEmail")?.value.trim() || "";
 
+        const message =
+          $("#contactMessage")?.value.trim() || "";
 
-      const nameInput =
-        document.getElementById(
-          "name"
+        if (!name || !email || !message) {
+
+          if (formMessage) {
+
+            formMessage.textContent =
+              "Please complete all fields.";
+
+          }
+
+          return;
+
+        }
+
+        const subject = encodeURIComponent(
+          `Website message from ${name}`
         );
 
-      const emailInput =
-        document.getElementById(
-          "email"
+        const body = encodeURIComponent(
+          `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
         );
-
-      const messageInput =
-        document.getElementById(
-          "message"
-        );
-
-
-      const name =
-        nameInput
-          ? nameInput.value.trim()
-          : "";
-
-
-      const email =
-        emailInput
-          ? emailInput.value.trim()
-          : "";
-
-
-      const message =
-        messageInput
-          ? messageInput.value.trim()
-          : "";
-
-
-      if (
-        !name ||
-        !email ||
-        !message
-      ) {
 
         if (formMessage) {
 
           formMessage.textContent =
-            "Please fill in all fields.";
+            "Opening your email app. Please review and send the prepared message.";
 
         }
 
-        return;
+        window.location.href =
+          `mailto:mdemtiaz36900@gmail.com?subject=${subject}&body=${body}`;
 
       }
+    );
 
+  }
 
-      if (formMessage) {
+  /* BACK TO TOP */
 
-        formMessage.textContent =
-          `Thanks ${name}! Your message has been received.`;
+  const backToTop = $("#backToTop");
 
-      }
+  const updateBackToTop = () => {
 
+    if (backToTop) {
 
-      contactForm.reset();
+      backToTop.classList.toggle(
+        "show",
+        window.scrollY > 450
+      );
 
+    }
+
+  };
+
+  window.addEventListener(
+    "scroll",
+    updateBackToTop,
+    {
+      passive: true
     }
   );
 
-}
-
-
-/* =========================================
-   BACK TO TOP
-========================================= */
-
-const backToTop =
-  document.getElementById(
-    "backToTop"
-  );
-
-
-function updateBackToTop() {
-
-  if (!backToTop) {
-    return;
-  }
-
-
-  if (
-    window.scrollY >
-    450
-  ) {
-
-    backToTop.classList.add(
-      "show"
-    );
-
-  } else {
-
-    backToTop.classList.remove(
-      "show"
-    );
-
-  }
-
-}
-
-
-window.addEventListener(
-  "scroll",
-  updateBackToTop,
-  {
-    passive: true
-  }
-);
-
-
-if (backToTop) {
-
-  backToTop.addEventListener(
+  backToTop?.addEventListener(
     "click",
     () => {
 
       window.scrollTo({
+
         top: 0,
-        behavior: "smooth"
+
+        behavior: reducedMotion
+          ? "auto"
+          : "smooth"
+
       });
 
     }
   );
 
-}
+  updateBackToTop();
 
+  /* SCROLL PROGRESS BAR */
 
-/* =========================================
-   ACTIVE NAVIGATION
-========================================= */
+  const scrollProgress =
+    document.createElement("div");
 
-const sections =
-  document.querySelectorAll(
-    "main section[id]"
+  scrollProgress.className =
+    "scroll-progress";
+
+  scrollProgress.setAttribute(
+    "aria-hidden",
+    "true"
   );
 
-const navigationLinks =
-  document.querySelectorAll(
-    ".nav-menu a"
-  );
+  document.body.appendChild(scrollProgress);
 
+  const updateScrollProgress = () => {
 
-if (
-  sections.length &&
-  navigationLinks.length &&
-  "IntersectionObserver" in window
-) {
+    const maxScroll =
+      document.documentElement.scrollHeight -
+      window.innerHeight;
 
-  const sectionObserver =
-    new IntersectionObserver(
-      (entries) => {
+    const percent =
+      maxScroll > 0
+        ? (window.scrollY / maxScroll) * 100
+        : 0;
 
-        entries.forEach(
-          (entry) => {
+    scrollProgress.style.width =
+      `${Math.min(100, Math.max(0, percent))}%`;
 
-            if (
-              entry.isIntersecting
-            ) {
+  };
 
-              const sectionId =
-                entry.target.id;
-
-
-              navigationLinks.forEach(
-                (link) => {
-
-                  const href =
-                    link.getAttribute(
-                      "href"
-                    );
-
-
-                  link.classList.toggle(
-                    "active",
-                    href ===
-                    `#${sectionId}`
-                  );
-
-                }
-              );
-
-            }
-
-          }
-        );
-
-      },
-      {
-        rootMargin:
-          "-30% 0px -60% 0px",
-
-        threshold: 0
-      }
-    );
-
-
-  sections.forEach(
-    (section) => {
-
-      sectionObserver.observe(
-        section
-      );
-
+  window.addEventListener(
+    "scroll",
+    updateScrollProgress,
+    {
+      passive: true
     }
   );
 
-}
+  window.addEventListener(
+    "resize",
+    updateScrollProgress,
+    {
+      passive: true
+    }
+  );
 
+  updateScrollProgress();
 
-/* =========================================
-   SMOOTH ANCHOR HANDLING
-========================================= */
+  /* ACTIVE NAVIGATION LINK */
 
-document
-  .querySelectorAll(
-    'a[href^="#"]'
-  )
-  .forEach(
-    (link) => {
+  const sections = $$("main section[id]");
 
-      link.addEventListener(
-        "click",
-        (event) => {
+  const navigationLinks =
+    $$("#navMenu a[href^='#']");
 
-          const targetId =
-            link.getAttribute(
-              "href"
-            );
+  if (
+    "IntersectionObserver" in window &&
+    sections.length &&
+    navigationLinks.length
+  ) {
 
+    const sectionObserver =
+      new IntersectionObserver(
+        entries => {
 
-          if (
-            !targetId ||
-            targetId === "#"
-          ) {
+          entries.forEach(entry => {
 
-            return;
+            if (!entry.isIntersecting) return;
 
-          }
+            navigationLinks.forEach(link => {
 
+              link.classList.toggle(
+                "active",
+                link.getAttribute("href") ===
+                  `#${entry.target.id}`
+              );
 
-          const target =
-            document.querySelector(
-              targetId
-            );
+            });
 
-
-          if (!target) {
-
-            return;
-
-          }
-
-
-          event.preventDefault();
-
-
-          target.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
           });
 
+        },
+        {
+          rootMargin: "-30% 0px -60% 0px",
+          threshold: 0
         }
       );
 
-    }
-  );
+    sections.forEach(section => {
+      sectionObserver.observe(section);
+    });
 
-
-/* =========================================
-   EXTERNAL LINKS
-========================================= */
-
-document
-  .querySelectorAll(
-    'a[target="_blank"]'
-  )
-  .forEach(
-    (link) => {
-
-      link.setAttribute(
-        "rel",
-        "noopener noreferrer"
-      );
-
-    }
-  );
-
-
-/* =========================================
-   CONSOLE MESSAGE
-========================================= */
-
-console.log(
-  "%cEmtiaz Official",
-  "font-size: 22px; font-weight: 800;"
-);
-
-console.log(
-  "%cWelcome to Emtiaz Official 🚀",
-  "font-size: 14px;"
-);
-/* =========================================================
-   EMTIAZ OFFICIAL — SCRIPT.JS
-   STEP 3 / 3
-========================================================= */
-
-/* IMAGE FALLBACK */
-const profileImage = document.querySelector(".hero-card img");
-
-if (profileImage) {
-  profileImage.addEventListener("error", () => {
-    profileImage.style.display = "none";
-
-    const imageContainer = profileImage.parentElement;
-
-    if (imageContainer && !imageContainer.querySelector(".image-fallback")) {
-      const fallback = document.createElement("div");
-
-      fallback.className = "image-fallback";
-      fallback.textContent = "E";
-
-      imageContainer.appendChild(fallback);
-    }
-  });
-}
-
-
-/* PAGE LOADED STATE */
-window.addEventListener("load", () => {
-  document.body.classList.add("page-loaded");
-});
-
-
-/* SCROLL PROGRESS */
-const scrollProgress = document.createElement("div");
-
-scrollProgress.className = "scroll-progress";
-
-scrollProgress.style.position = "fixed";
-scrollProgress.style.top = "0";
-scrollProgress.style.left = "0";
-scrollProgress.style.width = "0%";
-scrollProgress.style.height = "3px";
-scrollProgress.style.zIndex = "9999";
-scrollProgress.style.pointerEvents = "none";
-scrollProgress.style.background =
-  "linear-gradient(90deg, #4da3ff, #7c5cff, #00d4ff)";
-
-document.body.appendChild(scrollProgress);
-
-function updateScrollProgress() {
-  const scrollTop = window.scrollY;
-  const documentHeight =
-    document.documentElement.scrollHeight -
-    document.documentElement.clientHeight;
-
-  if (documentHeight <= 0) {
-    scrollProgress.style.width = "0%";
-    return;
   }
 
-  const progress =
-    (scrollTop / documentHeight) * 100;
+  /* SMOOTH IN-PAGE LINKS */
 
-  scrollProgress.style.width =
-    `${Math.min(progress, 100)}%`;
-}
+  $$("a[href^='#']").forEach(link => {
 
-window.addEventListener(
-  "scroll",
-  updateScrollProgress,
-  { passive: true }
-);
+    link.addEventListener(
+      "click",
+      event => {
 
-updateScrollProgress();
+        const selector =
+          link.getAttribute("href");
 
+        if (!selector || selector === "#") {
+          return;
+        }
 
-/* CURRENT YEAR SAFETY UPDATE */
-const footerYear = document.getElementById("currentYear");
+        const target =
+          document.querySelector(selector);
 
-if (footerYear) {
-  footerYear.textContent =
-    new Date().getFullYear();
-}
+        if (!target) return;
 
+        event.preventDefault();
 
-/* EXTERNAL SOCIAL LINKS */
-const socialLinks = document.querySelectorAll(
-  'a[href*="youtube.com"], a[href*="github.com"]'
-);
+        target.scrollIntoView({
 
-socialLinks.forEach((link) => {
-  if (link.getAttribute("target") === "_blank") {
+          behavior: reducedMotion
+            ? "auto"
+            : "smooth",
+
+          block: "start"
+
+        });
+
+        if (navMenu?.contains(link)) {
+          closeMenu();
+        }
+
+      }
+    );
+
+  });
+
+  /* EXTERNAL LINK SAFETY */
+
+  $$('a[target="_blank"]').forEach(link => {
+
     link.setAttribute(
       "rel",
       "noopener noreferrer"
     );
-  }
-});
 
-
-/* EMAIL LINK SAFETY */
-const emailLinks =
-  document.querySelectorAll('a[href^="mailto:"]');
-
-emailLinks.forEach((link) => {
-  link.addEventListener("click", () => {
-    console.log(
-      "Email contact link opened."
-    );
   });
-});
 
+  /* WELCOME VOICE */
 
-/* PHONE LINK SAFETY */
-const phoneLinks =
-  document.querySelectorAll('a[href^="tel:"]');
+  /*
+    Browsers may block automatic speech until
+    the visitor interacts with the page.
 
-phoneLinks.forEach((link) => {
-  link.addEventListener("click", () => {
-    console.log(
-      "Phone contact link opened."
-    );
-  });
-});
+    The welcome button always provides a
+    direct way to play the message.
+  */
 
+  const welcomeButton =
+    $("#welcomeVoiceBtn");
 
-/* CARD HOVER ACCESSIBILITY */
-const interactiveCards =
-  document.querySelectorAll(
-    ".service-card, .project-card, .skill-card, .age-counter-box"
+  const voiceStatus =
+    $("#voiceStatus");
+
+  let welcomeSpoken = false;
+
+  const speakWelcome = () => {
+
+    if (
+      !("speechSynthesis" in window) ||
+      !("SpeechSynthesisUtterance" in window)
+    ) {
+
+      if (voiceStatus) {
+
+        voiceStatus.textContent =
+          "Voice playback is not supported by this browser.";
+
+      }
+
+      return;
+
+    }
+
+    window.speechSynthesis.cancel();
+
+    const utterance =
+      new SpeechSynthesisUtterance(
+        "Welcome to Emtiaz Official Website."
+      );
+
+    utterance.lang = "en-US";
+    utterance.rate = 0.92;
+    utterance.pitch = 1;
+
+    utterance.onstart = () => {
+
+      if (voiceStatus) {
+
+        voiceStatus.textContent =
+          "Playing welcome message…";
+
+      }
+
+    };
+
+    utterance.onend = () => {
+
+      if (voiceStatus) {
+
+        voiceStatus.textContent =
+          "Welcome message finished.";
+
+      }
+
+    };
+
+    utterance.onerror = () => {
+
+      if (voiceStatus) {
+
+        voiceStatus.textContent =
+          "Tap the button to play the welcome message.";
+
+      }
+
+    };
+
+    window.speechSynthesis.speak(utterance);
+
+    welcomeSpoken = true;
+
+  };
+
+  welcomeButton?.addEventListener(
+    "click",
+    speakWelcome
   );
 
-interactiveCards.forEach((card) => {
-  card.addEventListener("mouseenter", () => {
-    card.classList.add("is-hovered");
-  });
+  /*
+    First normal page interaction attempts
+    the welcome voice once.
 
-  card.addEventListener("mouseleave", () => {
-    card.classList.remove("is-hovered");
-  });
-});
+    If the visitor clicks the voice button,
+    the button itself handles playback.
+  */
 
+  const firstInteraction = event => {
 
-/* PREVENT DOUBLE SUBMISSION */
-if (contactForm) {
-  contactForm.addEventListener("submit", () => {
-    const submitButton =
-      contactForm.querySelector(
-        'button[type="submit"]'
-      );
-
-    if (submitButton) {
-      setTimeout(() => {
-        submitButton.blur();
-      }, 100);
+    if (
+      welcomeButton &&
+      welcomeButton.contains(event.target)
+    ) {
+      return;
     }
-  });
-}
 
+    if (welcomeSpoken) return;
 
-/* KEYBOARD ACCESS FOR MODAL */
-document.addEventListener("keydown", (event) => {
-  if (
-    event.key === "Enter" &&
-    document.activeElement &&
-    document.activeElement.classList.contains(
-      "project-details-btn"
-    )
-  ) {
-    document.activeElement.click();
-  }
-});
+    speakWelcome();
 
-
-/* VISIBILITY CHECK */
-document.addEventListener(
-  "visibilitychange",
-  () => {
-    if (document.hidden) {
-      console.log(
-        "Emtiaz Official: page is currently hidden."
-      );
-    } else {
-      console.log(
-        "Emtiaz Official: welcome back."
-      );
-    }
-  }
-);
-
-
-/* SAFE AGE COUNTER REFRESH */
-let ageRefreshTimer = null;
-
-function keepAgeCounterAccurate() {
-  const ageElements = [
-    ageYears,
-    ageDays,
-    ageHours,
-    ageMinutes,
-    ageSeconds
-  ];
-
-  const hasAgeCounter =
-    ageElements.some(
-      (element) => element !== null
+    document.removeEventListener(
+      "pointerdown",
+      firstInteraction
     );
 
-  if (!hasAgeCounter) {
-    return;
-  }
+    document.removeEventListener(
+      "keydown",
+      firstInteraction
+    );
 
-  if (typeof updateAgeCounter === "function") {
-    updateAgeCounter();
-  }
-}
+  };
 
-document.addEventListener(
-  "visibilitychange",
-  () => {
-    if (!document.hidden) {
-      keepAgeCounterAccurate();
-    }
-  }
-);
-
-
-/* CLEANUP OLD TIMER BEFORE STARTING A NEW ONE */
-if (ageRefreshTimer) {
-  clearInterval(ageRefreshTimer);
-}
-
-ageRefreshTimer = setInterval(
-  keepAgeCounterAccurate,
-  1000
-);
-
-
-/* REDUCED MOTION SUPPORT */
-const prefersReducedMotion =
-  window.matchMedia &&
-  window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
-
-if (prefersReducedMotion) {
-  document.documentElement.classList.add(
-    "reduce-motion"
+  document.addEventListener(
+    "pointerdown",
+    firstInteraction
   );
-}
 
+  document.addEventListener(
+    "keydown",
+    firstInteraction
+  );
 
-/* SAFE RESIZE HANDLER */
-let resizeTimer = null;
+  /* PAGE READY */
 
-window.addEventListener(
-  "resize",
-  () => {
-    clearTimeout(resizeTimer);
+  window.addEventListener(
+    "load",
+    () => {
+      document.body.classList.add("page-loaded");
+    },
+    {
+      once: true
+    }
+  );
 
-    resizeTimer = setTimeout(() => {
-      updateScrollProgress();
-    }, 150);
-  },
-  { passive: true }
-);
+  console.log(
+    "Emtiaz Official — website scripts ready."
+  );
 
-
-/* FINAL READY MESSAGE */
-console.log(
-  "%cWebsite systems loaded successfully.",
-  "font-size: 13px; font-weight: 700;"
-);
-
-console.log(
-  "%cLive Age Counter: Active",
-  "font-size: 13px; font-weight: 700;"
-);
-
-console.log(
-  "%cEmtiaz Official — All systems ready 🚀",
-  "font-size: 13px; font-weight: 700;"
-);
-
-
-/* =========================================================
-   END OF SCRIPT.JS
-========================================================= */
+});
