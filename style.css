@@ -1,7 +1,9 @@
-/* =====================================================
-   EMTIAZ OFFICIAL — COMPLETE RESPONSIVE STYLESHEET
-===================================================== */
+/* =========================================================
+   EMTIAZ OFFICIAL — COMPLETE STYLE.CSS
+   Full responsive design + profile image fix
+========================================================= */
 
+/* ROOT VARIABLES */
 :root {
   color-scheme: dark;
   --bg: #07111f;
@@ -20,6 +22,7 @@
   --container: 1120px;
 }
 
+/* LIGHT THEME */
 body.light-theme {
   color-scheme: light;
   --bg: #f4f7fc;
@@ -33,7 +36,7 @@ body.light-theme {
   --shadow: 0 24px 60px rgba(38, 62, 95, .12);
 }
 
-/* BASE */
+/* BASIC RESET */
 * {
   box-sizing: border-box;
 }
@@ -108,7 +111,7 @@ img {
   -webkit-background-clip: text;
 }
 
-/* HEADER AND NAVIGATION */
+/* HEADER */
 .site-header {
   position: sticky;
   top: 0;
@@ -201,12 +204,13 @@ img {
   border-radius: 4px;
 }
 
-/* HERO */
+/* GENERAL SECTIONS */
 .section-shell {
   position: relative;
   overflow: hidden;
 }
 
+/* HERO */
 .hero {
   padding: 92px 0 70px;
 }
@@ -285,6 +289,7 @@ img {
   margin-top: 28px;
 }
 
+/* BUTTONS */
 .button {
   display: inline-flex;
   justify-content: center;
@@ -333,6 +338,7 @@ img {
   font-size: .76rem;
 }
 
+/* SOCIAL LINKS */
 .social-row {
   display: flex;
   gap: 10px;
@@ -442,6 +448,12 @@ img {
   background: linear-gradient(135deg, rgba(0,212,255,.12), rgba(139,108,255,.22));
 }
 
+/* PROFILE IMAGE FIX */
+.profile-image[hidden],
+.image-fallback[hidden] {
+  display: none !important;
+}
+
 .profile-caption {
   padding: 14px 4px 3px;
 }
@@ -490,7 +502,7 @@ img {
   color: var(--accent);
 }
 
-/* STATISTICS */
+/* STATS */
 .stats-section {
   margin-bottom: 30px;
 }
@@ -529,7 +541,7 @@ img {
   text-align: center;
 }
 
-/* GENERAL SECTIONS */
+/* SECTION COMMON */
 .section {
   padding-top: 100px;
   padding-bottom: 100px;
@@ -560,7 +572,7 @@ img {
   color: var(--muted);
 }
 
-/* ABOUT AND SERVICES */
+/* ABOUT */
 .about-grid,
 .services-grid {
   display: grid;
@@ -731,6 +743,7 @@ img {
   font-size: .78rem;
 }
 
+/* SERVICES */
 .services-grid {
   grid-template-columns: repeat(4, 1fr);
 }
@@ -1108,7 +1121,7 @@ img {
   cursor: pointer;
 }
 
-/* ANIMATIONS */
+/* SCROLL PROGRESS */
 .scroll-progress {
   position: fixed;
   top: 0;
@@ -1120,6 +1133,7 @@ img {
   background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
 }
 
+/* SCROLL REVEAL */
 .scroll-reveal {
   opacity: 0;
   transform: translateY(22px);
@@ -1151,6 +1165,7 @@ img {
   }
 }
 
+/* SMALL TABLET */
 @media (max-width: 850px) {
   .menu-toggle {
     display: block;
@@ -1319,7 +1334,7 @@ img {
   }
 }
 
-/* SMALL MOBILE */
+/* VERY SMALL MOBILE */
 @media (max-width: 390px) {
   .services-grid,
   .sisters-grid {
@@ -1339,7 +1354,7 @@ img {
   }
 }
 
-/* ACCESSIBILITY */
+/* REDUCED MOTION */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
