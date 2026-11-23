@@ -15,7 +15,62 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
+
+  <style>
+    .family-photos {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 18px;
+      margin: 18px auto;
+      width: 100%;
+    }
+
+    .family-person {
+      width: 85px;
+      text-align: center;
+    }
+
+    .family-person img {
+      display: block;
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 7px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid var(--primary, #00d4ff);
+      box-shadow: 0 5px 18px rgba(0, 212, 255, 0.18);
+    }
+
+    .family-person strong {
+      display: block;
+      color: var(--text-primary, #ffffff);
+      font-size: 13px;
+    }
+
+    .sister-photo {
+      display: block;
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 14px;
+      margin-bottom: 14px;
+    }
+
+    @media (max-width: 480px) {
+      .family-photos {
+        gap: 12px;
+      }
+
+      .family-person img {
+        width: 65px;
+        height: 65px;
+      }
+    }
+  </style>
 </head>
+
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -51,25 +106,35 @@
   </header>
 
   <main id="main">
+
+    <!-- HERO SECTION -->
     <section class="hero section-shell" id="home">
       <div class="container hero-grid">
+
         <div class="hero-content scroll-reveal">
           <span class="eyebrow"><span class="status-dot"></span> Welcome to my digital space</span>
+
           <p class="hero-kicker">Hello, I'm</p>
           <h1>Emtiaz <span class="gradient-text">Ahmed</span></h1>
+
           <h2 class="hero-role">I'm a <span id="typingText">Programmer</span><span class="typing-cursor">|</span></h2>
+
           <p class="hero-description">
             I love building useful digital experiences, exploring technology and turning creative ideas into reality.
             This is my official corner of the internet.
           </p>
+
           <div class="hero-actions">
             <a class="button button-primary" href="#projects">Explore my work <span aria-hidden="true">↗</span></a>
             <a class="button button-secondary" href="#contact">Get in touch</a>
           </div>
+
           <button class="voice-button" id="welcomeVoiceBtn" type="button">
             <span aria-hidden="true">🔊</span> Hear the welcome message
           </button>
+
           <p class="voice-note" id="voiceStatus" aria-live="polite">You can play the welcome message here.</p>
+
           <div class="social-row" aria-label="Social links">
             <a href="https://www.youtube.com/@emtiaz-official01" target="_blank" rel="noopener noreferrer" aria-label="YouTube">YT</a>
             <a href="https://github.com/ImtiAz9-6" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GH</a>
@@ -79,46 +144,103 @@
 
         <div class="hero-visual scroll-reveal">
           <div class="hero-glow"></div>
+
           <div class="hero-card">
-            <div class="hero-card-top"><span></span><span></span><span></span><small>EMTIAZ / PROFILE</small></div>
+            <div class="hero-card-top">
+              <span></span><span></span><span></span>
+              <small>EMTIAZ / PROFILE</small>
+            </div>
+
+            <!-- EMTIAZ PROFILE PHOTO -->
             <div class="profile-image-wrap">
               <img class="profile-image" src="profile.jpg" alt="Emtiaz profile" onerror="this.hidden=true; this.nextElementSibling.hidden=false">
               <div class="image-fallback" hidden>E</div>
             </div>
+
+            <!-- FATHER AND MOTHER PHOTOS -->
+            <div class="family-photos">
+
+              <div class="family-person">
+                <img src="assets/abbu.jpg" alt="Abbu" loading="lazy">
+                <strong>আব্বু</strong>
+              </div>
+
+              <div class="family-person">
+                <img src="assets/ammu.jpg" alt="Ammu" loading="lazy">
+                <strong>আম্মু</strong>
+              </div>
+
+            </div>
+
             <div class="profile-caption">
               <h3>Emtiaz</h3>
               <p>Programmer · Web Developer</p>
               <span class="profile-status"><i></i> Learning &amp; building</span>
             </div>
+
             <div class="floating-chip chip-one">{"code": "create"}</div>
             <div class="floating-chip chip-two">✦ Creative mind</div>
           </div>
         </div>
+
       </div>
     </section>
 
+    <!-- STATS -->
     <section class="stats-section container" aria-label="Portfolio highlights">
       <div class="stats-grid">
-        <article class="stat-card"><strong class="stat-number" data-target="10">0</strong><span>Projects &amp; ideas</span></article>
-        <article class="stat-card"><strong class="stat-number" data-target="6">0</strong><span>Core skill areas</span></article>
-        <article class="stat-card"><strong class="stat-number" data-target="1">0</strong><span>Curious mind</span></article>
-        <article class="stat-card"><strong class="stat-number" data-target="100">0</strong><span>Learning mindset %</span></article>
+        <article class="stat-card">
+          <strong class="stat-number" data-target="10">0</strong>
+          <span>Projects &amp; ideas</span>
+        </article>
+
+        <article class="stat-card">
+          <strong class="stat-number" data-target="6">0</strong>
+          <span>Core skill areas</span>
+        </article>
+
+        <article class="stat-card">
+          <strong class="stat-number" data-target="1">0</strong>
+          <span>Curious mind</span>
+        </article>
+
+        <article class="stat-card">
+          <strong class="stat-number" data-target="100">0</strong>
+          <span>Learning mindset %</span>
+        </article>
       </div>
     </section>
 
+    <!-- ABOUT -->
     <section class="section container" id="about">
       <div class="section-heading scroll-reveal">
         <span class="eyebrow">GET TO KNOW ME</span>
         <h2>About <span class="gradient-text">Me</span></h2>
         <p>A little introduction to the person behind this website.</p>
       </div>
+
       <div class="about-grid">
-        <article class="about-card scroll-reveal"><div class="card-icon">⌘</div><h3>Programmer</h3><p>I enjoy solving problems, understanding how software works and learning programming concepts step by step.</p></article>
-        <article class="about-card scroll-reveal"><div class="card-icon">⌁</div><h3>Web Developer</h3><p>I build responsive websites with clean structure, thoughtful design and useful interactions.</p></article>
-        <article class="about-card scroll-reveal"><div class="card-icon">✧</div><h3>Digital Creator</h3><p>I explore creative ideas and digital tools to make content and experiences that people can enjoy.</p></article>
+        <article class="about-card scroll-reveal">
+          <div class="card-icon">⌘</div>
+          <h3>Programmer</h3>
+          <p>I enjoy solving problems, understanding how software works and learning programming concepts step by step.</p>
+        </article>
+
+        <article class="about-card scroll-reveal">
+          <div class="card-icon">⌁</div>
+          <h3>Web Developer</h3>
+          <p>I build responsive websites with clean structure, thoughtful design and useful interactions.</p>
+        </article>
+
+        <article class="about-card scroll-reveal">
+          <div class="card-icon">✧</div>
+          <h3>Digital Creator</h3>
+          <p>I explore creative ideas and digital tools to make content and experiences that people can enjoy.</p>
+        </article>
       </div>
     </section>
 
+    <!-- AGE -->
     <section class="section section-alt" id="age">
       <div class="container">
         <div class="section-heading scroll-reveal">
@@ -126,35 +248,88 @@
           <h2>My Journey in <span class="gradient-text">Time</span></h2>
           <p>A live counter calculated from 16 August 2006, 12:00 AM Bangladesh time.</p>
         </div>
+
         <div class="age-panel scroll-reveal">
-          <div class="age-highlight"><strong id="ageYears">—</strong><span>Years old</span></div>
-          <div class="age-grid">
-            <div class="age-counter-box"><strong id="ageDays">—</strong><span>Total days</span></div>
-            <div class="age-counter-box"><strong id="ageHours">—</strong><span>Total hours</span></div>
-            <div class="age-counter-box"><strong id="ageMinutes">—</strong><span>Total minutes</span></div>
-            <div class="age-counter-box"><strong id="ageSeconds">—</strong><span>Total seconds</span></div>
+          <div class="age-highlight">
+            <strong id="ageYears">—</strong>
+            <span>Years old</span>
           </div>
+
+          <div class="age-grid">
+            <div class="age-counter-box">
+              <strong id="ageDays">—</strong>
+              <span>Total days</span>
+            </div>
+
+            <div class="age-counter-box">
+              <strong id="ageHours">—</strong>
+              <span>Total hours</span>
+            </div>
+
+            <div class="age-counter-box">
+              <strong id="ageMinutes">—</strong>
+              <span>Total minutes</span>
+            </div>
+
+            <div class="age-counter-box">
+              <strong id="ageSeconds">—</strong>
+              <span>Total seconds</span>
+            </div>
+          </div>
+
           <p class="age-footnote">Updated automatically while this page is open.</p>
         </div>
       </div>
     </section>
 
+    <!-- SKILLS -->
     <section class="section container" id="skills">
       <div class="section-heading scroll-reveal">
         <span class="eyebrow">WHAT I'M LEARNING</span>
         <h2>My <span class="gradient-text">Skills</span></h2>
         <p>Skills grow through practice, patience and continuous learning.</p>
       </div>
+
       <div class="skills-grid">
-        <article class="skill-card scroll-reveal"><div class="skill-top"><h3>HTML</h3><span>90%</span></div><div class="skill-track"><span style="--skill:90%"></span></div><p>Web page structure</p></article>
-        <article class="skill-card scroll-reveal"><div class="skill-top"><h3>CSS</h3><span>85%</span></div><div class="skill-track"><span style="--skill:85%"></span></div><p>Styling and responsive design</p></article>
-        <article class="skill-card scroll-reveal"><div class="skill-top"><h3>JavaScript</h3><span>70%</span></div><div class="skill-track"><span style="--skill:70%"></span></div><p>Web interactions</p></article>
-        <article class="skill-card scroll-reveal"><div class="skill-top"><h3>Python</h3><span>65%</span></div><div class="skill-track"><span style="--skill:65%"></span></div><p>Programming fundamentals</p></article>
-        <article class="skill-card scroll-reveal"><div class="skill-top"><h3>Git &amp; GitHub</h3><span>60%</span></div><div class="skill-track"><span style="--skill:60%"></span></div><p>Version control</p></article>
-        <article class="skill-card scroll-reveal"><div class="skill-top"><h3>Linux</h3><span>75%</span></div><div class="skill-track"><span style="--skill:75%"></span></div><p>Operating system basics</p></article>
+        <article class="skill-card scroll-reveal">
+          <div class="skill-top"><h3>HTML</h3><span>90%</span></div>
+          <div class="skill-track"><span style="--skill:90%"></span></div>
+          <p>Web page structure</p>
+        </article>
+
+        <article class="skill-card scroll-reveal">
+          <div class="skill-top"><h3>CSS</h3><span>85%</span></div>
+          <div class="skill-track"><span style="--skill:85%"></span></div>
+          <p>Styling and responsive design</p>
+        </article>
+
+        <article class="skill-card scroll-reveal">
+          <div class="skill-top"><h3>JavaScript</h3><span>70%</span></div>
+          <div class="skill-track"><span style="--skill:70%"></span></div>
+          <p>Web interactions</p>
+        </article>
+
+        <article class="skill-card scroll-reveal">
+          <div class="skill-top"><h3>Python</h3><span>65%</span></div>
+          <div class="skill-track"><span style="--skill:65%"></span></div>
+          <p>Programming fundamentals</p>
+        </article>
+
+        <article class="skill-card scroll-reveal">
+          <div class="skill-top"><h3>Git &amp; GitHub</h3><span>60%</span></div>
+          <div class="skill-track"><span style="--skill:60%"></span></div>
+          <p>Version control</p>
+        </article>
+
+        <article class="skill-card scroll-reveal">
+          <div class="skill-top"><h3>Linux</h3><span>75%</span></div>
+          <div class="skill-track"><span style="--skill:75%"></span></div>
+          <p>Operating system basics</p>
+        </article>
       </div>
     </section>
 
+    <!-- SERVICES -->
     <section class="section section-alt" id="services">
       <div class="container">
         <div class="section-heading scroll-reveal">
@@ -162,21 +337,43 @@
           <h2>My <span class="gradient-text">Services</span></h2>
           <p>Creative and technical help for digital ideas and projects.</p>
         </div>
+
         <div class="services-grid">
-          <article class="service-card scroll-reveal"><div class="card-icon">▣</div><h3>Web Development</h3><p>Responsive personal websites and clean web interfaces.</p></article>
-          <article class="service-card scroll-reveal"><div class="card-icon">⌘</div><h3>Programming</h3><p>Small programming projects and beginner-friendly solutions.</p></article>
-          <article class="service-card scroll-reveal"><div class="card-icon">✧</div><h3>Digital Design</h3><p>Simple, modern visual ideas for digital projects.</p></article>
-          <article class="service-card scroll-reveal"><div class="card-icon">◈</div><h3>Digital Projects</h3><p>Turning ideas into practical prototypes and experiments.</p></article>
+          <article class="service-card scroll-reveal">
+            <div class="card-icon">▣</div>
+            <h3>Web Development</h3>
+            <p>Responsive personal websites and clean web interfaces.</p>
+          </article>
+
+          <article class="service-card scroll-reveal">
+            <div class="card-icon">⌘</div>
+            <h3>Programming</h3>
+            <p>Small programming projects and beginner-friendly solutions.</p>
+          </article>
+
+          <article class="service-card scroll-reveal">
+            <div class="card-icon">✧</div>
+            <h3>Digital Design</h3>
+            <p>Simple, modern visual ideas for digital projects.</p>
+          </article>
+
+          <article class="service-card scroll-reveal">
+            <div class="card-icon">◈</div>
+            <h3>Digital Projects</h3>
+            <p>Turning ideas into practical prototypes and experiments.</p>
+          </article>
         </div>
       </div>
     </section>
 
+    <!-- PROJECTS -->
     <section class="section container" id="projects">
       <div class="section-heading scroll-reveal">
         <span class="eyebrow">SELECTED WORK</span>
         <h2>My <span class="gradient-text">Projects</span></h2>
         <p>A selection of projects, experiments and ideas.</p>
       </div>
+
       <div class="projects-grid">
         <article class="project-card scroll-reveal">
           <div class="project-art art-blue"><span>01</span><b>WEB</b></div>
@@ -185,7 +382,11 @@
             <h3>Emtiaz Official</h3>
             <p>A personal portfolio to share my journey, skills and work.</p>
             <div class="project-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
-            <button class="text-button project-details-btn" type="button" data-title="Emtiaz Official" data-description="A personal portfolio website featuring an introduction, live age counter, skills, projects, YouTube and contact information.">View details ↗</button>
+            <button class="text-button project-details-btn" type="button"
+              data-title="Emtiaz Official"
+              data-description="A personal portfolio website featuring an introduction, live age counter, skills, projects, YouTube and contact information.">
+              View details ↗
+            </button>
           </div>
         </article>
 
@@ -196,7 +397,11 @@
             <h3>Barta Bahok</h3>
             <p>A messaging application project currently under development.</p>
             <div class="project-tags"><span>HTML</span><span>Node.js</span><span>Socket.IO</span></div>
-            <button class="text-button project-details-btn" type="button" data-title="Barta Bahok" data-description="A chat application project focused on building a clear interface and learning real-time messaging technology.">View details ↗</button>
+            <button class="text-button project-details-btn" type="button"
+              data-title="Barta Bahok"
+              data-description="A chat application project focused on building a clear interface and learning real-time messaging technology.">
+              View details ↗
+            </button>
           </div>
         </article>
 
@@ -218,29 +423,45 @@
             <h3>Future Projects</h3>
             <p>More ideas and experiments will be added as they develop.</p>
             <div class="project-tags"><span>Learning</span><span>Building</span></div>
-            <button class="text-button project-details-btn" type="button" data-title="Future Projects" data-description="This space is reserved for upcoming experiments, learning projects and new ideas.">View details ↗</button>
+            <button class="text-button project-details-btn" type="button"
+              data-title="Future Projects"
+              data-description="This space is reserved for upcoming experiments, learning projects and new ideas.">
+              View details ↗
+            </button>
           </div>
         </article>
       </div>
     </section>
 
+    <!-- YOUTUBE -->
     <section class="section section-alt" id="youtube">
       <div class="container youtube-layout scroll-reveal">
         <div>
           <span class="eyebrow">WATCH &amp; FOLLOW</span>
           <h2>My YouTube <span class="gradient-text">Channel</span></h2>
           <p>Visit my channel for videos and creative content. New content may be added over time.</p>
-          <a class="button button-primary" href="https://www.youtube.com/@emtiaz-official01" target="_blank" rel="noopener noreferrer">Visit YouTube channel ↗</a>
+          <a class="button button-primary"
+            href="https://www.youtube.com/@emtiaz-official01"
+            target="_blank" rel="noopener noreferrer">
+            Visit YouTube channel ↗
+          </a>
         </div>
-        <a class="youtube-card" href="https://www.youtube.com/@emtiaz-official01" target="_blank" rel="noopener noreferrer" aria-label="Open Emtiaz Official YouTube channel">
+
+        <a class="youtube-card"
+          href="https://www.youtube.com/@emtiaz-official01"
+          target="_blank" rel="noopener noreferrer"
+          aria-label="Open Emtiaz Official YouTube channel">
           <span class="youtube-play">▶</span>
-          <span><strong>Emtiaz Official</strong><small>@emtiaz-official01</small></span>
+          <span>
+            <strong>Emtiaz Official</strong>
+            <small>@emtiaz-official01</small>
+          </span>
           <span class="youtube-arrow">↗</span>
         </a>
       </div>
     </section>
 
-    <!-- SISTERS SECTION -->
+    <!-- SISTERS WITH PHOTOS -->
     <section class="section container" id="sisters">
       <div class="section-heading scroll-reveal">
         <span class="eyebrow">SPECIAL PEOPLE</span>
@@ -251,49 +472,25 @@
       <div class="sisters-grid">
 
         <article class="sister-card scroll-reveal">
-          <img
-            class="sister-avatar"
-            src="assets/meghla.jpg"
-            alt="Meghla"
-            loading="lazy"
-            style="width:110px;height:110px;object-fit:cover;border-radius:50%;margin:0 auto 15px;"
-          >
+          <img class="sister-photo" src="assets/meghla.jpg" alt="Meghla" loading="lazy">
           <h3>Meghla</h3>
           <p>Always remembered with kindness.</p>
         </article>
 
         <article class="sister-card scroll-reveal">
-          <img
-            class="sister-avatar"
-            src="assets/eva.png"
-            alt="Eva"
-            loading="lazy"
-            style="width:110px;height:110px;object-fit:cover;border-radius:50%;margin:0 auto 15px;"
-          >
+          <img class="sister-photo" src="assets/eva.png" alt="Eva" loading="lazy">
           <h3>Eva</h3>
           <p>A special part of the memories.</p>
         </article>
 
         <article class="sister-card scroll-reveal">
-          <img
-            class="sister-avatar"
-            src="assets/arshi.png"
-            alt="Arshi"
-            loading="lazy"
-            style="width:110px;height:110px;object-fit:cover;border-radius:50%;margin:0 auto 15px;"
-          >
+          <img class="sister-photo" src="assets/arshi.png" alt="Arshi" loading="lazy">
           <h3>Arshi</h3>
           <p>Wishing happiness and success.</p>
         </article>
 
         <article class="sister-card scroll-reveal">
-          <img
-            class="sister-avatar"
-            src="assets/sumaiya.jpg"
-            alt="Sumaiya"
-            loading="lazy"
-            style="width:110px;height:110px;object-fit:cover;border-radius:50%;margin:0 auto 15px;"
-          >
+          <img class="sister-photo" src="assets/sumaiya.jpg" alt="Sumaiya" loading="lazy">
           <h3>Sumaiya</h3>
           <p>Creator and YouTuber.</p>
         </article>
@@ -301,6 +498,7 @@
       </div>
     </section>
 
+    <!-- CONTACT -->
     <section class="section section-alt" id="contact">
       <div class="container">
         <div class="section-heading scroll-reveal">
@@ -308,61 +506,96 @@
           <h2>Contact <span class="gradient-text">Me</span></h2>
           <p>Have a question or an idea? Send a message.</p>
         </div>
+
         <div class="contact-layout">
           <div class="contact-info scroll-reveal">
+
             <article class="contact-card">
               <span class="contact-icon">✉</span>
-              <div><h3>Email</h3><a href="mailto:mdemtiaz36900@gmail.com">mdemtiaz36900@gmail.com</a></div>
+              <div>
+                <h3>Email</h3>
+                <a href="mailto:mdemtiaz36900@gmail.com">mdemtiaz36900@gmail.com</a>
+              </div>
             </article>
+
             <article class="contact-card">
               <span class="contact-icon">☎</span>
-              <div><h3>Phone</h3><a href="tel:+8801798665955">+880 1798-665955</a></div>
+              <div>
+                <h3>Phone</h3>
+                <a href="tel:+8801798665955">+880 1798-665955</a>
+              </div>
             </article>
+
             <article class="contact-card">
               <span class="contact-icon">▶</span>
-              <div><h3>YouTube</h3><a href="https://www.youtube.com/@emtiaz-official01" target="_blank" rel="noopener noreferrer">@emtiaz-official01</a></div>
+              <div>
+                <h3>YouTube</h3>
+                <a href="https://www.youtube.com/@emtiaz-official01"
+                  target="_blank" rel="noopener noreferrer">@emtiaz-official01</a>
+              </div>
             </article>
+
           </div>
 
           <form class="contact-form scroll-reveal" id="contactForm">
             <label for="contactName">Your name</label>
-            <input id="contactName" name="name" type="text" autocomplete="name" maxlength="80" required placeholder="Enter your name">
+            <input id="contactName" name="name" type="text"
+              autocomplete="name" maxlength="80" required
+              placeholder="Enter your name">
 
             <label for="contactEmail">Your email</label>
-            <input id="contactEmail" name="email" type="email" autocomplete="email" maxlength="120" required placeholder="Enter your email">
+            <input id="contactEmail" name="email" type="email"
+              autocomplete="email" maxlength="120" required
+              placeholder="Enter your email">
 
             <label for="contactMessage">Your message</label>
-            <textarea id="contactMessage" name="message" rows="5" maxlength="3000" required placeholder="Write your message..."></textarea>
+            <textarea id="contactMessage" name="message" rows="5"
+              maxlength="3000" required
+              placeholder="Write your message..."></textarea>
 
             <button class="button button-primary" type="submit">Prepare email ↗</button>
-            <p class="form-message" id="formMessage" role="status" aria-live="polite">Your email app will open with your message ready to send.</p>
+
+            <p class="form-message" id="formMessage" role="status" aria-live="polite">
+              Your email app will open with your message ready to send.
+            </p>
           </form>
         </div>
       </div>
     </section>
+
   </main>
 
+  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="container footer-content">
       <a class="brand" href="#home">
         <span class="brand-mark">E</span>
         <span>EMTIAZ<span class="brand-accent">.</span></span>
       </a>
+
       <p>Built with curiosity, creativity and code.</p>
-      <p class="copyright">© <span id="currentYear">2026</span> Emtiaz Official. All rights reserved.</p>
+
+      <p class="copyright">
+        © <span id="currentYear">2026</span> Emtiaz Official. All rights reserved.
+      </p>
     </div>
   </footer>
 
   <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">↑</button>
 
+  <!-- PROJECT DETAILS MODAL -->
   <div class="project-modal" id="projectModal" aria-hidden="true">
     <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
+
       <button class="modal-close" id="projectModalClose" type="button" aria-label="Close project details">×</button>
+
       <span class="eyebrow">PROJECT DETAILS</span>
       <h2 id="projectModalTitle">Project Details</h2>
       <p id="projectModalDescription"></p>
+
       <button class="button button-secondary" id="modalDone" type="button">Close</button>
     </div>
   </div>
+
 </body>
 </html>
