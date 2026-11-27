@@ -1,18 +1,20 @@
-/* =====================================================
-   EMTIAZ OFFICIAL — COMPLETE SCRIPT.JS
-===================================================== */
+/* =========================================================
+   EMTIAZ OFFICIAL — PREMIUM SCRIPT.JS
+   ========================================================= */
 
 "use strict";
 
 document.addEventListener("DOMContentLoaded", () => {
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
-  const $ = (selector, root = document) =>
-    root.querySelector(selector);
+  const reducedMotion = window.matchMedia?.(
+    "(prefers-reduced-motion: reduce)"
+  ).matches || false;
 
-  const $$ = (selector, root = document) =>
-    [...root.querySelectorAll(selector)];
-
-  /* FOOTER YEAR */
+  /* =======================================================
+     FOOTER YEAR
+  ======================================================= */
 
   const currentYear = $("#currentYear");
 
@@ -20,24 +22,32 @@ document.addEventListener("DOMContentLoaded", () => {
     currentYear.textContent = String(new Date().getFullYear());
   }
 
-  /* PROFILE IMAGE FALLBACK */
+  /* =======================================================
+     IMAGE FALLBACK
+     If an image cannot load, show its fallback letter.
+  ======================================================= */
 
-  const profileImage = $(".profile-image");
-  const imageFallback = $(".image-fallback");
+  $$("img").forEach(image => {
+    const showFallback = () => {
+      image.hidden = true;
 
-  if (profileImage && imageFallback) {
-    profileImage.addEventListener("error", () => {
-      profileImage.hidden = true;
-      imageFallback.hidden = false;
-    });
+      const fallback = image.nextElementSibling;
 
-    if (profileImage.complete && profileImage.naturalWidth === 0) {
-      profileImage.hidden = true;
-      imageFallback.hidden = false;
+      if (fallback && fallback.classList.contains("image-fallback")) {
+        fallback.hidden = false;
+      }
+    };
+
+    image.addEventListener("error", showFallback, { once: true });
+
+    if (image.complete && image.naturalWidth === 0) {
+      showFallback();
     }
-  }
+  });
 
-  /* MOBILE NAVIGATION */
+  /* =======================================================
+     MOBILE NAVIGATION
+  ======================================================= */
 
   const menuToggle = $("#menuToggle");
   const navMenu = $("#navMenu");
@@ -46,32 +56,19 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!menuToggle || !navMenu) return;
 
     navMenu.classList.remove("active");
-
     menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.setAttribute(
-      "aria-label",
-      "Open navigation menu"
-    );
+    menuToggle.setAttribute("aria-label", "Open navigation menu");
   };
 
   if (menuToggle && navMenu) {
-
     menuToggle.addEventListener("click", () => {
-
       const opened = navMenu.classList.toggle("active");
 
-      menuToggle.setAttribute(
-        "aria-expanded",
-        String(opened)
-      );
-
+      menuToggle.setAttribute("aria-expanded", String(opened));
       menuToggle.setAttribute(
         "aria-label",
-        opened
-          ? "Close navigation menu"
-          : "Open navigation menu"
+        opened ? "Close navigation menu" : "Open navigation menu"
       );
-
     });
 
     $$("a", navMenu).forEach(link => {
@@ -79,97 +76,77 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.addEventListener("click", event => {
-
       if (
         !navMenu.contains(event.target) &&
         !menuToggle.contains(event.target)
       ) {
         closeMenu();
       }
-
     });
 
     document.addEventListener("keydown", event => {
-
       if (event.key === "Escape") {
         closeMenu();
       }
-
     });
-
   }
 
-  /* DARK AND LIGHT THEME */
+  /* =======================================================
+     THEME TOGGLE
+  ======================================================= */
 
   const themeToggle = $("#themeToggle");
 
   const applyTheme = theme => {
-
     const light = theme === "light";
 
-    document.body.classList.toggle(
-      "light-theme",
-      light
-    );
+    document.body.classList.toggle("light-theme", light);
 
     if (themeToggle) {
-
       themeToggle.textContent = light ? "🌙" : "☀️";
 
       themeToggle.setAttribute(
         "aria-label",
-        light
-          ? "Switch to dark mode"
-          : "Switch to light mode"
+        light ? "Switch to dark mode" : "Switch to light mode"
       );
 
-      themeToggle.title = light
-        ? "Dark mode"
-        : "Light mode";
-
+      themeToggle.title = light ? "Dark mode" : "Light mode";
     }
-
   };
 
   let savedTheme = "dark";
 
   try {
-    savedTheme =
-      localStorage.getItem("emtiaz-theme") || "dark";
-  } catch (_) {}
+    savedTheme = localStorage.getItem("emtiaz-theme") || "dark";
+  } catch (_) {
+    savedTheme = "dark";
+  }
 
   applyTheme(savedTheme);
 
   if (themeToggle) {
-
     themeToggle.addEventListener("click", () => {
+      const nextTheme = document.body.classList.contains("light-theme")
+        ? "dark"
+        : "light";
 
-      const next =
-        document.body.classList.contains("light-theme")
-          ? "dark"
-          : "light";
-
-      applyTheme(next);
+      applyTheme(nextTheme);
 
       try {
-        localStorage.setItem("emtiaz-theme", next);
-      } catch (_) {}
-
+        localStorage.setItem("emtiaz-theme", nextTheme);
+      } catch (_) {
+        // Theme still works for the current page session.
+      }
     });
-
   }
 
-  /* TYPING ANIMATION */
+  /* =======================================================
+     TYPING ANIMATION
+  ======================================================= */
 
   const typingElement = $("#typingText");
 
-  const reducedMotion =
-    window.matchMedia?.(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
   if (typingElement) {
-
     const words = [
       "Programmer",
       "Web Developer",
@@ -179,110 +156,74 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     if (reducedMotion) {
-
       typingElement.textContent = words[0];
-
     } else {
-
       let wordIndex = 0;
       let charIndex = 0;
       let deleting = false;
 
       const type = () => {
-
         const word = words[wordIndex];
 
         charIndex += deleting ? -1 : 1;
-
-        typingElement.textContent =
-          word.slice(0, charIndex);
+        typingElement.textContent = word.slice(0, charIndex);
 
         let delay = deleting ? 48 : 85;
 
-        if (
-          !deleting &&
-          charIndex >= word.length
-        ) {
-
+        if (!deleting && charIndex >= word.length) {
           deleting = true;
           delay = 1250;
-
-        } else if (
-          deleting &&
-          charIndex <= 0
-        ) {
-
+        } else if (deleting && charIndex <= 0) {
           deleting = false;
-
-          wordIndex =
-            (wordIndex + 1) % words.length;
-
+          wordIndex = (wordIndex + 1) % words.length;
           delay = 320;
-
         }
 
         window.setTimeout(type, delay);
-
       };
 
       type();
-
     }
-
   }
 
-  /* SCROLL REVEAL ANIMATION */
+  /* =======================================================
+     SCROLL REVEAL ANIMATION
+  ======================================================= */
 
   const revealElements = $$(".scroll-reveal");
 
-  if (
-    "IntersectionObserver" in window &&
-    !reducedMotion
-  ) {
-
-    const revealObserver =
-      new IntersectionObserver(
-        (entries, observer) => {
-
-          entries.forEach(entry => {
-
-            if (entry.isIntersecting) {
-
-              entry.target.classList.add("visible");
-
-              observer.unobserve(entry.target);
-
-            }
-
-          });
-
-        },
-        {
-          threshold: 0.12
-        }
-      );
+  if ("IntersectionObserver" in window && !reducedMotion) {
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12
+      }
+    );
 
     revealElements.forEach(element => {
       revealObserver.observe(element);
     });
-
   } else {
-
     revealElements.forEach(element => {
       element.classList.add("visible");
     });
-
   }
 
-  /* STATISTICS COUNTER */
+  /* =======================================================
+     STATS COUNTER ANIMATION
+  ======================================================= */
 
   const statNumbers = $$(".stat-number");
 
   const animateCounter = element => {
-
-    if (element.dataset.animated === "true") {
-      return;
-    }
+    if (element.dataset.animated === "true") return;
 
     element.dataset.animated = "true";
 
@@ -291,131 +232,88 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!Number.isFinite(target)) return;
 
     if (reducedMotion) {
-
-      element.textContent =
-        target.toLocaleString();
-
+      element.textContent = target.toLocaleString();
       return;
-
     }
 
     const start = performance.now();
     const duration = 1400;
 
     const tick = now => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
 
-      const progress = Math.min(
-        (now - start) / duration,
-        1
-      );
-
-      const eased =
-        1 - Math.pow(1 - progress, 3);
-
-      element.textContent =
-        Math.floor(target * eased).toLocaleString();
+      element.textContent = Math.floor(
+        target * eased
+      ).toLocaleString();
 
       if (progress < 1) {
         requestAnimationFrame(tick);
       }
-
     };
 
     requestAnimationFrame(tick);
-
   };
 
   if ("IntersectionObserver" in window) {
-
-    const statsObserver =
-      new IntersectionObserver(
-        (entries, observer) => {
-
-          entries.forEach(entry => {
-
-            if (entry.isIntersecting) {
-
-              animateCounter(entry.target);
-
-              observer.unobserve(entry.target);
-
-            }
-
-          });
-
-        },
-        {
-          threshold: 0.4
-        }
-      );
+    const statsObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.4
+      }
+    );
 
     statNumbers.forEach(element => {
       statsObserver.observe(element);
     });
-
   } else {
-
     statNumbers.forEach(animateCounter);
-
   }
 
-  /* LIVE AGE COUNTER — BANGLADESH TIME */
+  /* =======================================================
+     LIVE AGE COUNTER — BANGLADESH TIME
+     Birthday: 16 August 2006, 12:00 AM
+  ======================================================= */
 
   const ageNodes = {
-
     years: $("#ageYears"),
     days: $("#ageDays"),
     hours: $("#ageHours"),
     minutes: $("#ageMinutes"),
     seconds: $("#ageSeconds")
-
   };
 
-  /*
-    Birthday:
-    16 August 2006
-    12:00 AM
-    Bangladesh Time (UTC+6)
-  */
+  const birthTimestamp = new Date(
+    "2006-08-16T00:00:00+06:00"
+  ).getTime();
 
-  const birthTimestamp =
-    new Date(
-      "2006-08-16T00:00:00+06:00"
-    ).getTime();
+  const dhakaFormatter = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Asia/Dhaka",
+    year: "numeric",
+    month: "numeric",
+    day: "numeric"
+  });
 
-  const dhakaFormatter =
-    new Intl.DateTimeFormat("en-US", {
-
-      timeZone: "Asia/Dhaka",
-      year: "numeric",
-      month: "numeric",
-      day: "numeric"
-
-    });
-
-  const dhakaParts = date => {
-
+  const getDhakaParts = date => {
     const result = {};
 
-    dhakaFormatter
-      .formatToParts(date)
-      .forEach(part => {
-
-        if (part.type !== "literal") {
-
-          result[part.type] =
-            Number(part.value);
-
-        }
-
-      });
+    dhakaFormatter.formatToParts(date).forEach(part => {
+      if (part.type !== "literal") {
+        result[part.type] = Number(part.value);
+      }
+    });
 
     return result;
-
   };
 
   const updateAgeCounter = () => {
-
     const now = new Date();
 
     const elapsed = Math.max(
@@ -423,594 +321,376 @@ document.addEventListener("DOMContentLoaded", () => {
       now.getTime() - birthTimestamp
     );
 
-    const totalSeconds =
-      Math.floor(elapsed / 1000);
-
-    const parts = dhakaParts(now);
+    const totalSeconds = Math.floor(elapsed / 1000);
+    const parts = getDhakaParts(now);
 
     let years = parts.year - 2006;
 
     if (
       parts.month < 8 ||
-      (
-        parts.month === 8 &&
-        parts.day < 16
-      )
+      (parts.month === 8 && parts.day < 16)
     ) {
       years--;
     }
 
     const values = {
-
       years: Math.max(0, years),
-
-      days: Math.floor(
-        totalSeconds / 86400
-      ),
-
-      hours: Math.floor(
-        totalSeconds / 3600
-      ),
-
-      minutes: Math.floor(
-        totalSeconds / 60
-      ),
-
+      days: Math.floor(totalSeconds / 86400),
+      hours: Math.floor(totalSeconds / 3600),
+      minutes: Math.floor(totalSeconds / 60),
       seconds: totalSeconds
-
     };
 
-    Object.entries(ageNodes).forEach(
-      ([key, node]) => {
-
-        if (node) {
-
-          node.textContent =
-            values[key].toLocaleString();
-
-        }
-
+    Object.entries(ageNodes).forEach(([key, node]) => {
+      if (node) {
+        node.textContent = values[key].toLocaleString();
       }
-    );
-
+    });
   };
 
-  const hasAgeCounter =
-    Object.values(ageNodes).some(Boolean);
+  const hasAgeCounter = Object.values(ageNodes).some(Boolean);
 
   if (hasAgeCounter) {
-
     updateAgeCounter();
 
-    window.setInterval(
-      updateAgeCounter,
-      1000
-    );
+    window.setInterval(updateAgeCounter, 1000);
 
-    document.addEventListener(
-      "visibilitychange",
-      () => {
-
-        if (!document.hidden) {
-          updateAgeCounter();
-        }
-
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) {
+        updateAgeCounter();
       }
-    );
-
+    });
   }
 
-  /* PROJECT DETAILS MODAL */
+  /* =======================================================
+     PROJECT DETAILS MODAL
+  ======================================================= */
 
   const projectModal = $("#projectModal");
-
-  const modalTitle =
-    $("#projectModalTitle");
-
-  const modalDescription =
-    $("#projectModalDescription");
-
-  const modalClose =
-    $("#projectModalClose");
-
-  const modalDone =
-    $("#modalDone");
+  const modalTitle = $("#projectModalTitle");
+  const modalDescription = $("#projectModalDescription");
+  const modalClose = $("#projectModalClose");
+  const modalDone = $("#modalDone");
 
   let previousFocus = null;
 
   const closeProjectModal = () => {
-
     if (!projectModal) return;
 
     projectModal.classList.remove("active");
-
-    projectModal.setAttribute(
-      "aria-hidden",
-      "true"
-    );
+    projectModal.setAttribute("aria-hidden", "true");
 
     document.body.style.overflow = "";
 
     if (previousFocus) {
       previousFocus.focus();
     }
-
   };
 
   $$(".project-details-btn").forEach(button => {
-
     button.addEventListener("click", () => {
-
       if (!projectModal) return;
 
       previousFocus = button;
 
       if (modalTitle) {
-
         modalTitle.textContent =
-          button.dataset.title ||
-          "Project Details";
-
+          button.dataset.title || "Project Details";
       }
 
       if (modalDescription) {
-
         modalDescription.textContent =
           button.dataset.description ||
           "More information will be available soon.";
-
       }
 
       projectModal.classList.add("active");
-
-      projectModal.setAttribute(
-        "aria-hidden",
-        "false"
-      );
+      projectModal.setAttribute("aria-hidden", "false");
 
       document.body.style.overflow = "hidden";
 
       modalClose?.focus();
-
     });
-
   });
 
-  modalClose?.addEventListener(
-    "click",
-    closeProjectModal
-  );
+  modalClose?.addEventListener("click", closeProjectModal);
+  modalDone?.addEventListener("click", closeProjectModal);
 
-  modalDone?.addEventListener(
-    "click",
-    closeProjectModal
-  );
-
-  projectModal?.addEventListener(
-    "click",
-    event => {
-
-      if (event.target === projectModal) {
-        closeProjectModal();
-      }
-
+  projectModal?.addEventListener("click", event => {
+    if (event.target === projectModal) {
+      closeProjectModal();
     }
-  );
+  });
 
   document.addEventListener("keydown", event => {
-
     if (
       event.key === "Escape" &&
       projectModal?.classList.contains("active")
     ) {
       closeProjectModal();
     }
-
   });
 
-  /* CONTACT FORM */
-
-  /*
-    GitHub Pages does not provide a built-in
-    form backend. This prepares an email for
-    the visitor to review and send.
-  */
+  /* =======================================================
+     CONTACT FORM
+     GitHub Pages does not provide a built-in form backend.
+     This prepares an email for the visitor to review and send.
+  ======================================================= */
 
   const contactForm = $("#contactForm");
   const formMessage = $("#formMessage");
 
   if (contactForm) {
+    contactForm.addEventListener("submit", event => {
+      event.preventDefault();
 
-    contactForm.addEventListener(
-      "submit",
-      event => {
+      const name = $("#contactName")?.value.trim() || "";
+      const email = $("#contactEmail")?.value.trim() || "";
+      const message = $("#contactMessage")?.value.trim() || "";
 
-        event.preventDefault();
-
-        const name =
-          $("#contactName")?.value.trim() || "";
-
-        const email =
-          $("#contactEmail")?.value.trim() || "";
-
-        const message =
-          $("#contactMessage")?.value.trim() || "";
-
-        if (!name || !email || !message) {
-
-          if (formMessage) {
-
-            formMessage.textContent =
-              "Please complete all fields.";
-
-          }
-
-          return;
-
-        }
-
-        const subject = encodeURIComponent(
-          `Website message from ${name}`
-        );
-
-        const body = encodeURIComponent(
-          `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
-        );
-
+      if (!name || !email || !message) {
         if (formMessage) {
-
-          formMessage.textContent =
-            "Opening your email app. Please review and send the prepared message.";
-
+          formMessage.textContent = "Please complete all fields.";
         }
 
-        window.location.href =
-          `mailto:mdemtiaz36900@gmail.com?subject=${subject}&body=${body}`;
-
+        return;
       }
-    );
 
+      const subject = encodeURIComponent(
+        `Website message from ${name}`
+      );
+
+      const body = encodeURIComponent(
+        `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+      );
+
+      if (formMessage) {
+        formMessage.textContent =
+          "Opening your email app. Please review and send the prepared message.";
+      }
+
+      window.location.href =
+        `mailto:mdemtiaz36900@gmail.com?subject=${subject}&body=${body}`;
+    });
   }
 
-  /* BACK TO TOP */
+  /* =======================================================
+     BACK TO TOP
+  ======================================================= */
 
   const backToTop = $("#backToTop");
 
   const updateBackToTop = () => {
-
     if (backToTop) {
-
       backToTop.classList.toggle(
         "show",
         window.scrollY > 450
       );
-
     }
-
   };
 
-  window.addEventListener(
-    "scroll",
-    updateBackToTop,
-    {
-      passive: true
-    }
-  );
+  window.addEventListener("scroll", updateBackToTop, {
+    passive: true
+  });
 
-  backToTop?.addEventListener(
-    "click",
-    () => {
-
-      window.scrollTo({
-
-        top: 0,
-
-        behavior: reducedMotion
-          ? "auto"
-          : "smooth"
-
-      });
-
-    }
-  );
+  backToTop?.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: reducedMotion ? "auto" : "smooth"
+    });
+  });
 
   updateBackToTop();
 
-  /* SCROLL PROGRESS BAR */
+  /* =======================================================
+     SCROLL PROGRESS BAR
+  ======================================================= */
 
-  const scrollProgress =
-    document.createElement("div");
+  const scrollProgress = document.createElement("div");
 
-  scrollProgress.className =
-    "scroll-progress";
-
-  scrollProgress.setAttribute(
-    "aria-hidden",
-    "true"
-  );
+  scrollProgress.className = "scroll-progress";
+  scrollProgress.setAttribute("aria-hidden", "true");
 
   document.body.appendChild(scrollProgress);
 
   const updateScrollProgress = () => {
-
     const maxScroll =
-      document.documentElement.scrollHeight -
-      window.innerHeight;
+      document.documentElement.scrollHeight - window.innerHeight;
 
-    const percent =
-      maxScroll > 0
-        ? (window.scrollY / maxScroll) * 100
-        : 0;
+    const percent = maxScroll > 0
+      ? (window.scrollY / maxScroll) * 100
+      : 0;
 
     scrollProgress.style.width =
       `${Math.min(100, Math.max(0, percent))}%`;
-
   };
 
-  window.addEventListener(
-    "scroll",
-    updateScrollProgress,
-    {
-      passive: true
-    }
-  );
+  window.addEventListener("scroll", updateScrollProgress, {
+    passive: true
+  });
 
-  window.addEventListener(
-    "resize",
-    updateScrollProgress,
-    {
-      passive: true
-    }
-  );
+  window.addEventListener("resize", updateScrollProgress);
 
   updateScrollProgress();
 
-  /* ACTIVE NAVIGATION LINK */
+  /* =======================================================
+     ACTIVE NAVIGATION LINK
+  ======================================================= */
 
   const sections = $$("main section[id]");
-
-  const navigationLinks =
-    $$("#navMenu a[href^='#']");
+  const navigationLinks = $$("#navMenu a[href^='#']");
 
   if (
     "IntersectionObserver" in window &&
     sections.length &&
     navigationLinks.length
   ) {
+    const sectionObserver = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
 
-    const sectionObserver =
-      new IntersectionObserver(
-        entries => {
-
-          entries.forEach(entry => {
-
-            if (!entry.isIntersecting) return;
-
-            navigationLinks.forEach(link => {
-
-              link.classList.toggle(
-                "active",
-                link.getAttribute("href") ===
-                  `#${entry.target.id}`
-              );
-
-            });
-
+          navigationLinks.forEach(link => {
+            link.classList.toggle(
+              "active",
+              link.getAttribute("href") === `#${entry.target.id}`
+            );
           });
-
-        },
-        {
-          rootMargin: "-30% 0px -60% 0px",
-          threshold: 0
-        }
-      );
+        });
+      },
+      {
+        rootMargin: "-30% 0px -60% 0px",
+        threshold: 0
+      }
+    );
 
     sections.forEach(section => {
       sectionObserver.observe(section);
     });
-
   }
 
-  /* SMOOTH IN-PAGE LINKS */
+  /* =======================================================
+     SMOOTH IN-PAGE LINKS
+  ======================================================= */
 
   $$("a[href^='#']").forEach(link => {
+    link.addEventListener("click", event => {
+      const selector = link.getAttribute("href");
 
-    link.addEventListener(
-      "click",
-      event => {
+      if (!selector || selector === "#") return;
 
-        const selector =
-          link.getAttribute("href");
+      const target = document.querySelector(selector);
 
-        if (!selector || selector === "#") {
-          return;
-        }
+      if (!target) return;
 
-        const target =
-          document.querySelector(selector);
+      event.preventDefault();
 
-        if (!target) return;
+      target.scrollIntoView({
+        behavior: reducedMotion ? "auto" : "smooth",
+        block: "start"
+      });
 
-        event.preventDefault();
-
-        target.scrollIntoView({
-
-          behavior: reducedMotion
-            ? "auto"
-            : "smooth",
-
-          block: "start"
-
-        });
-
-        if (navMenu?.contains(link)) {
-          closeMenu();
-        }
-
+      if (navMenu?.contains(link)) {
+        closeMenu();
       }
-    );
-
+    });
   });
 
-  /* EXTERNAL LINK SAFETY */
+  /* =======================================================
+     EXTERNAL LINK SAFETY
+  ======================================================= */
 
   $$('a[target="_blank"]').forEach(link => {
-
-    link.setAttribute(
-      "rel",
-      "noopener noreferrer"
-    );
-
+    link.setAttribute("rel", "noopener noreferrer");
   });
 
-  /* WELCOME VOICE */
+  /* =======================================================
+     WELCOME VOICE
+     Browsers require user interaction before speech playback.
+  ======================================================= */
 
-  /*
-    Browsers may block automatic speech until
-    the visitor interacts with the page.
-
-    The welcome button always provides a
-    direct way to play the message.
-  */
-
-  const welcomeButton =
-    $("#welcomeVoiceBtn");
-
-  const voiceStatus =
-    $("#voiceStatus");
+  const welcomeButton = $("#welcomeVoiceBtn");
+  const voiceStatus = $("#voiceStatus");
 
   let welcomeSpoken = false;
 
   const speakWelcome = () => {
-
     if (
       !("speechSynthesis" in window) ||
       !("SpeechSynthesisUtterance" in window)
     ) {
-
       if (voiceStatus) {
-
         voiceStatus.textContent =
           "Voice playback is not supported by this browser.";
-
       }
 
       return;
-
     }
 
     window.speechSynthesis.cancel();
 
-    const utterance =
-      new SpeechSynthesisUtterance(
-        "Welcome to Emtiaz Official Website."
-      );
+    const utterance = new SpeechSynthesisUtterance(
+      "Welcome to Emtiaz Official Website."
+    );
 
     utterance.lang = "en-US";
     utterance.rate = 0.92;
     utterance.pitch = 1;
 
     utterance.onstart = () => {
-
       if (voiceStatus) {
-
-        voiceStatus.textContent =
-          "Playing welcome message…";
-
+        voiceStatus.textContent = "Playing welcome message...";
       }
-
     };
 
     utterance.onend = () => {
-
       if (voiceStatus) {
-
-        voiceStatus.textContent =
-          "Welcome message finished.";
-
+        voiceStatus.textContent = "Welcome message finished.";
       }
-
     };
 
     utterance.onerror = () => {
-
       if (voiceStatus) {
-
         voiceStatus.textContent =
           "Tap the button to play the welcome message.";
-
       }
-
     };
 
     window.speechSynthesis.speak(utterance);
 
     welcomeSpoken = true;
-
   };
 
-  welcomeButton?.addEventListener(
-    "click",
-    speakWelcome
-  );
+  welcomeButton?.addEventListener("click", speakWelcome);
 
-  /*
-    First normal page interaction attempts
-    the welcome voice once.
-
-    If the visitor clicks the voice button,
-    the button itself handles playback.
-  */
-
-  const firstInteraction = event => {
-
-    if (
-      welcomeButton &&
-      welcomeButton.contains(event.target)
-    ) {
-      return;
-    }
-
+  const firstInteraction = () => {
     if (welcomeSpoken) return;
 
     speakWelcome();
 
-    document.removeEventListener(
-      "pointerdown",
-      firstInteraction
-    );
-
-    document.removeEventListener(
-      "keydown",
-      firstInteraction
-    );
-
+    document.removeEventListener("pointerdown", firstInteraction);
+    document.removeEventListener("keydown", firstInteraction);
   };
 
-  document.addEventListener(
-    "pointerdown",
-    firstInteraction
-  );
+  document.addEventListener("pointerdown", firstInteraction, {
+    once: true
+  });
 
-  document.addEventListener(
-    "keydown",
-    firstInteraction
-  );
+  document.addEventListener("keydown", firstInteraction, {
+    once: true
+  });
 
-  /* PAGE READY */
+  /* =======================================================
+     PAGE READY
+  ======================================================= */
 
   window.addEventListener(
     "load",
     () => {
       document.body.classList.add("page-loaded");
     },
-    {
-      once: true
-    }
+    { once: true }
   );
 
-  console.log(
-    "Emtiaz Official — website scripts ready."
-  );
-
+  console.log("Emtiaz Official — premium website scripts ready.");
 });
