@@ -1,131 +1,168 @@
 /* =========================================================
-   EMTIAZ OFFICIAL — SIGNATURE LUXURY EDITION
-   COMPLETE SCRIPT.JS
+   EMTIAZ OFFICIAL — PREMIUM JAVASCRIPT
+   FILE 3 / 3
+   Complete Website Functionality
 ========================================================= */
 
 "use strict";
 
-/* =========================
-   ELEMENTS
-========================= */
+/* =========================================================
+   1. SELECT ELEMENTS
+========================================================= */
 
-const $ = (selector, parent = document) =>
-  parent.querySelector(selector);
+const body = document.body;
 
-const $$ = (selector, parent = document) =>
-  [...parent.querySelectorAll(selector)];
+const themeToggle = document.getElementById("themeToggle");
+const menuToggle = document.getElementById("menuToggle");
+const navMenu = document.getElementById("navMenu");
 
-/* =========================
-   CURRENT YEAR
-========================= */
+const typingText = document.getElementById("typingText");
+const welcomeVoiceBtn = document.getElementById("welcomeVoiceBtn");
 
-const currentYear = $("#currentYear");
+const scrollProgress = document.getElementById("scrollProgress");
+const backToTop = document.getElementById("backToTop");
 
-if (currentYear) {
-  currentYear.textContent = new Date().getFullYear();
-}
+const currentYear = document.getElementById("currentYear");
 
-/* =========================
-   THEME SYSTEM
-========================= */
+const projectModal = document.getElementById("projectModal");
+const modalClose = document.getElementById("modalClose");
+const modalTitle = document.getElementById("modalTitle");
+const modalDescription = document.getElementById("modalDescription");
 
-const themeToggle = $("#themeToggle");
+const contactForm = document.getElementById("contactForm");
+const formMessage = document.getElementById("formMessage");
 
-function setTheme(theme) {
-  document.documentElement.setAttribute("data-theme", theme);
+
+/* =========================================================
+   2. DARK / LIGHT THEME
+========================================================= */
+
+function applyTheme(theme) {
+  const selectedTheme = theme === "light" ? "light" : "dark";
+
+  body.classList.toggle(
+    "light-theme",
+    selectedTheme === "light"
+  );
 
   if (themeToggle) {
-    themeToggle.textContent = theme === "light" ? "☾" : "☼";
+    themeToggle.textContent =
+      selectedTheme === "light" ? "☀️" : "🌙";
+
     themeToggle.setAttribute(
       "aria-label",
-      theme === "light" ? "Switch to dark theme" : "Switch to light theme"
+      selectedTheme === "light"
+        ? "Switch to dark mode"
+        : "Switch to light mode"
+    );
+
+    themeToggle.setAttribute(
+      "title",
+      selectedTheme === "light"
+        ? "Dark Mode"
+        : "Light Mode"
     );
   }
-}
-
-let savedTheme = "dark";
-
-try {
-  savedTheme = localStorage.getItem("emtiaz-theme") || "dark";
-} catch {
-  savedTheme = "dark";
-}
-
-setTheme(savedTheme);
-
-themeToggle?.addEventListener("click", () => {
-  const currentTheme =
-    document.documentElement.getAttribute("data-theme") || "dark";
-
-  const nextTheme = currentTheme === "dark" ? "light" : "dark";
-
-  setTheme(nextTheme);
 
   try {
-    localStorage.setItem("emtiaz-theme", nextTheme);
-  } catch {
-    // Theme still works for this page session.
-  }
-});
-
-/* =========================
-   MOBILE NAVIGATION
-========================= */
-
-const menuToggle = $("#menuToggle");
-const navMenu = $("#navMenu");
-
-function closeMenu() {
-  navMenu?.classList.remove("active");
-
-  if (menuToggle) {
-    menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.textContent = "☰";
+    localStorage.setItem("emtiaz-theme", selectedTheme);
+  } catch (error) {
+    console.warn("Theme preference could not be saved.");
   }
 }
 
-menuToggle?.addEventListener("click", () => {
-  const isOpen = navMenu?.classList.toggle("active") || false;
+function initializeTheme() {
+  let savedTheme = "dark";
 
-  menuToggle.setAttribute("aria-expanded", String(isOpen));
-  menuToggle.textContent = isOpen ? "×" : "☰";
-});
+  try {
+    const storedTheme = localStorage.getItem("emtiaz-theme");
 
-$$(".nav-menu a").forEach(link => {
-  link.addEventListener("click", closeMenu);
-});
-
-document.addEventListener("click", event => {
-  if (
-    navMenu &&
-    menuToggle &&
-    !navMenu.contains(event.target) &&
-    !menuToggle.contains(event.target)
-  ) {
-    closeMenu();
+    if (storedTheme === "light" || storedTheme === "dark") {
+      savedTheme = storedTheme;
+    }
+  } catch (error) {
+    console.warn("Saved theme could not be accessed.");
   }
-});
 
-/* =========================
-   TYPING ANIMATION
-========================= */
+  applyTheme(savedTheme);
+}
 
-const typingText = $("#typingText");
+initializeTheme();
+
+if (themeToggle) {
+  themeToggle.addEventListener("click", function () {
+    const isLight = body.classList.contains("light-theme");
+
+    applyTheme(isLight ? "dark" : "light");
+  });
+}
+
+
+/* =========================================================
+   3. MOBILE NAVIGATION
+========================================================= */
+
+function closeNavigation() {
+  if (!navMenu || !menuToggle) return;
+
+  navMenu.classList.remove("active");
+
+  menuToggle.setAttribute("aria-expanded", "false");
+
+  menuToggle.textContent = "☰";
+}
+
+if (menuToggle && navMenu) {
+  menuToggle.addEventListener("click", function () {
+    const isOpen = navMenu.classList.toggle("active");
+
+    menuToggle.setAttribute(
+      "aria-expanded",
+      String(isOpen)
+    );
+
+    menuToggle.textContent = isOpen ? "✕" : "☰";
+  });
+
+  navMenu.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", closeNavigation);
+  });
+
+  document.addEventListener("click", function (event) {
+    const clickedInsideMenu = navMenu.contains(event.target);
+    const clickedMenuButton = menuToggle.contains(event.target);
+
+    if (!clickedInsideMenu && !clickedMenuButton) {
+      closeNavigation();
+    }
+  });
+
+  window.addEventListener("resize", function () {
+    if (window.innerWidth > 760) {
+      closeNavigation();
+    }
+  });
+}
+
+
+/* =========================================================
+   4. HERO TYPING ANIMATION
+========================================================= */
 
 if (typingText) {
-  const words = [
+  const typingWords = [
     "Programmer",
     "Web Developer",
     "Digital Creator",
-    "Technology Explorer"
+    "Technology Enthusiast"
   ];
 
   let wordIndex = 0;
   let characterIndex = 0;
   let deleting = false;
 
-  function typeEffect() {
-    const currentWord = words[wordIndex];
+  function typeAnimation() {
+    const currentWord = typingWords[wordIndex];
 
     if (!deleting) {
       characterIndex++;
@@ -135,7 +172,8 @@ if (typingText) {
 
       if (characterIndex === currentWord.length) {
         deleting = true;
-        setTimeout(typeEffect, 1500);
+
+        setTimeout(typeAnimation, 1500);
         return;
       }
     } else {
@@ -146,340 +184,418 @@ if (typingText) {
 
       if (characterIndex === 0) {
         deleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
+
+        wordIndex =
+          (wordIndex + 1) % typingWords.length;
       }
     }
 
-    setTimeout(typeEffect, deleting ? 55 : 105);
+    setTimeout(
+      typeAnimation,
+      deleting ? 45 : 90
+    );
   }
 
-  typeEffect();
+  typeAnimation();
 }
 
-/* =========================
-   WELCOME VOICE
-========================= */
 
-const welcomeVoiceBtn = $("#welcomeVoiceBtn");
+/* =========================================================
+   5. WELCOME VOICE
+========================================================= */
 
-welcomeVoiceBtn?.addEventListener("click", () => {
-  if (!("speechSynthesis" in window)) {
-    welcomeVoiceBtn.textContent = "Voice not supported";
-    return;
-  }
+if (welcomeVoiceBtn) {
+  welcomeVoiceBtn.addEventListener("click", function () {
+    if (!("speechSynthesis" in window)) {
+      if (formMessage) {
+        formMessage.textContent =
+          "Voice feature is not supported by this browser.";
+      }
 
-  window.speechSynthesis.cancel();
+      return;
+    }
 
-  const message = new SpeechSynthesisUtterance(
-    "Welcome to Emtiaz Official. I am Emtiaz. Welcome to my digital world."
-  );
+    window.speechSynthesis.cancel();
 
-  message.lang = "en-US";
-  message.rate = 0.9;
-  message.pitch = 1;
+    const welcomeMessage = new SpeechSynthesisUtterance(
+      "Welcome to Emtiaz Official. " +
+      "I am Emtiaz, a programmer and web developer. " +
+      "Thank you for visiting my website."
+    );
 
-  window.speechSynthesis.speak(message);
-});
+    welcomeMessage.lang = "en-US";
+    welcomeMessage.rate = 0.9;
+    welcomeMessage.pitch = 1;
+    welcomeMessage.volume = 1;
 
-/* =========================
-   BIRTHDAY & AGE COUNTER
-========================= */
+    window.speechSynthesis.speak(welcomeMessage);
+  });
+}
 
-const birthday = new Date("2006-08-16T00:00:00+06:00");
 
-const ageYears = $("#ageYears");
-const ageDays = $("#ageDays");
-const ageHours = $("#ageHours");
-const ageMinutes = $("#ageMinutes");
-const ageSeconds = $("#ageSeconds");
+/* =========================================================
+   6. AGE & BIRTHDAY COUNTER
+========================================================= */
+
+const birthdayDate = new Date(
+  "2006-08-16T00:00:00+06:00"
+);
+
+const ageYears = document.getElementById("ageYears");
+const ageDays = document.getElementById("ageDays");
+const ageHours = document.getElementById("ageHours");
+const ageMinutes = document.getElementById("ageMinutes");
+const ageSeconds = document.getElementById("ageSeconds");
 
 function updateAgeCounter() {
   const now = new Date();
 
-  if (now < birthday) return;
+  if (Number.isNaN(birthdayDate.getTime())) {
+    return;
+  }
 
-  let years = now.getFullYear() - birthday.getFullYear();
+  let years = now.getFullYear() - birthdayDate.getFullYear();
 
   const birthdayThisYear = new Date(
     now.getFullYear(),
-    birthday.getMonth(),
-    birthday.getDate(),
-    0, 0, 0
+    7,
+    16,
+    0,
+    0,
+    0
   );
 
   if (now < birthdayThisYear) {
     years--;
   }
 
-  const lastBirthday = new Date(
-    birthday.getFullYear() + years,
-    birthday.getMonth(),
-    birthday.getDate()
-  );
+  if (ageYears) {
+    ageYears.textContent = Math.max(0, years);
+  }
+
+  const nextBirthdayYear =
+    now < birthdayThisYear
+      ? now.getFullYear()
+      : now.getFullYear() + 1;
 
   const nextBirthday = new Date(
-    birthday.getFullYear() + years + 1,
-    birthday.getMonth(),
-    birthday.getDate()
+    nextBirthdayYear,
+    7,
+    16,
+    0,
+    0,
+    0
   );
 
-  const elapsed = now - lastBirthday;
-  const remaining = nextBirthday - now;
+  const remainingMilliseconds =
+    Math.max(0, nextBirthday.getTime() - now.getTime());
 
-  const days = Math.floor(elapsed / 86400000);
-  const hours = Math.floor((elapsed % 86400000) / 3600000);
-  const minutes = Math.floor((elapsed % 3600000) / 60000);
-  const seconds = Math.floor((elapsed % 60000) / 1000);
+  const totalSeconds = Math.floor(
+    remainingMilliseconds / 1000
+  );
 
-  if (ageYears) ageYears.textContent = years;
-  if (ageDays) ageDays.textContent = days;
-  if (ageHours) ageHours.textContent = hours;
-  if (ageMinutes) ageMinutes.textContent = minutes;
-  if (ageSeconds) ageSeconds.textContent = seconds;
+  const days = Math.floor(totalSeconds / 86400);
 
-  const agePanel = $(".age-panel");
+  const hours = Math.floor(
+    (totalSeconds % 86400) / 3600
+  );
 
-  if (agePanel) {
-    agePanel.setAttribute(
-      "title",
-      `${Math.floor(remaining / 86400000)} days until next birthday`
-    );
+  const minutes = Math.floor(
+    (totalSeconds % 3600) / 60
+  );
+
+  const seconds = totalSeconds % 60;
+
+  if (ageDays) {
+    ageDays.textContent = days;
+  }
+
+  if (ageHours) {
+    ageHours.textContent = hours;
+  }
+
+  if (ageMinutes) {
+    ageMinutes.textContent = minutes;
+  }
+
+  if (ageSeconds) {
+    ageSeconds.textContent = seconds;
   }
 }
 
 updateAgeCounter();
+
 setInterval(updateAgeCounter, 1000);
 
-/* =========================
-   PROJECT MODAL
-========================= */
 
-const projectModal = $("#projectModal");
-const modalTitle = $("#modalTitle");
-const modalDescription = $("#modalDescription");
-const modalClose = $("#modalClose");
+/* =========================================================
+   7. PROJECT DETAILS MODAL
+========================================================= */
 
 function openProjectModal(title, description) {
-  if (!projectModal) return;
+  if (
+    !projectModal ||
+    !modalTitle ||
+    !modalDescription
+  ) {
+    return;
+  }
 
-  if (modalTitle) modalTitle.textContent = title;
-  if (modalDescription) modalDescription.textContent = description;
+  modalTitle.textContent = title;
+  modalDescription.textContent = description;
 
   projectModal.classList.add("active");
-  projectModal.setAttribute("aria-hidden", "false");
-  document.body.style.overflow = "hidden";
 
-  modalClose?.focus();
+  projectModal.setAttribute("aria-hidden", "false");
+
+  body.style.overflow = "hidden";
+
+  if (modalClose) {
+    modalClose.focus();
+  }
 }
 
 function closeProjectModal() {
   if (!projectModal) return;
 
   projectModal.classList.remove("active");
+
   projectModal.setAttribute("aria-hidden", "true");
-  document.body.style.overflow = "";
+
+  body.style.overflow = "";
 }
 
-$$(".project-details").forEach(button => {
-  button.addEventListener("click", () => {
-    openProjectModal(
-      button.dataset.title || "Project Details",
-      button.dataset.description || "More information coming soon."
-    );
-  });
-});
+document.querySelectorAll(".project-details").forEach(
+  function (button) {
+    button.addEventListener("click", function () {
+      const title =
+        button.dataset.title || "Project Details";
 
-modalClose?.addEventListener("click", closeProjectModal);
+      const description =
+        button.dataset.description ||
+        "More information about this project will be available soon.";
 
-projectModal?.addEventListener("click", event => {
-  if (event.target === projectModal) {
-    closeProjectModal();
+      openProjectModal(title, description);
+    });
   }
-});
+);
 
-document.addEventListener("keydown", event => {
-  if (event.key === "Escape") {
-    closeProjectModal();
-    closeMenu();
-  }
-});
+if (modalClose) {
+  modalClose.addEventListener(
+    "click",
+    closeProjectModal
+  );
+}
 
-/* =========================
-   CONTACT FORM
-========================= */
-
-const contactForm = $("#contactForm");
-const formMessage = $("#formMessage");
-
-contactForm?.addEventListener("submit", event => {
-  event.preventDefault();
-
-  const name = $("#contactName")?.value.trim();
-  const email = $("#contactEmail")?.value.trim();
-  const message = $("#contactMessage")?.value.trim();
-
-  if (!name || !email || !message) {
-    if (formMessage) {
-      formMessage.textContent = "Please complete all fields.";
+if (projectModal) {
+  projectModal.addEventListener("click", function (event) {
+    if (event.target === projectModal) {
+      closeProjectModal();
     }
-    return;
-  }
-
-  const subject = encodeURIComponent(
-    `Website message from ${name}`
-  );
-
-  const body = encodeURIComponent(
-    `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
-  );
-
-  const mailto =
-    `mailto:mdemtiaz36900@gmail.com?subject=${subject}&body=${body}`;
-
-  if (formMessage) {
-    formMessage.textContent =
-      "Opening your email application...";
-  }
-
-  window.location.href = mailto;
-});
-
-/* =========================
-   BACK TO TOP
-========================= */
-
-const backToTop = $("#backToTop");
-
-backToTop?.addEventListener("click", () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
   });
+}
+
+document.addEventListener("keydown", function (event) {
+  if (
+    event.key === "Escape" &&
+    projectModal &&
+    projectModal.classList.contains("active")
+  ) {
+    closeProjectModal();
+  }
 });
 
-/* =========================
-   SCROLL PROGRESS
-========================= */
 
-const scrollProgress = $(".scroll-progress");
+/* =========================================================
+   8. CONTACT FORM
+========================================================= */
 
-function updateScrollEffects() {
-  const scrollTop = window.scrollY;
+if (contactForm) {
+  contactForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const nameInput =
+      document.getElementById("contactName");
+
+    const emailInput =
+      document.getElementById("contactEmail");
+
+    const messageInput =
+      document.getElementById("contactMessage");
+
+    if (!nameInput || !emailInput || !messageInput) {
+      return;
+    }
+
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim();
+    const message = messageInput.value.trim();
+
+    if (!name || !email || !message) {
+      if (formMessage) {
+        formMessage.textContent =
+          "Please complete all fields.";
+      }
+
+      return;
+    }
+
+    const emailPattern =
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(email)) {
+      if (formMessage) {
+        formMessage.textContent =
+          "Please enter a valid email address.";
+      }
+
+      emailInput.focus();
+      return;
+    }
+
+    const subject = encodeURIComponent(
+      "Website Message from " + name
+    );
+
+    const emailBody = encodeURIComponent(
+      "Name: " + name +
+      "\nEmail: " + email +
+      "\n\nMessage:\n" + message
+    );
+
+    const mailtoLink =
+      "mailto:mdemtiaz36900@gmail.com" +
+      "?subject=" + subject +
+      "&body=" + emailBody;
+
+    if (formMessage) {
+      formMessage.textContent =
+        "Opening your email application...";
+    }
+
+    window.location.href = mailtoLink;
+  });
+}
+
+
+/* =========================================================
+   9. SCROLL PROGRESS & BACK TO TOP
+========================================================= */
+
+function updateScrollElements() {
+  const scrollTop =
+    window.scrollY || document.documentElement.scrollTop;
 
   const scrollHeight =
-    document.documentElement.scrollHeight - window.innerHeight;
+    document.documentElement.scrollHeight -
+    document.documentElement.clientHeight;
 
   const progress =
-    scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+    scrollHeight > 0
+      ? (scrollTop / scrollHeight) * 100
+      : 0;
 
   if (scrollProgress) {
-    scrollProgress.style.width = `${progress}%`;
+    scrollProgress.style.width =
+      Math.min(100, Math.max(0, progress)) + "%";
   }
 
-  backToTop?.classList.toggle("show", scrollTop > 450);
+  if (backToTop) {
+    backToTop.classList.toggle(
+      "show",
+      scrollTop > 450
+    );
+  }
 }
 
-window.addEventListener("scroll", updateScrollEffects, {
-  passive: true
-});
+window.addEventListener(
+  "scroll",
+  updateScrollElements,
+  { passive: true }
+);
 
-updateScrollEffects();
+updateScrollElements();
 
-/* =========================
-   SCROLL REVEAL
-========================= */
+if (backToTop) {
+  backToTop.addEventListener("click", function () {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+}
 
-const revealElements = $$(".scroll-reveal");
+
+/* =========================================================
+   10. SCROLL REVEAL ANIMATION
+========================================================= */
+
+const revealElements = document.querySelectorAll(
+  ".scroll-reveal"
+);
 
 if ("IntersectionObserver" in window) {
   const revealObserver = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
+    function (entries, observer) {
+      entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add("visible");
-          revealObserver.unobserve(entry.target);
+
+          observer.unobserve(entry.target);
         }
       });
     },
     {
-      threshold: 0.12
+      threshold: 0.12,
+      rootMargin: "0px 0px -35px 0px"
     }
   );
 
-  revealElements.forEach(element => {
+  revealElements.forEach(function (element) {
     revealObserver.observe(element);
   });
 } else {
-  revealElements.forEach(element => {
+  revealElements.forEach(function (element) {
     element.classList.add("visible");
   });
 }
 
-/* =========================
-   IMAGE FALLBACK
-========================= */
 
-$$("img").forEach(img => {
-  img.addEventListener("error", () => {
-    img.style.display = "none";
+/* =========================================================
+   11. CURRENT YEAR
+========================================================= */
 
-    const fallback = img.nextElementSibling;
-
-    if (fallback?.classList.contains("image-fallback")) {
-      fallback.style.display = "grid";
-    }
-  });
-});
-
-/* =========================
-   ACTIVE NAVIGATION
-========================= */
-
-const pageSections = $$("main section[id]");
-const navLinks = $$(".nav-menu a[href^='#']");
-
-if ("IntersectionObserver" in window) {
-  const sectionObserver = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-
-        navLinks.forEach(link => {
-          link.classList.toggle(
-            "active",
-            link.getAttribute("href") === `#${entry.target.id}`
-          );
-        });
-      });
-    },
-    {
-      rootMargin: "-35% 0px -55% 0px"
-    }
-  );
-
-  pageSections.forEach(section => {
-    sectionObserver.observe(section);
-  });
+if (currentYear) {
+  currentYear.textContent = new Date().getFullYear();
 }
 
-/* =========================
-   ACCESSIBILITY
-========================= */
 
-document.addEventListener("keydown", event => {
-  if (event.key === "Tab") {
-    document.body.classList.add("keyboard-navigation");
+/* =========================================================
+   12. IMAGE ERROR HANDLING
+   No letter or "E" fallback is added.
+========================================================= */
+
+document.querySelectorAll("img").forEach(
+  function (image) {
+    image.addEventListener("error", function () {
+      image.classList.add("image-unavailable");
+    });
   }
-});
+);
 
-document.addEventListener("pointerdown", () => {
-  document.body.classList.remove("keyboard-navigation");
-});
 
-/* =========================
-   INITIALIZATION
-========================= */
+/* =========================================================
+   13. INITIAL PAGE SETUP
+========================================================= */
 
-document.documentElement.classList.add("js-enabled");
+if (projectModal) {
+  projectModal.setAttribute("aria-hidden", "true");
+}
 
-console.log("Emtiaz Official — Signature Luxury Edition loaded.");
+if (menuToggle) {
+  menuToggle.setAttribute("aria-expanded", "false");
+}
+
+console.log(
+  "Emtiaz Official — Premium website initialized successfully."
+);
