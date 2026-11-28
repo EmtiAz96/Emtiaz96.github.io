@@ -1,245 +1,171 @@
-/* =========================================================
-   EMTIAZ OFFICIAL — PREMIUM JAVASCRIPT
-   FILE 3 / 3
-   Complete Website Functionality
-========================================================= */
+/* =====================================================
+   EMTIAZ OFFICIAL — PREMIUM SCRIPT.JS
+   STEP 3 / 3
+===================================================== */
 
 "use strict";
 
-/* =========================================================
-   1. SELECT ELEMENTS
-========================================================= */
-
-const body = document.body;
+/* =========================================
+   1. THEME SYSTEM
+========================================= */
 
 const themeToggle = document.getElementById("themeToggle");
+
+function applyTheme(theme) {
+  document.body.classList.toggle("light-theme", theme === "light");
+
+  if (themeToggle) {
+    themeToggle.textContent = theme === "light" ? "☀️" : "🌙";
+    themeToggle.setAttribute(
+      "aria-label",
+      theme === "light" ? "Switch to dark mode" : "Switch to light mode"
+    );
+  }
+}
+
+let savedTheme = "dark";
+
+try {
+  savedTheme = localStorage.getItem("emtiaz-theme") || "dark";
+} catch (error) {
+  savedTheme = "dark";
+}
+
+applyTheme(savedTheme);
+
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    const newTheme = document.body.classList.contains("light-theme")
+      ? "dark"
+      : "light";
+
+    applyTheme(newTheme);
+
+    try {
+      localStorage.setItem("emtiaz-theme", newTheme);
+    } catch (error) {
+      console.warn("Theme preference could not be saved.");
+    }
+  });
+}
+
+/* =========================================
+   2. MOBILE NAVIGATION
+========================================= */
+
 const menuToggle = document.getElementById("menuToggle");
 const navMenu = document.getElementById("navMenu");
 
-const typingText = document.getElementById("typingText");
-const welcomeVoiceBtn = document.getElementById("welcomeVoiceBtn");
-
-const scrollProgress = document.getElementById("scrollProgress");
-const backToTop = document.getElementById("backToTop");
-
-const currentYear = document.getElementById("currentYear");
-
-const projectModal = document.getElementById("projectModal");
-const modalClose = document.getElementById("modalClose");
-const modalTitle = document.getElementById("modalTitle");
-const modalDescription = document.getElementById("modalDescription");
-
-const contactForm = document.getElementById("contactForm");
-const formMessage = document.getElementById("formMessage");
-
-
-/* =========================================================
-   2. DARK / LIGHT THEME
-========================================================= */
-
-function applyTheme(theme) {
-  const selectedTheme = theme === "light" ? "light" : "dark";
-
-  body.classList.toggle(
-    "light-theme",
-    selectedTheme === "light"
-  );
-
-  if (themeToggle) {
-    themeToggle.textContent =
-      selectedTheme === "light" ? "☀️" : "🌙";
-
-    themeToggle.setAttribute(
-      "aria-label",
-      selectedTheme === "light"
-        ? "Switch to dark mode"
-        : "Switch to light mode"
-    );
-
-    themeToggle.setAttribute(
-      "title",
-      selectedTheme === "light"
-        ? "Dark Mode"
-        : "Light Mode"
-    );
-  }
-
-  try {
-    localStorage.setItem("emtiaz-theme", selectedTheme);
-  } catch (error) {
-    console.warn("Theme preference could not be saved.");
-  }
-}
-
-function initializeTheme() {
-  let savedTheme = "dark";
-
-  try {
-    const storedTheme = localStorage.getItem("emtiaz-theme");
-
-    if (storedTheme === "light" || storedTheme === "dark") {
-      savedTheme = storedTheme;
-    }
-  } catch (error) {
-    console.warn("Saved theme could not be accessed.");
-  }
-
-  applyTheme(savedTheme);
-}
-
-initializeTheme();
-
-if (themeToggle) {
-  themeToggle.addEventListener("click", function () {
-    const isLight = body.classList.contains("light-theme");
-
-    applyTheme(isLight ? "dark" : "light");
-  });
-}
-
-
-/* =========================================================
-   3. MOBILE NAVIGATION
-========================================================= */
-
-function closeNavigation() {
-  if (!navMenu || !menuToggle) return;
-
-  navMenu.classList.remove("active");
-
-  menuToggle.setAttribute("aria-expanded", "false");
-
-  menuToggle.textContent = "☰";
-}
-
 if (menuToggle && navMenu) {
-  menuToggle.addEventListener("click", function () {
+  menuToggle.addEventListener("click", () => {
     const isOpen = navMenu.classList.toggle("active");
 
-    menuToggle.setAttribute(
-      "aria-expanded",
-      String(isOpen)
-    );
-
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
     menuToggle.textContent = isOpen ? "✕" : "☰";
   });
 
-  navMenu.querySelectorAll("a").forEach(function (link) {
-    link.addEventListener("click", closeNavigation);
+  navMenu.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      navMenu.classList.remove("active");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.textContent = "☰";
+    });
   });
 
-  document.addEventListener("click", function (event) {
-    const clickedInsideMenu = navMenu.contains(event.target);
-    const clickedMenuButton = menuToggle.contains(event.target);
-
-    if (!clickedInsideMenu && !clickedMenuButton) {
-      closeNavigation();
-    }
-  });
-
-  window.addEventListener("resize", function () {
-    if (window.innerWidth > 760) {
-      closeNavigation();
+  document.addEventListener("click", (event) => {
+    if (
+      navMenu.classList.contains("active") &&
+      !navMenu.contains(event.target) &&
+      !menuToggle.contains(event.target)
+    ) {
+      navMenu.classList.remove("active");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.textContent = "☰";
     }
   });
 }
 
+/* =========================================
+   3. TYPING ANIMATION
+========================================= */
 
-/* =========================================================
-   4. HERO TYPING ANIMATION
-========================================================= */
+const typingText = document.getElementById("typingText");
 
 if (typingText) {
-  const typingWords = [
+  const phrases = [
     "Programmer",
     "Web Developer",
     "Digital Creator",
     "Technology Enthusiast"
   ];
 
-  let wordIndex = 0;
+  let phraseIndex = 0;
   let characterIndex = 0;
   let deleting = false;
 
-  function typeAnimation() {
-    const currentWord = typingWords[wordIndex];
+  function typeEffect() {
+    const currentPhrase = phrases[phraseIndex];
 
-    if (!deleting) {
-      characterIndex++;
-
-      typingText.textContent =
-        currentWord.substring(0, characterIndex);
-
-      if (characterIndex === currentWord.length) {
-        deleting = true;
-
-        setTimeout(typeAnimation, 1500);
-        return;
-      }
-    } else {
+    if (deleting) {
       characterIndex--;
-
-      typingText.textContent =
-        currentWord.substring(0, characterIndex);
-
-      if (characterIndex === 0) {
-        deleting = false;
-
-        wordIndex =
-          (wordIndex + 1) % typingWords.length;
-      }
+    } else {
+      characterIndex++;
     }
 
-    setTimeout(
-      typeAnimation,
-      deleting ? 45 : 90
+    typingText.textContent = currentPhrase.substring(
+      0,
+      characterIndex
     );
+
+    let delay = deleting ? 45 : 90;
+
+    if (!deleting && characterIndex === currentPhrase.length) {
+      deleting = true;
+      delay = 1400;
+    } else if (deleting && characterIndex === 0) {
+      deleting = false;
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      delay = 400;
+    }
+
+    window.setTimeout(typeEffect, delay);
   }
 
-  typeAnimation();
+  typeEffect();
 }
 
+/* =========================================
+   4. WELCOME VOICE
+========================================= */
 
-/* =========================================================
-   5. WELCOME VOICE
-========================================================= */
+const voiceButton = document.getElementById("voiceButton");
 
-if (welcomeVoiceBtn) {
-  welcomeVoiceBtn.addEventListener("click", function () {
+if (voiceButton) {
+  voiceButton.addEventListener("click", () => {
     if (!("speechSynthesis" in window)) {
-      if (formMessage) {
-        formMessage.textContent =
-          "Voice feature is not supported by this browser.";
-      }
-
+      alert("Your browser does not support voice greetings.");
       return;
     }
 
     window.speechSynthesis.cancel();
 
-    const welcomeMessage = new SpeechSynthesisUtterance(
-      "Welcome to Emtiaz Official. " +
-      "I am Emtiaz, a programmer and web developer. " +
-      "Thank you for visiting my website."
+    const greeting = new SpeechSynthesisUtterance(
+      "Welcome to Emtiaz website."
     );
 
-    welcomeMessage.lang = "en-US";
-    welcomeMessage.rate = 0.9;
-    welcomeMessage.pitch = 1;
-    welcomeMessage.volume = 1;
+    greeting.lang = "en-US";
+    greeting.rate = 0.9;
+    greeting.pitch = 1;
 
-    window.speechSynthesis.speak(welcomeMessage);
+    window.speechSynthesis.speak(greeting);
   });
 }
 
+/* =========================================
+   5. LIVE AGE COUNTER
+========================================= */
 
-/* =========================================================
-   6. AGE & BIRTHDAY COUNTER
-========================================================= */
-
-const birthdayDate = new Date(
-  "2006-08-16T00:00:00+06:00"
-);
+const birthDate = new Date("2006-08-16T00:00:00+06:00");
 
 const ageYears = document.getElementById("ageYears");
 const ageDays = document.getElementById("ageDays");
@@ -247,209 +173,171 @@ const ageHours = document.getElementById("ageHours");
 const ageMinutes = document.getElementById("ageMinutes");
 const ageSeconds = document.getElementById("ageSeconds");
 
-function updateAgeCounter() {
+function updateAge() {
   const now = new Date();
+  const difference = now.getTime() - birthDate.getTime();
 
-  if (Number.isNaN(birthdayDate.getTime())) {
-    return;
-  }
+  if (difference < 0) return;
 
-  let years = now.getFullYear() - birthdayDate.getFullYear();
+  let years = now.getUTCFullYear() - 2006;
 
-  const birthdayThisYear = new Date(
-    now.getFullYear(),
-    7,
-    16,
-    0,
-    0,
-    0
-  );
+  const currentMonth = now.getUTCMonth();
+  const currentDay = now.getUTCDate();
 
-  if (now < birthdayThisYear) {
+  if (
+    currentMonth < 7 ||
+    (currentMonth === 7 &&
+      (currentDay < 16 ||
+        (currentDay === 16 &&
+          now.getUTCHours() < 18)))
+  ) {
     years--;
   }
 
-  if (ageYears) {
-    ageYears.textContent = Math.max(0, years);
-  }
+  const totalSeconds = Math.floor(difference / 1000);
+  const days = Math.floor(totalSeconds / 86400);
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
 
-  const nextBirthdayYear =
-    now < birthdayThisYear
-      ? now.getFullYear()
-      : now.getFullYear() + 1;
+  if (ageYears) ageYears.textContent = years;
+  if (ageDays) ageDays.textContent = days;
+  if (ageHours) ageHours.textContent = hours;
+  if (ageMinutes) ageMinutes.textContent = minutes;
+  if (ageSeconds) ageSeconds.textContent = seconds;
+}
 
-  const nextBirthday = new Date(
-    nextBirthdayYear,
+updateAge();
+window.setInterval(updateAge, 1000);
+
+/* =========================================
+   6. NEXT BIRTHDAY COUNTDOWN
+========================================= */
+
+function updateBirthdayCountdown() {
+  const now = new Date();
+
+  let nextBirthday = new Date(
+    now.getUTCFullYear(),
     7,
     16,
-    0,
+    18,
     0,
     0
   );
 
-  const remainingMilliseconds =
-    Math.max(0, nextBirthday.getTime() - now.getTime());
-
-  const totalSeconds = Math.floor(
-    remainingMilliseconds / 1000
-  );
-
-  const days = Math.floor(totalSeconds / 86400);
-
-  const hours = Math.floor(
-    (totalSeconds % 86400) / 3600
-  );
-
-  const minutes = Math.floor(
-    (totalSeconds % 3600) / 60
-  );
-
-  const seconds = totalSeconds % 60;
-
-  if (ageDays) {
-    ageDays.textContent = days;
+  if (nextBirthday.getTime() <= now.getTime()) {
+    nextBirthday = new Date(
+      now.getUTCFullYear() + 1,
+      7,
+      16,
+      18,
+      0,
+      0
+    );
   }
 
-  if (ageHours) {
-    ageHours.textContent = hours;
-  }
+  const remaining = nextBirthday.getTime() - now.getTime();
 
-  if (ageMinutes) {
-    ageMinutes.textContent = minutes;
-  }
+  const countdownDays = document.getElementById("countdownDays");
+  const countdownHours = document.getElementById("countdownHours");
+  const countdownMinutes = document.getElementById("countdownMinutes");
+  const countdownSeconds = document.getElementById("countdownSeconds");
 
-  if (ageSeconds) {
-    ageSeconds.textContent = seconds;
-  }
+  if (remaining < 0) return;
+
+  const days = Math.floor(remaining / 86400000);
+  const hours = Math.floor((remaining % 86400000) / 3600000);
+  const minutes = Math.floor((remaining % 3600000) / 60000);
+  const seconds = Math.floor((remaining % 60000) / 1000);
+
+  if (countdownDays) countdownDays.textContent = days;
+  if (countdownHours) countdownHours.textContent = hours;
+  if (countdownMinutes) countdownMinutes.textContent = minutes;
+  if (countdownSeconds) countdownSeconds.textContent = seconds;
 }
 
-updateAgeCounter();
+updateBirthdayCountdown();
+window.setInterval(updateBirthdayCountdown, 1000);
 
-setInterval(updateAgeCounter, 1000);
-
-
-/* =========================================================
+/* =========================================
    7. PROJECT DETAILS MODAL
-========================================================= */
+========================================= */
 
-function openProjectModal(title, description) {
-  if (
-    !projectModal ||
-    !modalTitle ||
-    !modalDescription
-  ) {
-    return;
-  }
-
-  modalTitle.textContent = title;
-  modalDescription.textContent = description;
-
-  projectModal.classList.add("active");
-
-  projectModal.setAttribute("aria-hidden", "false");
-
-  body.style.overflow = "hidden";
-
-  if (modalClose) {
-    modalClose.focus();
-  }
-}
+const projectModal = document.getElementById("projectModal");
+const modalTitle = document.getElementById("modalTitle");
+const modalDescription = document.getElementById("modalDescription");
+const modalClose = document.getElementById("modalClose");
 
 function closeProjectModal() {
-  if (!projectModal) return;
-
-  projectModal.classList.remove("active");
-
-  projectModal.setAttribute("aria-hidden", "true");
-
-  body.style.overflow = "";
+  if (projectModal) {
+    projectModal.classList.remove("active");
+    document.body.style.overflow = "";
+  }
 }
 
-document.querySelectorAll(".project-details").forEach(
-  function (button) {
-    button.addEventListener("click", function () {
-      const title =
-        button.dataset.title || "Project Details";
+document.querySelectorAll(".project-details").forEach((button) => {
+  button.addEventListener("click", () => {
+    if (!projectModal) return;
 
-      const description =
-        button.dataset.description ||
-        "More information about this project will be available soon.";
+    const title = button.dataset.title || "Project Details";
+    const description =
+      button.dataset.description || "More information coming soon.";
 
-      openProjectModal(title, description);
-    });
-  }
-);
+    if (modalTitle) modalTitle.textContent = title;
+    if (modalDescription) modalDescription.textContent = description;
+
+    projectModal.classList.add("active");
+    document.body.style.overflow = "hidden";
+  });
+});
 
 if (modalClose) {
-  modalClose.addEventListener(
-    "click",
-    closeProjectModal
-  );
+  modalClose.addEventListener("click", closeProjectModal);
 }
 
 if (projectModal) {
-  projectModal.addEventListener("click", function (event) {
+  projectModal.addEventListener("click", (event) => {
     if (event.target === projectModal) {
       closeProjectModal();
     }
   });
 }
 
-document.addEventListener("keydown", function (event) {
-  if (
-    event.key === "Escape" &&
-    projectModal &&
-    projectModal.classList.contains("active")
-  ) {
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
     closeProjectModal();
   }
 });
 
-
-/* =========================================================
+/* =========================================
    8. CONTACT FORM
-========================================================= */
+========================================= */
+
+const contactForm = document.getElementById("contactForm");
+const formMessage = document.getElementById("formMessage");
 
 if (contactForm) {
-  contactForm.addEventListener("submit", function (event) {
+  contactForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    const nameInput =
-      document.getElementById("contactName");
-
-    const emailInput =
-      document.getElementById("contactEmail");
-
-    const messageInput =
-      document.getElementById("contactMessage");
-
-    if (!nameInput || !emailInput || !messageInput) {
-      return;
-    }
-
-    const name = nameInput.value.trim();
-    const email = emailInput.value.trim();
-    const message = messageInput.value.trim();
+    const name = document.getElementById("contactName")?.value.trim();
+    const email = document.getElementById("contactEmail")?.value.trim();
+    const message = document.getElementById("contactMessage")?.value.trim();
 
     if (!name || !email || !message) {
       if (formMessage) {
-        formMessage.textContent =
-          "Please complete all fields.";
+        formMessage.textContent = "Please fill in all fields.";
       }
-
       return;
     }
 
-    const emailPattern =
-      /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailPattern.test(email)) {
       if (formMessage) {
-        formMessage.textContent =
-          "Please enter a valid email address.";
+        formMessage.textContent = "Please enter a valid email address.";
       }
-
-      emailInput.focus();
       return;
     }
 
@@ -457,67 +345,76 @@ if (contactForm) {
       "Website Message from " + name
     );
 
-    const emailBody = encodeURIComponent(
+    const body = encodeURIComponent(
       "Name: " + name +
       "\nEmail: " + email +
       "\n\nMessage:\n" + message
     );
 
-    const mailtoLink =
-      "mailto:mdemtiaz36900@gmail.com" +
-      "?subject=" + subject +
-      "&body=" + emailBody;
-
     if (formMessage) {
       formMessage.textContent =
-        "Opening your email application...";
+        "Your email application is opening. Please send the message there.";
     }
 
-    window.location.href = mailtoLink;
+    window.location.href =
+      "mailto:mdemtiaz36900@gmail.com?subject=" +
+      subject +
+      "&body=" +
+      body;
   });
 }
 
+/* =========================================
+   9. SCROLL PROGRESS
+========================================= */
 
-/* =========================================================
-   9. SCROLL PROGRESS & BACK TO TOP
-========================================================= */
+let scrollProgress = document.querySelector(".scroll-progress");
 
-function updateScrollElements() {
-  const scrollTop =
-    window.scrollY || document.documentElement.scrollTop;
-
-  const scrollHeight =
-    document.documentElement.scrollHeight -
-    document.documentElement.clientHeight;
-
-  const progress =
-    scrollHeight > 0
-      ? (scrollTop / scrollHeight) * 100
-      : 0;
-
-  if (scrollProgress) {
-    scrollProgress.style.width =
-      Math.min(100, Math.max(0, progress)) + "%";
-  }
-
-  if (backToTop) {
-    backToTop.classList.toggle(
-      "show",
-      scrollTop > 450
-    );
-  }
+if (!scrollProgress) {
+  scrollProgress = document.createElement("div");
+  scrollProgress.className = "scroll-progress";
+  document.body.prepend(scrollProgress);
 }
 
-window.addEventListener(
-  "scroll",
-  updateScrollElements,
-  { passive: true }
-);
+function updateScrollProgress() {
+  const scrollableHeight =
+    document.documentElement.scrollHeight -
+    window.innerHeight;
 
-updateScrollElements();
+  const progress =
+    scrollableHeight > 0
+      ? (window.scrollY / scrollableHeight) * 100
+      : 0;
+
+  scrollProgress.style.width = progress + "%";
+}
+
+window.addEventListener("scroll", updateScrollProgress, {
+  passive: true
+});
+
+updateScrollProgress();
+
+/* =========================================
+   10. BACK TO TOP
+========================================= */
+
+const backToTop = document.getElementById("backToTop");
+
+function updateBackToTop() {
+  if (!backToTop) return;
+
+  backToTop.classList.toggle("show", window.scrollY > 400);
+}
+
+window.addEventListener("scroll", updateBackToTop, {
+  passive: true
+});
+
+updateBackToTop();
 
 if (backToTop) {
-  backToTop.addEventListener("click", function () {
+  backToTop.addEventListener("click", () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth"
@@ -525,77 +422,67 @@ if (backToTop) {
   });
 }
 
+/* =========================================
+   11. SCROLL REVEAL
+========================================= */
 
-/* =========================================================
-   10. SCROLL REVEAL ANIMATION
-========================================================= */
-
-const revealElements = document.querySelectorAll(
-  ".scroll-reveal"
-);
+const revealElements = document.querySelectorAll(".scroll-reveal");
 
 if ("IntersectionObserver" in window) {
   const revealObserver = new IntersectionObserver(
-    function (entries, observer) {
-      entries.forEach(function (entry) {
+    (entries, observer) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("visible");
-
           observer.unobserve(entry.target);
         }
       });
     },
     {
-      threshold: 0.12,
-      rootMargin: "0px 0px -35px 0px"
+      threshold: 0.12
     }
   );
 
-  revealElements.forEach(function (element) {
+  revealElements.forEach((element) => {
     revealObserver.observe(element);
   });
 } else {
-  revealElements.forEach(function (element) {
+  revealElements.forEach((element) => {
     element.classList.add("visible");
   });
 }
 
+/* =========================================
+   12. IMAGE ERROR HANDLING
+========================================= */
 
-/* =========================================================
-   11. CURRENT YEAR
-========================================================= */
+document.querySelectorAll("img").forEach((image) => {
+  image.addEventListener("error", () => {
+    image.classList.add("image-unavailable");
+    console.warn("Image could not be loaded:", image.getAttribute("src"));
+  });
+});
+
+/* =========================================
+   13. CURRENT YEAR
+========================================= */
+
+const currentYear = document.getElementById("currentYear");
 
 if (currentYear) {
   currentYear.textContent = new Date().getFullYear();
 }
 
-
-/* =========================================================
-   12. IMAGE ERROR HANDLING
-   No letter or "E" fallback is added.
-========================================================= */
-
-document.querySelectorAll("img").forEach(
-  function (image) {
-    image.addEventListener("error", function () {
-      image.classList.add("image-unavailable");
-    });
-  }
-);
-
-
-/* =========================================================
-   13. INITIAL PAGE SETUP
-========================================================= */
-
-if (projectModal) {
-  projectModal.setAttribute("aria-hidden", "true");
-}
-
-if (menuToggle) {
-  menuToggle.setAttribute("aria-expanded", "false");
-}
+/* =========================================
+   14. CONSOLE MESSAGE
+========================================= */
 
 console.log(
-  "Emtiaz Official — Premium website initialized successfully."
+  "%c EMTIAZ OFFICIAL ",
+  "background:#00d4ff;color:#06101c;font-size:18px;font-weight:bold;padding:8px 14px;border-radius:6px;"
+);
+
+console.log(
+  "%c Welcome to Emtiaz Official Website!",
+  "color:#00ffa3;font-size:13px;font-weight:bold;"
 );
