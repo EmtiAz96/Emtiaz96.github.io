@@ -4,1178 +4,634 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Emtiaz Official | Programmer & Web Developer</title>
-
-  <meta
-    name="description"
-    content="Official website of Emtiaz — programmer, web developer and digital creator from Bangladesh."
-  >
-
-  <meta name="author" content="Emtiaz">
-  <meta name="theme-color" content="#070b14">
-
-  <meta
-    http-equiv="Content-Security-Policy"
-    content="
-      default-src 'self';
-      script-src 'self';
-      style-src 'self' 'unsafe-inline';
-      img-src 'self' data:;
-      font-src 'self' data:;
-      connect-src 'self';
-      object-src 'none';
-      base-uri 'self';
-      form-action 'self' mailto:;
-    "
-  >
+  <title>Emtiaz Official | Premium Digital Experience</title>
+  <meta name="description" content="Official website of Emtiaz — programmer, web developer and digital creator from Bangladesh.">
+  <meta name="theme-color" content="#070b18">
 
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
 
-  <script src="script.js" defer></script>
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:;">
 </head>
 
 <body>
 
-  <!-- ACCESSIBILITY -->
-  <a href="#mainContent" class="skip-link">
-    Skip to content
-  </a>
+  <div class="scroll-progress"></div>
 
-  <!-- SCROLL PROGRESS -->
-  <div
-    class="scroll-progress"
-    id="scrollProgress"
-    aria-hidden="true"
-  ></div>
+  <!-- TOP INFORMATION BAR -->
+  <div class="top-info-bar">
+    <div class="container top-info-content">
+      <div class="live-location">
+        <span class="live-dot"></span>
+        <span>Bangladesh · Dhaka Time</span>
+      </div>
 
+      <div class="dhaka-clock">
+        <span id="dhakaDay">Loading...</span>
+        <span class="clock-divider">|</span>
+        <span id="dhakaDate">Loading...</span>
+        <span class="clock-divider">|</span>
+        <strong id="dhakaTime">00:00:00</strong>
+      </div>
+    </div>
+  </div>
 
   <!-- HEADER -->
   <header class="site-header">
-
-    <nav class="navbar" aria-label="Main navigation">
+    <div class="container navbar">
 
       <a href="#home" class="brand">
         <span class="brand-mark">E</span>
-
-        <span>
-          EMTIAZ<span class="brand-accent">.</span>
-        </span>
+        <span>EMTIAZ<span class="brand-dot">.</span></span>
       </a>
 
-
-      <ul class="nav-menu" id="navMenu">
-
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#age">Age</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#youtube">YouTube</a></li>
-        <li><a href="#family">Family</a></li>
-        <li><a href="#contact">Contact</a></li>
-
-        <li>
-          <a href="friendship.html">🤝 Friendship</a>
-        </li>
-
-        <li>
-          <a href="partner.html">💖 Special Page</a>
-        </li>
-
-      </ul>
-
+      <nav>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#age">Age</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#youtube">YouTube</a></li>
+          <li><a href="#family">Family</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="friendship.html">Friendship</a></li>
+          <li><a href="partner.html">Partner</a></li>
+        </ul>
+      </nav>
 
       <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle"
+          type="button" aria-label="Toggle theme">🌙</button>
 
-        <button
-          class="icon-button"
-          id="themeToggle"
-          type="button"
-          aria-label="Switch to light mode"
-          title="Change Theme"
-        >
-          🌙
-        </button>
-
-        <button
-          class="menu-toggle"
-          id="menuToggle"
-          type="button"
-          aria-label="Toggle navigation"
-          aria-expanded="false"
-        >
-          ☰
-        </button>
-
+        <button class="menu-toggle" id="menuToggle"
+          type="button" aria-label="Open menu"
+          aria-expanded="false">☰</button>
       </div>
 
-    </nav>
-
+    </div>
   </header>
 
+  <main>
 
-  <main id="mainContent">
+    <!-- FRIDAY GREETING -->
+    <section class="jumma-section" id="jummaSection" hidden>
+      <div class="container">
+        <div class="jumma-card">
+          <div class="jumma-decoration">☪</div>
+          <div>
+            <span class="jumma-small">A SPECIAL FRIDAY WISH</span>
+            <h2>Jummah Mubarak <span>❤️</span></h2>
+            <p>May your Friday be filled with peace, blessings and happiness.</p>
+          </div>
+          <div class="jumma-decoration">🌙</div>
+        </div>
+      </div>
+    </section>
 
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="hero-orb hero-orb-one"></div>
+      <div class="hero-orb hero-orb-two"></div>
 
-    <!-- HERO SECTION -->
-    <section class="hero section" id="home">
+      <div class="container hero-content">
 
-      <div class="container hero-grid">
-
-        <div class="hero-content scroll-reveal">
-
-          <span class="eyebrow">
-            ✦ WELCOME TO MY DIGITAL WORLD
+        <div class="hero-text scroll-reveal">
+          <span class="hero-tag">
+            ✦ PERSONAL PORTFOLIO · BANGLADESH
           </span>
 
+          <p class="hero-intro">HELLO, I'M</p>
+
           <h1>
-            Hi, I'm <span>Emtiaz</span>
+            EMTIAZ
+            <span class="gradient-text">AHMED</span>
           </h1>
 
           <h2>
-            I'm a
             <span id="typingText">Programmer</span>
+            <span class="typing-cursor">|</span>
           </h2>
 
-          <p>
-            Welcome to my official website. I am passionate about
-            programming, web development, technology and creating
-            meaningful digital experiences.
+          <p class="hero-description">
+            Welcome to my digital world. I'm a technology enthusiast
+            from Bangladesh, exploring programming, web development
+            and creative digital experiences.
           </p>
 
-
           <div class="hero-buttons">
+            <a href="#about" class="btn btn-primary">Explore My World ↗</a>
+            <a href="#contact" class="btn btn-outline">Contact Me</a>
+          </div>
 
-            <a href="#projects" class="primary-button">
-              Explore My Work →
-            </a>
+          <div class="voice-panel">
+            <span class="voice-label">CHOOSE YOUR GREETING VOICE</span>
 
-            <a href="#contact" class="secondary-button">
-              Contact Me
-            </a>
+            <div class="voice-buttons">
+              <button type="button" class="voice-choice active"
+                id="maleVoiceButton" aria-pressed="true">
+                <span class="voice-icon">🎙️</span>
+                <span>Male</span>
+              </button>
 
-            <button
-              type="button"
-              class="text-button"
-              id="welcomeVoiceBtn"
-            >
-              🔊 Welcome Voice
+              <button type="button" class="voice-choice"
+                id="femaleVoiceButton" aria-pressed="false">
+                <span class="voice-icon">🎤</span>
+                <span>Female</span>
+              </button>
+            </div>
+
+            <button type="button" class="voice-play-button" id="voiceButton">
+              ▶ Play Welcome Greeting
             </button>
 
+            <p class="voice-status" id="voiceStatus" aria-live="polite">
+              Select a voice and press play.
+            </p>
           </div>
-
         </div>
 
-
-        <div class="hero-visual scroll-reveal">
-
-          <div class="hero-card">
-
-            <div class="hero-card-top">
-              <span class="status-dot"></span>
-              <span>Available for learning & projects</span>
+        <div class="hero-image-area scroll-reveal">
+          <div class="profile-ring">
+            <div class="profile-ring-inner">
+              <img src="profile.jpg" alt="Emtiaz profile photo"
+                class="hero-image">
             </div>
-
-
-            <div class="profile-image-wrap">
-
-              <img
-                src="profile.jpg"
-                alt="Emtiaz profile portrait"
-                class="profile-image"
-                fetchpriority="high"
-              >
-
-            </div>
-
-
-            <div class="profile-caption">
-
-              <h3>Emtiaz</h3>
-
-              <p>
-                Programmer & Web Developer
-              </p>
-
-            </div>
-
           </div>
 
-
-          <div class="floating-chip chip-one">
-            💻 Developer
+          <div class="profile-floating-card">
+            <span class="live-dot"></span>
+            <div>
+              <strong>Emtiaz</strong>
+              <small>Learning & Building</small>
+            </div>
           </div>
 
-          <div class="floating-chip chip-two">
-            🚀 Always Learning
+          <div class="profile-caption">
+            <span>✦</span> Programmer · Creator · Dreamer
           </div>
-
         </div>
 
       </div>
-
     </section>
-
 
     <!-- STATS -->
     <section class="stats-section">
-
       <div class="container stats-grid">
 
-        <article class="stat-card scroll-reveal">
-          <h3>06+</h3>
-          <p>Learning Skills</p>
-        </article>
+        <div class="stat-card scroll-reveal">
+          <span class="stat-icon">💻</span>
+          <h3>Web</h3>
+          <p>Development</p>
+        </div>
 
-        <article class="stat-card scroll-reveal">
-          <h3>04+</h3>
-          <p>Projects & Ideas</p>
-        </article>
+        <div class="stat-card scroll-reveal">
+          <span class="stat-icon">🐍</span>
+          <h3>Python</h3>
+          <p>Programming</p>
+        </div>
 
-        <article class="stat-card scroll-reveal">
-          <h3>100%</h3>
-          <p>Passion for Learning</p>
-        </article>
+        <div class="stat-card scroll-reveal">
+          <span class="stat-icon">🚀</span>
+          <h3>Creative</h3>
+          <p>Projects</p>
+        </div>
 
-        <article class="stat-card scroll-reveal">
-          <h3>∞</h3>
-          <p>Dreams & Goals</p>
-        </article>
+        <div class="stat-card scroll-reveal">
+          <span class="stat-icon">🇧🇩</span>
+          <h3>Bangladesh</h3>
+          <p>My Home</p>
+        </div>
 
       </div>
-
     </section>
 
-
     <!-- ABOUT -->
-    <section class="section section-alt" id="about">
-
+    <section id="about">
       <div class="container">
 
         <div class="section-heading scroll-reveal">
-
-          <span class="eyebrow">GET TO KNOW ME</span>
-
-          <h2>About Me</h2>
-
-          <p>
-            A little introduction about my interests and goals.
-          </p>
-
+          <span class="section-kicker">GET TO KNOW ME</span>
+          <h2>About <span class="gradient-text">Me</span></h2>
+          <p>A little introduction to my journey and interests.</p>
         </div>
-
 
         <div class="about-grid">
 
-          <article class="about-card scroll-reveal">
-
-            <div class="card-icon">👨‍💻</div>
-
-            <h3>Who Am I?</h3>
+          <div class="about-content glass-card scroll-reveal">
+            <span class="card-kicker">MY STORY</span>
+            <h3>Building My Digital Future</h3>
 
             <p>
-              My name is Emtiaz. I am from Bangladesh and I enjoy
-              learning programming, exploring technology and
-              building websites. I believe in learning step by step
-              and improving my skills every day.
+              Hello! I'm Emtiaz, a learner and technology enthusiast
+              from Bangladesh. I enjoy exploring new technologies,
+              writing code and creating useful digital projects.
             </p>
-
-          </article>
-
-
-          <article class="about-card scroll-reveal">
-
-            <div class="card-icon">🎯</div>
-
-            <h3>My Goal</h3>
 
             <p>
-              My goal is to become a skilled programmer and software
-              developer. I want to build useful applications,
-              websites and creative digital projects.
+              My goal is to become a skilled programmer and build
+              meaningful things through technology.
             </p>
 
-          </article>
+            <div class="about-details">
+              <div class="detail-item">
+                <span>Name</span>
+                <strong>Emtiaz</strong>
+              </div>
 
+              <div class="detail-item">
+                <span>Country</span>
+                <strong>Bangladesh</strong>
+              </div>
 
-          <article class="about-card scroll-reveal">
+              <div class="detail-item">
+                <span>Profession</span>
+                <strong>Student & Developer</strong>
+              </div>
 
-            <div class="card-icon">🌍</div>
+              <div class="detail-item">
+                <span>Status</span>
+                <strong>Learning & Building</strong>
+              </div>
+            </div>
+          </div>
 
-            <h3>My Interests</h3>
-
+          <div class="about-highlight glass-card scroll-reveal">
+            <div class="highlight-symbol">✦</div>
+            <h3>Think. Learn. Create.</h3>
             <p>
-              Programming, web development, Python, Linux,
-              technology, creativity and learning new things.
+              Every project is an opportunity to learn something new.
+              Every day is a chance to improve.
             </p>
-
-          </article>
-
-
-          <article class="about-card scroll-reveal">
-
-            <div class="card-icon">📍</div>
-
-            <h3>Location</h3>
-
-            <p>
-              Bangladesh
-            </p>
-
-          </article>
+            <div class="highlight-line"></div>
+            <span>MY PERSONAL PHILOSOPHY</span>
+          </div>
 
         </div>
-
       </div>
-
     </section>
 
-
     <!-- AGE -->
-    <section class="section" id="age">
-
+    <section id="age">
       <div class="container">
 
         <div class="section-heading scroll-reveal">
-
-          <span class="eyebrow">MY BIRTHDAY</span>
-
-          <h2>Age & Birthday</h2>
-
-          <p>
-            A live counter based on my birthday.
-          </p>
-
+          <span class="section-kicker">TIME & MILESTONES</span>
+          <h2>My <span class="gradient-text">Journey</span></h2>
+          <p>A live age counter using Bangladesh time.</p>
         </div>
 
-
-        <div class="age-panel scroll-reveal">
-
-          <h3>My Current Age</h3>
-
-          <p>
-            Birthday: 16 August 2006
-          </p>
-
-          <div class="age-highlight">
-            <span id="ageYears">20</span> Years Old
+        <div class="age-card glass-card scroll-reveal">
+          <span class="card-kicker">MY LIFE COUNTER</span>
+          <div class="age-number">
+            <span id="ageYears">0</span>
+            <small>Years Old</small>
           </div>
 
-
-          <h3>Time Until My Next Birthday</h3>
-
           <div class="age-grid">
-
-            <div class="age-counter-box">
+            <div class="age-item">
               <strong id="ageDays">0</strong>
               <span>Days</span>
             </div>
-
-            <div class="age-counter-box">
+            <div class="age-item">
               <strong id="ageHours">0</strong>
               <span>Hours</span>
             </div>
-
-            <div class="age-counter-box">
+            <div class="age-item">
               <strong id="ageMinutes">0</strong>
               <span>Minutes</span>
             </div>
-
-            <div class="age-counter-box">
+            <div class="age-item">
               <strong id="ageSeconds">0</strong>
               <span>Seconds</span>
             </div>
-
           </div>
 
-          <p>
-            Time zone: Bangladesh Standard Time (UTC+6)
-          </p>
+          <div class="birthday-box">
+            <h3>🎂 Next Birthday</h3>
+            <div class="birthday-countdown">
+              <div><strong id="countdownDays">0</strong><span>Days</span></div>
+              <div><strong id="countdownHours">0</strong><span>Hours</span></div>
+              <div><strong id="countdownMinutes">0</strong><span>Minutes</span></div>
+              <div><strong id="countdownSeconds">0</strong><span>Seconds</span></div>
+            </div>
+            <p>16 August · Bangladesh Time</p>
+          </div>
 
         </div>
-
       </div>
-
     </section>
 
-
     <!-- SKILLS -->
-    <section class="section section-alt" id="skills">
-
+    <section id="skills">
       <div class="container">
 
         <div class="section-heading scroll-reveal">
-
-          <span class="eyebrow">MY EXPERTISE</span>
-
-          <h2>My Skills</h2>
-
-          <p>
-            Technologies and tools I am learning and working with.
-          </p>
-
+          <span class="section-kicker">WHAT I'M LEARNING</span>
+          <h2>My <span class="gradient-text">Skills</span></h2>
+          <p>Technologies and tools I'm exploring.</p>
         </div>
-
 
         <div class="skills-grid">
 
-          <article class="skill-card scroll-reveal">
+          <div class="skill-item scroll-reveal">
+            <div class="skill-info"><span>HTML</span><span>90%</span></div>
+            <div class="skill-bar"><div class="skill-progress" style="width:90%"></div></div>
+          </div>
 
-            <div class="skill-top">
-              <h3>HTML</h3>
-              <span>90%</span>
-            </div>
+          <div class="skill-item scroll-reveal">
+            <div class="skill-info"><span>CSS</span><span>85%</span></div>
+            <div class="skill-bar"><div class="skill-progress" style="width:85%"></div></div>
+          </div>
 
-            <div class="skill-track">
-              <span style="--skill:90%"></span>
-            </div>
+          <div class="skill-item scroll-reveal">
+            <div class="skill-info"><span>JavaScript</span><span>70%</span></div>
+            <div class="skill-bar"><div class="skill-progress" style="width:70%"></div></div>
+          </div>
 
-          </article>
+          <div class="skill-item scroll-reveal">
+            <div class="skill-info"><span>Python</span><span>65%</span></div>
+            <div class="skill-bar"><div class="skill-progress" style="width:65%"></div></div>
+          </div>
 
+          <div class="skill-item scroll-reveal">
+            <div class="skill-info"><span>Git & GitHub</span><span>60%</span></div>
+            <div class="skill-bar"><div class="skill-progress" style="width:60%"></div></div>
+          </div>
 
-          <article class="skill-card scroll-reveal">
-
-            <div class="skill-top">
-              <h3>CSS</h3>
-              <span>85%</span>
-            </div>
-
-            <div class="skill-track">
-              <span style="--skill:85%"></span>
-            </div>
-
-          </article>
-
-
-          <article class="skill-card scroll-reveal">
-
-            <div class="skill-top">
-              <h3>JavaScript</h3>
-              <span>70%</span>
-            </div>
-
-            <div class="skill-track">
-              <span style="--skill:70%"></span>
-            </div>
-
-          </article>
-
-
-          <article class="skill-card scroll-reveal">
-
-            <div class="skill-top">
-              <h3>Python</h3>
-              <span>65%</span>
-            </div>
-
-            <div class="skill-track">
-              <span style="--skill:65%"></span>
-            </div>
-
-          </article>
-
-
-          <article class="skill-card scroll-reveal">
-
-            <div class="skill-top">
-              <h3>Git & GitHub</h3>
-              <span>60%</span>
-            </div>
-
-            <div class="skill-track">
-              <span style="--skill:60%"></span>
-            </div>
-
-          </article>
-
-
-          <article class="skill-card scroll-reveal">
-
-            <div class="skill-top">
-              <h3>Linux</h3>
-              <span>75%</span>
-            </div>
-
-            <div class="skill-track">
-              <span style="--skill:75%"></span>
-            </div>
-
-          </article>
+          <div class="skill-item scroll-reveal">
+            <div class="skill-info"><span>Linux</span><span>75%</span></div>
+            <div class="skill-bar"><div class="skill-progress" style="width:75%"></div></div>
+          </div>
 
         </div>
-
       </div>
-
     </section>
 
-
     <!-- SERVICES -->
-    <section class="section" id="services">
-
+    <section id="services">
       <div class="container">
 
         <div class="section-heading scroll-reveal">
-
-          <span class="eyebrow">WHAT I DO</span>
-
-          <h2>My Services</h2>
-
-          <p>
-            Creative digital work and development interests.
-          </p>
-
+          <span class="section-kicker">WHAT I EXPLORE</span>
+          <h2>My <span class="gradient-text">Interests</span></h2>
+          <p>Areas where I enjoy learning and creating.</p>
         </div>
-
 
         <div class="services-grid">
 
           <article class="service-card scroll-reveal">
-
-            <div class="card-icon">🌐</div>
-
+            <div class="service-icon">🌐</div>
             <h3>Web Development</h3>
-
-            <p>
-              Creating modern and responsive websites using
-              HTML, CSS and JavaScript.
-            </p>
-
+            <p>Exploring modern websites and responsive user interfaces.</p>
           </article>
 
-
           <article class="service-card scroll-reveal">
-
-            <div class="card-icon">💻</div>
-
+            <div class="service-icon">⌨️</div>
             <h3>Programming</h3>
-
-            <p>
-              Learning programming and developing useful
-              software projects.
-            </p>
-
+            <p>Learning programming languages and solving problems.</p>
           </article>
 
-
           <article class="service-card scroll-reveal">
-
-            <div class="card-icon">🎨</div>
-
-            <h3>Creative Projects</h3>
-
-            <p>
-              Exploring creative ideas and turning them
-              into digital experiences.
-            </p>
-
+            <div class="service-icon">🎨</div>
+            <h3>Digital Creativity</h3>
+            <p>Turning creative ideas into digital experiences.</p>
           </article>
 
         </div>
-
       </div>
-
     </section>
 
-
     <!-- PROJECTS -->
-    <section class="section section-alt" id="projects">
-
+    <section id="projects">
       <div class="container">
 
         <div class="section-heading scroll-reveal">
-
-          <span class="eyebrow">MY WORK</span>
-
-          <h2>Featured Projects</h2>
-
-          <p>
-            Some of my projects, experiments and future ideas.
-          </p>
-
+          <span class="section-kicker">MY WORK</span>
+          <h2>Featured <span class="gradient-text">Projects</span></h2>
+          <p>A selection of my personal projects and experiments.</p>
         </div>
-
 
         <div class="projects-grid">
 
           <article class="project-card scroll-reveal">
-
-            <div class="project-art art-blue">
-              E
-            </div>
-
-            <div class="project-content">
-
-              <span class="project-type">PERSONAL WEBSITE</span>
-
-              <h3>Emtiaz Official</h3>
-
-              <p>
-                My personal website showcasing my profile,
-                skills, projects and digital journey.
-              </p>
-
-              <div class="project-tags">
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>JavaScript</span>
-              </div>
-
-              <button
-                type="button"
-                class="project-details"
-                data-title="Emtiaz Official"
-                data-description="My personal portfolio website built with HTML, CSS and JavaScript. It presents my introduction, skills, projects, family section and contact information."
-              >
-                View Details →
-              </button>
-
-            </div>
-
+            <div class="project-icon">✦</div>
+            <h3>Emtiaz Official</h3>
+            <p>My personal portfolio and digital identity.</p>
+            <button class="btn btn-outline project-details"
+              data-title="Emtiaz Official"
+              data-description="My personal portfolio website, built to share my journey, interests, skills and projects.">
+              View Details ↗
+            </button>
           </article>
 
-
           <article class="project-card scroll-reveal">
-
-            <div class="project-art art-purple">
-              BB
-            </div>
-
-            <div class="project-content">
-
-              <span class="project-type">CHAT APPLICATION</span>
-
-              <h3>Barta Bahok</h3>
-
-              <p>
-                A real-time messaging application project
-                developed with web technologies.
-              </p>
-
-              <div class="project-tags">
-                <span>Node.js</span>
-                <span>Express</span>
-                <span>Socket.IO</span>
-              </div>
-
-              <button
-                type="button"
-                class="project-details"
-                data-title="Barta Bahok"
-                data-description="Barta Bahok is a real-time messaging application project using Node.js, Express and Socket.IO."
-              >
-                View Details →
-              </button>
-
-            </div>
-
+            <div class="project-icon">💬</div>
+            <h3>Barta Bahok</h3>
+            <p>A real-time messaging project using web technologies.</p>
+            <button class="btn btn-outline project-details"
+              data-title="Barta Bahok"
+              data-description="A real-time chat application project developed with web technologies and Socket.IO.">
+              View Details ↗
+            </button>
           </article>
 
-
           <article class="project-card scroll-reveal">
-
-            <div class="project-art art-green">
-              🤝
-            </div>
-
-            <div class="project-content">
-
-              <span class="project-type">PERSONAL PAGE</span>
-
-              <h3>Friendship Page</h3>
-
-              <p>
-                A special page dedicated to close friends
-                and meaningful friendships.
-              </p>
-
-              <div class="project-tags">
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>Design</span>
-              </div>
-
-              <button
-                type="button"
-                class="project-details"
-                data-title="Friendship Page"
-                data-description="A dedicated friendship page featuring special friends and personal memories."
-              >
-                View Details →
-              </button>
-
-            </div>
-
+            <div class="project-icon">🤝</div>
+            <h3>Friendship Page</h3>
+            <p>A special page dedicated to friendship and memories.</p>
+            <a href="friendship.html" class="btn btn-outline">Explore Page ↗</a>
           </article>
 
-
           <article class="project-card scroll-reveal">
-
-            <div class="project-art art-orange">
-              🚀
-            </div>
-
-            <div class="project-content">
-
-              <span class="project-type">UPCOMING</span>
-
-              <h3>Future Projects</h3>
-
-              <p>
-                More creative applications, websites
-                and programming experiments are coming.
-              </p>
-
-              <div class="project-tags">
-                <span>Python</span>
-                <span>JavaScript</span>
-                <span>Linux</span>
-              </div>
-
-              <button
-                type="button"
-                class="project-details"
-                data-title="Future Projects"
-                data-description="I am continuously learning and planning new programming, software and web development projects."
-              >
-                View Details →
-              </button>
-
-            </div>
-
+            <div class="project-icon">🚀</div>
+            <h3>Future Projects</h3>
+            <p>More creative ideas and digital experiments are coming.</p>
+            <button class="btn btn-outline project-details"
+              data-title="Future Projects"
+              data-description="This space is reserved for upcoming projects and new ideas.">
+              View Details ↗
+            </button>
           </article>
 
         </div>
-
       </div>
-
     </section>
-
 
     <!-- YOUTUBE -->
-    <section class="section" id="youtube">
-
+    <section id="youtube">
       <div class="container">
 
         <div class="section-heading scroll-reveal">
-
-          <span class="eyebrow">MY YOUTUBE CHANNEL</span>
-
-          <h2>Let's Connect on YouTube</h2>
-
-          <p>
-            Visit my channel and explore my videos.
-          </p>
-
+          <span class="section-kicker">VIDEO & CONTENT</span>
+          <h2>My <span class="gradient-text">YouTube</span></h2>
         </div>
 
-
-        <div class="youtube-layout">
-
-          <div class="scroll-reveal">
-
-            <h3>Emtiaz Official</h3>
-
-            <p>
-              Welcome to my YouTube channel. Explore my
-              content and follow my digital journey.
-            </p>
-
-          </div>
-
-
-          <a
-            href="https://www.youtube.com/@emtiaz-official01"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="youtube-card scroll-reveal"
-          >
-
-            <span class="youtube-play">▶</span>
-
-            <div>
-
-              <h3>Visit My Channel</h3>
-
-              <p>
-                YouTube — @emtiaz-official01
-              </p>
-
-            </div>
-
-            <span class="youtube-arrow">↗</span>
-
-          </a>
-
+        <div class="youtube-card glass-card scroll-reveal">
+          <div class="youtube-icon">▶</div>
+          <h3>Emtiaz Official</h3>
+          <p>Visit my YouTube channel and explore my content.</p>
+          <a href="https://www.youtube.com/@emtiaz-official01"
+            target="_blank" rel="noopener noreferrer"
+            class="btn btn-primary">Visit YouTube Channel ↗</a>
         </div>
 
       </div>
-
     </section>
-
 
     <!-- FAMILY -->
-    <section class="section section-alt" id="family">
-
+    <section id="family">
       <div class="container">
 
         <div class="section-heading scroll-reveal">
-
-          <span class="eyebrow">MY FAMILY</span>
-
-          <h2>My Family</h2>
-
-          <p>
-            The people who have a special place in my life.
-          </p>
-
+          <span class="section-kicker">MY DEAREST PEOPLE</span>
+          <h2>My <span class="gradient-text">Family</span></h2>
+          <p>Some of the most important people in my life.</p>
         </div>
 
-
-        <!-- PARENTS -->
         <h3 class="family-subheading">My Parents</h3>
 
-        <div class="parents-grid">
+        <div class="family-grid parent-grid">
 
-          <article class="parent-card scroll-reveal">
-
-            <img
-              src="assets/abbu.jpg"
-              alt="My Father"
-              loading="lazy"
-            >
-
-            <div>
-              <h3>Father</h3>
-              <p>My Father</p>
-            </div>
-
+          <article class="family-card scroll-reveal">
+            <img src="assets/abbu.jpg" alt="My Father">
+            <h3>Father</h3>
+            <p class="role">My Father</p>
           </article>
 
-
-          <article class="parent-card scroll-reveal">
-
-            <img
-              src="assets/ammu.jpg"
-              alt="My Mother"
-              loading="lazy"
-            >
-
-            <div>
-              <h3>Mother</h3>
-              <p>My Mother</p>
-            </div>
-
+          <article class="family-card scroll-reveal">
+            <img src="assets/ammu.jpg" alt="My Mother">
+            <h3>Mother</h3>
+            <p class="role">My Mother</p>
           </article>
 
         </div>
 
-
-        <!-- SISTERS -->
         <h3 class="family-subheading">My Sisters</h3>
 
-        <div class="sisters-grid">
+        <div class="family-grid">
 
-          <article class="sister-card scroll-reveal">
-
-            <img
-              src="assets/meghla.jpg"
-              alt="Meghla"
-              loading="lazy"
-            >
-
-            <div>
-              <h3>Meghla</h3>
-              <p>My Sister</p>
-            </div>
-
+          <article class="family-card scroll-reveal">
+            <img src="assets/meghla.jpg" alt="Meghla">
+            <h3>Meghla</h3>
+            <p class="role">My Sister</p>
           </article>
 
-
-          <article class="sister-card scroll-reveal">
-
-            <img
-              src="assets/eva.jpg"
-              alt="Eva"
-              loading="lazy"
-            >
-
-            <div>
-              <h3>Eva</h3>
-              <p>My Sister</p>
-            </div>
-
+          <article class="family-card scroll-reveal">
+            <img src="assets/eva.jpg" alt="Eva">
+            <h3>Eva</h3>
+            <p class="role">My Sister</p>
           </article>
 
-
-          <article class="sister-card scroll-reveal">
-
-            <img
-              src="assets/arshi.jpg"
-              alt="Arshi"
-              loading="lazy"
-            >
-
-            <div>
-              <h3>Arshi</h3>
-              <p>My Sister</p>
-            </div>
-
+          <article class="family-card scroll-reveal">
+            <img src="assets/arshi.jpg" alt="Arshi">
+            <h3>Arshi</h3>
+            <p class="role">My Sister</p>
           </article>
 
-
-          <article class="sister-card scroll-reveal">
-
-            <img
-              src="assets/sumaiya.jpg"
-              alt="Sumaiya"
-              loading="lazy"
-            >
-
-            <div>
-              <h3>Sumaiya</h3>
-              <p>YouTuber</p>
-            </div>
-
+          <article class="family-card scroll-reveal">
+            <img src="assets/sumaiya.jpg" alt="Sumaiya">
+            <h3>Sumaiya</h3>
+            <p class="role">YouTuber</p>
           </article>
 
         </div>
-
       </div>
-
     </section>
 
-
     <!-- CONTACT -->
-    <section class="section" id="contact">
-
+    <section id="contact">
       <div class="container">
 
         <div class="section-heading scroll-reveal">
-
-          <span class="eyebrow">GET IN TOUCH</span>
-
-          <h2>Contact Me</h2>
-
-          <p>
-            Feel free to contact me for questions,
-            ideas and project discussions.
-          </p>
-
+          <span class="section-kicker">LET'S CONNECT</span>
+          <h2>Contact <span class="gradient-text">Me</span></h2>
+          <p>Have a question or a project idea? Send me a message.</p>
         </div>
 
+        <div class="contact-grid">
 
-        <div class="contact-layout">
-
-
-          <!-- CONTACT INFORMATION -->
           <div class="contact-info scroll-reveal">
-
             <h3>Contact Information</h3>
-
-
-            <div class="contact-card">
-
-              <div class="contact-icon">✉️</div>
-
-              <div>
-                <h4>Email</h4>
-
-                <a href="mailto:mdemtiaz36900@gmail.com">
-                  mdemtiaz36900@gmail.com
-                </a>
-              </div>
-
-            </div>
-
-
-            <div class="contact-card">
-
-              <div class="contact-icon">📱</div>
-
-              <div>
-                <h4>Phone</h4>
-
-                <a href="tel:+8801798665955">
-                  +8801798665955
-                </a>
-              </div>
-
-            </div>
-
-
-            <div class="contact-card">
-
-              <div class="contact-icon">▶️</div>
-
-              <div>
-                <h4>YouTube</h4>
-
-                <a
-                  href="https://www.youtube.com/@emtiaz-official01"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Emtiaz Official
-                </a>
-              </div>
-
-            </div>
-
-
-            <div class="contact-card">
-
-              <div class="contact-icon">🌍</div>
-
-              <div>
-                <h4>Location</h4>
-                <p>Bangladesh</p>
-              </div>
-
-            </div>
-
+            <p>✉️ Email: mdemtiaz36900@gmail.com</p>
+            <p>📱 Phone: +8801798665955</p>
+            <p>📍 Bangladesh</p>
+            <a class="btn btn-outline"
+              href="https://www.youtube.com/@emtiaz-official01"
+              target="_blank" rel="noopener noreferrer">
+              YouTube ↗
+            </a>
           </div>
 
+          <form class="contact-form scroll-reveal" id="contactForm">
+            <input type="text" id="contactName"
+              placeholder="Your Name" maxlength="80" required>
 
-          <!-- CONTACT FORM -->
-          <form
-            class="contact-form scroll-reveal"
-            id="contactForm"
-          >
+            <input type="email" id="contactEmail"
+              placeholder="Your Email" maxlength="120" required>
 
-            <h3>Send Me a Message</h3>
-
-
-            <label for="contactName">
-              Your Name
-            </label>
-
-            <input
-              type="text"
-              id="contactName"
-              name="name"
-              placeholder="Enter your name"
-              maxlength="80"
-              required
-            >
-
-
-            <label for="contactEmail">
-              Your Email
-            </label>
-
-            <input
-              type="email"
-              id="contactEmail"
-              name="email"
-              placeholder="Enter your email"
-              maxlength="120"
-              required
-            >
-
-
-            <label for="contactMessage">
-              Your Message
-            </label>
-
-            <textarea
-              id="contactMessage"
-              name="message"
+            <textarea id="contactMessage"
               placeholder="Write your message..."
-              maxlength="3000"
-              required
-            ></textarea>
+              rows="5" maxlength="2000" required></textarea>
 
-
-            <button
-              type="submit"
-              class="primary-button"
-            >
-              Send Message →
+            <button type="submit" class="btn btn-primary">
+              Send Message ↗
             </button>
 
-
-            <p
-              class="form-message"
-              id="formMessage"
-              aria-live="polite"
-            ></p>
-
+            <p id="formMessage" aria-live="polite"></p>
           </form>
 
         </div>
-
       </div>
-
     </section>
 
   </main>
 
-
-  <!-- FOOTER -->
-  <footer class="site-footer">
-
-    <div class="container footer-content">
-
-      <p>
-        © <span id="currentYear"></span>
-        Emtiaz Official. All Rights Reserved.
-      </p>
-
-      <a href="#home">
-        Back to Home ↑
-      </a>
-
-    </div>
-
-  </footer>
-
-
-  <!-- BACK TO TOP -->
-  <button
-    type="button"
-    class="back-to-top"
-    id="backToTop"
-    aria-label="Back to top"
-    title="Back to Top"
-  >
-    ↑
-  </button>
-
-
   <!-- PROJECT MODAL -->
-  <div
-    class="project-modal"
-    id="projectModal"
-    aria-hidden="true"
-  >
+  <div class="project-modal" id="projectModal"
+    role="dialog" aria-modal="true" aria-labelledby="modalTitle">
 
-    <div
-      class="modal-content"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="modalTitle"
-    >
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose"
+        type="button" aria-label="Close">×</button>
 
-      <button
-        type="button"
-        class="modal-close"
-        id="modalClose"
-        aria-label="Close dialog"
-      >
-        ×
-      </button>
-
-      <h2 id="modalTitle">
-        Project Details
-      </h2>
-
+      <span class="section-kicker">PROJECT INFORMATION</span>
+      <h2 id="modalTitle">Project Details</h2>
       <p id="modalDescription"></p>
-
     </div>
 
   </div>
 
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+
+      <a href="#home" class="brand footer-brand">
+        <span class="brand-mark">E</span>
+        <span>EMTIAZ<span class="brand-dot">.</span></span>
+      </a>
+
+      <p>Designed with creativity by Emtiaz.</p>
+
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <a href="friendship.html">Friendship</a>
+        <a href="partner.html">Partner</a>
+      </div>
+
+      <p>© <span id="currentYear"></span> Emtiaz Official. All rights reserved.</p>
+
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop"
+    type="button" aria-label="Back to top">↑</button>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
